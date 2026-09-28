@@ -1,0 +1,463 @@
+dataset,index,check,detail
+sg-legal-glossary,0,header_row,looks like a CSV header row
+sg-legal-glossary,18,whitespace,runs of spaces or padded target
+sg-legal-glossary,52,time_sensitive,costs
+sg-legal-glossary,55,whitespace,runs of spaces or padded target
+sg-legal-glossary,56,whitespace,runs of spaces or padded target
+sg-legal-glossary,74,whitespace,runs of spaces or padded target
+sg-legal-glossary,75,whitespace,runs of spaces or padded target
+sg-legal-glossary,76,whitespace,runs of spaces or padded target
+sg-legal-glossary,77,whitespace,runs of spaces or padded target
+sg-legal-glossary,78,whitespace,runs of spaces or padded target
+sg-legal-glossary,79,whitespace,runs of spaces or padded target
+sg-legal-glossary,80,whitespace,runs of spaces or padded target
+sg-legal-glossary,81,whitespace,runs of spaces or padded target
+sg-legal-glossary,82,whitespace,runs of spaces or padded target
+sg-legal-glossary,83,whitespace,runs of spaces or padded target
+sg-legal-glossary,84,whitespace,runs of spaces or padded target
+sg-legal-glossary,85,whitespace,runs of spaces or padded target
+sg-legal-glossary,86,whitespace,runs of spaces or padded target
+sg-legal-glossary,87,whitespace,runs of spaces or padded target
+sg-legal-glossary,89,whitespace,runs of spaces or padded target
+sg-legal-glossary,90,whitespace,runs of spaces or padded target
+sg-legal-glossary,91,whitespace,runs of spaces or padded target
+sg-legal-glossary,93,whitespace,runs of spaces or padded target
+sg-legal-glossary,94,whitespace,runs of spaces or padded target
+sg-legal-glossary,96,whitespace,runs of spaces or padded target
+sg-legal-glossary,98,whitespace,runs of spaces or padded target
+sg-legal-glossary,99,whitespace,runs of spaces or padded target
+sg-legal-glossary,101,whitespace,runs of spaces or padded target
+sg-legal-glossary,102,whitespace,runs of spaces or padded target
+sg-legal-glossary,103,whitespace,runs of spaces or padded target
+sg-legal-glossary,104,whitespace,runs of spaces or padded target
+sg-legal-glossary,105,whitespace,runs of spaces or padded target
+sg-legal-glossary,106,whitespace,runs of spaces or padded target
+sg-legal-glossary,107,whitespace,runs of spaces or padded target
+sg-legal-glossary,108,whitespace,runs of spaces or padded target
+sg-legal-glossary,109,whitespace,runs of spaces or padded target
+sg-legal-glossary,110,whitespace,runs of spaces or padded target
+sg-legal-glossary,111,whitespace,runs of spaces or padded target
+sg-legal-glossary,113,whitespace,runs of spaces or padded target
+sg-legal-glossary,114,whitespace,runs of spaces or padded target
+sg-legal-glossary,115,whitespace,runs of spaces or padded target
+sg-legal-glossary,116,whitespace,runs of spaces or padded target
+sg-legal-glossary,117,whitespace,runs of spaces or padded target
+sg-legal-glossary,118,whitespace,runs of spaces or padded target
+sg-legal-glossary,119,whitespace,runs of spaces or padded target
+sg-legal-glossary,121,whitespace,runs of spaces or padded target
+sg-legal-glossary,122,whitespace,runs of spaces or padded target
+sg-legal-glossary,123,whitespace,runs of spaces or padded target
+sg-legal-glossary,124,whitespace,runs of spaces or padded target
+sg-legal-glossary,125,whitespace,runs of spaces or padded target
+sg-legal-glossary,126,whitespace,runs of spaces or padded target
+sg-legal-glossary,127,whitespace,runs of spaces or padded target
+sg-legal-glossary,129,whitespace,runs of spaces or padded target
+sg-legal-glossary,130,whitespace,runs of spaces or padded target
+sg-legal-glossary,131,whitespace,runs of spaces or padded target
+sg-legal-glossary,132,whitespace,runs of spaces or padded target
+sg-legal-glossary,133,whitespace,runs of spaces or padded target
+sg-legal-glossary,134,whitespace,runs of spaces or padded target
+sg-legal-glossary,135,whitespace,runs of spaces or padded target
+sg-legal-glossary,136,whitespace,runs of spaces or padded target
+sg-legal-glossary,137,whitespace,runs of spaces or padded target
+sg-legal-glossary,138,whitespace,runs of spaces or padded target
+sg-legal-glossary,139,whitespace,runs of spaces or padded target
+sg-legal-glossary,140,whitespace,runs of spaces or padded target
+sg-legal-glossary,141,whitespace,runs of spaces or padded target
+sg-legal-glossary,142,whitespace,runs of spaces or padded target
+sg-legal-glossary,143,whitespace,runs of spaces or padded target
+sg-legal-glossary,144,whitespace,runs of spaces or padded target
+sg-legal-glossary,145,whitespace,runs of spaces or padded target
+sg-legal-glossary,146,whitespace,runs of spaces or padded target
+sg-legal-glossary,147,whitespace,runs of spaces or padded target
+sg-legal-glossary,148,whitespace,runs of spaces or padded target
+sg-legal-glossary,150,whitespace,runs of spaces or padded target
+sg-legal-glossary,151,whitespace,runs of spaces or padded target
+sg-legal-glossary,152,whitespace,runs of spaces or padded target
+sg-legal-glossary,153,whitespace,runs of spaces or padded target
+sg-legal-glossary,154,whitespace,runs of spaces or padded target
+sg-legal-glossary,156,whitespace,runs of spaces or padded target
+sg-legal-glossary,157,whitespace,runs of spaces or padded target
+sg-legal-glossary,158,whitespace,runs of spaces or padded target
+sg-legal-glossary,159,whitespace,runs of spaces or padded target
+sg-legal-glossary,160,whitespace,runs of spaces or padded target
+sg-legal-glossary,161,whitespace,runs of spaces or padded target
+sg-legal-glossary,162,whitespace,runs of spaces or padded target
+sg-legal-glossary,163,whitespace,runs of spaces or padded target
+sg-legal-glossary,164,whitespace,runs of spaces or padded target
+sg-legal-glossary,165,whitespace,runs of spaces or padded target
+sg-legal-glossary,166,whitespace,runs of spaces or padded target
+sg-legal-glossary,167,whitespace,runs of spaces or padded target
+sg-legal-glossary,168,whitespace,runs of spaces or padded target
+sg-legal-glossary,170,whitespace,runs of spaces or padded target
+sg-legal-glossary,171,whitespace,runs of spaces or padded target
+sg-legal-glossary,173,whitespace,runs of spaces or padded target
+sg-legal-glossary,174,whitespace,runs of spaces or padded target
+sg-legal-glossary,175,whitespace,runs of spaces or padded target
+sg-legal-glossary,177,whitespace,runs of spaces or padded target
+sg-legal-glossary,178,whitespace,runs of spaces or padded target
+sg-legal-glossary,179,whitespace,runs of spaces or padded target
+sg-legal-glossary,180,whitespace,runs of spaces or padded target
+sg-legal-glossary,181,whitespace,runs of spaces or padded target
+sg-legal-glossary,182,whitespace,runs of spaces or padded target
+sg-legal-glossary,183,whitespace,runs of spaces or padded target
+sg-legal-glossary,184,whitespace,runs of spaces or padded target
+sg-legal-glossary,185,whitespace,runs of spaces or padded target
+sg-legal-glossary,186,whitespace,runs of spaces or padded target
+sg-legal-glossary,187,whitespace,runs of spaces or padded target
+sg-legal-glossary,188,whitespace,runs of spaces or padded target
+sg-legal-glossary,189,whitespace,runs of spaces or padded target
+sg-legal-glossary,190,whitespace,runs of spaces or padded target
+sg-legal-glossary,194,whitespace,runs of spaces or padded target
+sg-legal-glossary,197,whitespace,runs of spaces or padded target
+sg-legal-glossary,199,whitespace,runs of spaces or padded target
+sg-legal-glossary,200,whitespace,runs of spaces or padded target
+sg-legal-glossary,201,whitespace,runs of spaces or padded target
+sg-legal-glossary,204,whitespace,runs of spaces or padded target
+sg-legal-glossary,205,whitespace,runs of spaces or padded target
+sg-legal-glossary,206,whitespace,runs of spaces or padded target
+sg-legal-glossary,207,whitespace,runs of spaces or padded target
+sg-legal-glossary,210,whitespace,runs of spaces or padded target
+sg-legal-glossary,214,whitespace,runs of spaces or padded target
+sg-legal-glossary,216,whitespace,runs of spaces or padded target
+sg-legal-glossary,217,whitespace,runs of spaces or padded target
+sg-legal-glossary,218,whitespace,runs of spaces or padded target
+sg-legal-glossary,220,whitespace,runs of spaces or padded target
+sg-legal-glossary,221,whitespace,runs of spaces or padded target
+sg-legal-glossary,222,whitespace,runs of spaces or padded target
+sg-legal-glossary,223,whitespace,runs of spaces or padded target
+sg-legal-glossary,225,whitespace,runs of spaces or padded target
+sg-legal-glossary,226,whitespace,runs of spaces or padded target
+sg-legal-glossary,227,whitespace,runs of spaces or padded target
+sg-legal-glossary,228,whitespace,runs of spaces or padded target
+sg-legal-glossary,230,whitespace,runs of spaces or padded target
+sg-legal-glossary,231,whitespace,runs of spaces or padded target
+sg-legal-glossary,232,whitespace,runs of spaces or padded target
+sg-legal-glossary,233,whitespace,runs of spaces or padded target
+sg-legal-glossary,234,whitespace,runs of spaces or padded target
+sg-legal-glossary,235,whitespace,runs of spaces or padded target
+sg-legal-glossary,237,whitespace,runs of spaces or padded target
+sg-legal-glossary,238,whitespace,runs of spaces or padded target
+sg-legal-glossary,239,whitespace,runs of spaces or padded target
+sg-legal-glossary,240,whitespace,runs of spaces or padded target
+sg-legal-glossary,241,whitespace,runs of spaces or padded target
+sg-legal-glossary,243,whitespace,runs of spaces or padded target
+sg-legal-glossary,244,whitespace,runs of spaces or padded target
+sg-legal-glossary,245,whitespace,runs of spaces or padded target
+sg-legal-glossary,246,whitespace,runs of spaces or padded target
+sg-legal-glossary,248,whitespace,runs of spaces or padded target
+sg-legal-glossary,251,whitespace,runs of spaces or padded target
+sg-legal-glossary,253,whitespace,runs of spaces or padded target
+sg-legal-glossary,257,whitespace,runs of spaces or padded target
+sg-legal-glossary,258,whitespace,runs of spaces or padded target
+sg-legal-glossary,259,whitespace,runs of spaces or padded target
+sg-legal-glossary,260,whitespace,runs of spaces or padded target
+sg-legal-glossary,261,whitespace,runs of spaces or padded target
+sg-legal-glossary,262,whitespace,runs of spaces or padded target
+sg-legal-glossary,264,whitespace,runs of spaces or padded target
+sg-legal-glossary,265,whitespace,runs of spaces or padded target
+sg-legal-glossary,267,whitespace,runs of spaces or padded target
+sg-legal-glossary,268,whitespace,runs of spaces or padded target
+sg-legal-glossary,269,time_sensitive,costs
+sg-legal-glossary,269,whitespace,runs of spaces or padded target
+sg-legal-glossary,270,time_sensitive,costs
+sg-legal-glossary,270,whitespace,runs of spaces or padded target
+sg-legal-glossary,271,time_sensitive,costs
+sg-legal-glossary,272,time_sensitive,costs
+sg-legal-glossary,272,whitespace,runs of spaces or padded target
+sg-legal-glossary,273,whitespace,runs of spaces or padded target
+sg-legal-glossary,274,whitespace,runs of spaces or padded target
+sg-legal-glossary,275,whitespace,runs of spaces or padded target
+sg-legal-glossary,276,whitespace,runs of spaces or padded target
+sg-legal-glossary,278,whitespace,runs of spaces or padded target
+sg-legal-glossary,279,whitespace,runs of spaces or padded target
+sg-legal-glossary,280,whitespace,runs of spaces or padded target
+sg-legal-glossary,281,whitespace,runs of spaces or padded target
+sg-legal-glossary,283,whitespace,runs of spaces or padded target
+sg-legal-glossary,284,whitespace,runs of spaces or padded target
+sg-legal-glossary,285,whitespace,runs of spaces or padded target
+sg-legal-glossary,286,whitespace,runs of spaces or padded target
+sg-legal-glossary,287,whitespace,runs of spaces or padded target
+sg-legal-glossary,288,whitespace,runs of spaces or padded target
+sg-legal-glossary,289,whitespace,runs of spaces or padded target
+sg-legal-glossary,290,whitespace,runs of spaces or padded target
+sg-legal-glossary,291,whitespace,runs of spaces or padded target
+sg-legal-glossary,292,whitespace,runs of spaces or padded target
+sg-legal-glossary,293,whitespace,runs of spaces or padded target
+sg-legal-glossary,294,whitespace,runs of spaces or padded target
+sg-legal-glossary,295,whitespace,runs of spaces or padded target
+sg-legal-glossary,296,whitespace,runs of spaces or padded target
+sg-legal-glossary,297,whitespace,runs of spaces or padded target
+sg-legal-glossary,298,whitespace,runs of spaces or padded target
+sg-legal-glossary,299,whitespace,runs of spaces or padded target
+sg-legal-glossary,300,whitespace,runs of spaces or padded target
+sg-legal-glossary,301,whitespace,runs of spaces or padded target
+sg-legal-glossary,302,whitespace,runs of spaces or padded target
+sg-legal-glossary,303,whitespace,runs of spaces or padded target
+sg-legal-glossary,304,whitespace,runs of spaces or padded target
+sg-legal-glossary,305,whitespace,runs of spaces or padded target
+sg-legal-glossary,306,whitespace,runs of spaces or padded target
+sg-legal-glossary,307,whitespace,runs of spaces or padded target
+sg-legal-glossary,309,whitespace,runs of spaces or padded target
+sg-legal-glossary,311,whitespace,runs of spaces or padded target
+sg-legal-glossary,312,whitespace,runs of spaces or padded target
+sg-legal-glossary,313,whitespace,runs of spaces or padded target
+sg-legal-glossary,314,whitespace,runs of spaces or padded target
+sg-legal-glossary,316,whitespace,runs of spaces or padded target
+sg-legal-glossary,317,whitespace,runs of spaces or padded target
+sg-legal-glossary,318,whitespace,runs of spaces or padded target
+sg-legal-glossary,319,whitespace,runs of spaces or padded target
+sg-legal-glossary,321,whitespace,runs of spaces or padded target
+sg-legal-glossary,322,whitespace,runs of spaces or padded target
+sg-legal-glossary,323,whitespace,runs of spaces or padded target
+sg-legal-glossary,324,whitespace,runs of spaces or padded target
+sg-legal-glossary,326,whitespace,runs of spaces or padded target
+sg-legal-glossary,327,whitespace,runs of spaces or padded target
+sg-legal-glossary,328,whitespace,runs of spaces or padded target
+sg-legal-glossary,329,whitespace,runs of spaces or padded target
+sg-legal-glossary,330,whitespace,runs of spaces or padded target
+sg-legal-glossary,331,whitespace,runs of spaces or padded target
+sg-legal-glossary,332,whitespace,runs of spaces or padded target
+sg-legal-glossary,333,whitespace,runs of spaces or padded target
+sg-legal-glossary,334,whitespace,runs of spaces or padded target
+sg-legal-glossary,335,whitespace,runs of spaces or padded target
+sg-legal-glossary,336,whitespace,runs of spaces or padded target
+sg-legal-glossary,337,whitespace,runs of spaces or padded target
+sg-legal-glossary,338,whitespace,runs of spaces or padded target
+sg-legal-glossary,340,whitespace,runs of spaces or padded target
+sg-legal-glossary,341,whitespace,runs of spaces or padded target
+sg-legal-glossary,413,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,0,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,1,time_sensitive,recent
+sg-university-tutorial-questions-legal,1,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,2,time_sensitive,recently
+sg-university-tutorial-questions-legal,2,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,3,time_sensitive,recently
+sg-university-tutorial-questions-legal,3,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,4,time_sensitive,recently
+sg-university-tutorial-questions-legal,4,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,5,time_sensitive,recently
+sg-university-tutorial-questions-legal,6,time_sensitive,recently
+sg-university-tutorial-questions-legal,6,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,7,time_sensitive,recently
+sg-university-tutorial-questions-legal,8,time_sensitive,"now, price, recently"
+sg-university-tutorial-questions-legal,8,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,9,time_sensitive,"now, price, recently"
+sg-university-tutorial-questions-legal,9,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,10,time_sensitive,"now, price, recently"
+sg-university-tutorial-questions-legal,10,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,14,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,22,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,23,time_sensitive,now
+sg-university-tutorial-questions-legal,23,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,24,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,27,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,28,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,29,time_sensitive,cost
+sg-university-tutorial-questions-legal,29,whitespace,runs of spaces or padded target
+sg-university-tutorial-questions-legal,30,time_sensitive,"now, price"
+sg-university-tutorial-questions-legal,30,whitespace,runs of spaces or padded target
+singapore-facts-tnf,0,ambiguity,hedge: most
+singapore-facts-tnf,1,ambiguity,absolute: unilaterally
+singapore-facts-tnf,1,time_sensitive,"incumbent, president"
+singapore-facts-tnf,4,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-facts-tnf,5,ambiguity,hedge: most
+singapore-facts-tnf,8,ambiguity,absolute: all
+singapore-facts-tnf,10,ambiguity,hedge: most
+singapore-facts-tnf,10,time_sensitive,$1
+singapore-facts-tnf,12,ambiguity,hedge: most
+singapore-facts-tnf,13,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-facts-tnf,15,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-facts-tnf,16,ambiguity,hedge: often
+singapore-facts-tnf,21,ambiguity,hedge: Many
+singapore-facts-tnf,22,ambiguity,hedge: most
+singapore-facts-tnf,22,consensus,"5/5 models answer TRUE, key is FALSE"
+singapore-facts-tnf,24,ambiguity,hedge: Most
+singapore-facts-tnf,26,ambiguity,hedge: most
+singapore-facts-tnf,27,ambiguity,hedge: most; absolute: only
+singapore-facts-tnf,33,ambiguity,absolute: every
+singapore-facts-tnf,34,ambiguity,hedge: most
+singapore-facts-tnf,35,ambiguity,absolute: all
+singapore-facts-tnf,37,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-facts-tnf,38,ambiguity,hedge: most
+singapore-facts-tnf,43,ambiguity,hedge: most
+singapore-facts-tnf,44,ambiguity,hedge: Most
+singapore-facts-tnf,45,ambiguity,hedge: most
+singapore-facts-tnf,48,ambiguity,absolute: only
+singapore-facts-tnf,49,ambiguity,hedge: some
+singapore-food-tnf,1,ambiguity,hedge: typically
+singapore-food-tnf,2,ambiguity,hedge: Most
+singapore-food-tnf,3,ambiguity,hedge: typically
+singapore-food-tnf,5,ambiguity,hedge: usually
+singapore-food-tnf,7,ambiguity,hedge: most
+singapore-food-tnf,7,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,8,ambiguity,hedge: most
+singapore-food-tnf,9,ambiguity,hedge: may
+singapore-food-tnf,9,time_sensitive,today
+singapore-food-tnf,10,ambiguity,hedge: typically
+singapore-food-tnf,10,consensus,"5/5 models answer FALSE, key is TRUE"
+singapore-food-tnf,11,consensus,"5/5 models answer FALSE, key is TRUE"
+singapore-food-tnf,14,ambiguity,hedge: typically
+singapore-food-tnf,17,ambiguity,hedge: many
+singapore-food-tnf,17,consensus,"5/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,19,ambiguity,hedge: often
+singapore-food-tnf,20,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,21,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,22,ambiguity,hedge: typically
+singapore-food-tnf,23,ambiguity,hedge: often
+singapore-food-tnf,24,ambiguity,hedge: commonly
+singapore-food-tnf,25,ambiguity,hedge: usually
+singapore-food-tnf,26,ambiguity,hedge: typically
+singapore-food-tnf,27,ambiguity,hedge: usually
+singapore-food-tnf,28,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,29,ambiguity,hedge: often
+singapore-food-tnf,30,ambiguity,hedge: commonly
+singapore-food-tnf,32,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-food-tnf,33,ambiguity,hedge: typically; long compound claim keyed TRUE: every part must hold
+singapore-food-tnf,35,ambiguity,hedge: typically
+singapore-food-tnf,37,ambiguity,absolute: all
+singapore-food-tnf,38,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,39,ambiguity,hedge: commonly
+singapore-food-tnf,40,ambiguity,hedge: commonly
+singapore-food-tnf,44,ambiguity,hedge: typically
+singapore-food-tnf,45,ambiguity,hedge: often
+singapore-food-tnf,47,ambiguity,hedge: often
+singapore-food-tnf,50,ambiguity,hedge: often
+singapore-food-tnf,51,ambiguity,hedge: most
+singapore-food-tnf,52,ambiguity,hedge: typically
+singapore-food-tnf,53,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-food-tnf,56,ambiguity,hedge: typically
+singapore-food-tnf,56,consensus,"5/5 models answer FALSE, key is TRUE"
+singapore-food-tnf,58,ambiguity,hedge: typically
+singapore-food-tnf,59,ambiguity,hedge: commonly
+singapore-food-tnf,60,ambiguity,hedge: commonly
+singapore-food-tnf,61,ambiguity,hedge: typically
+singapore-food-tnf,64,ambiguity,hedge: commonly
+singapore-food-tnf,67,ambiguity,hedge: commonly
+singapore-food-tnf,67,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,71,ambiguity,hedge: Most
+singapore-food-tnf,72,ambiguity,hedge: usually
+singapore-food-tnf,73,ambiguity,hedge: usually
+singapore-food-tnf,73,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-food-tnf,77,ambiguity,hedge: commonly
+singapore-food-tnf,80,ambiguity,hedge: commonly
+singapore-food-tnf,82,ambiguity,hedge: commonly
+singapore-food-tnf,83,ambiguity,hedge: typically
+singapore-food-tnf,84,ambiguity,hedge: typically
+singapore-food-tnf,85,ambiguity,hedge: Most
+singapore-food-tnf,85,time_sensitive,population
+singapore-food-tnf,86,ambiguity,hedge: most
+singapore-food-tnf,87,consensus,"5/5 models answer TRUE, key is FALSE"
+singapore-food-tnf,88,ambiguity,hedge: commonly
+singapore-food-tnf,91,ambiguity,hedge: commonly
+singapore-food-tnf,93,ambiguity,hedge: usually
+singapore-food-tnf,93,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-food-tnf,95,ambiguity,hedge: commonly
+singapore-food-tnf,99,ambiguity,hedge: usually
+singapore-iconic-places,2,consensus,"4/5 models answer C, key is B"
+singapore-iconic-places,8,consensus,"4/5 models answer C, key is A"
+singapore-iconic-places,9,time_sensitive,now
+singapore-iconic-places,12,time_sensitive,now
+singapore-places-tnf,4,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-places-tnf,6,time_sensitive,2023
+singapore-places-tnf,8,time_sensitive,today
+singapore-places-tnf,10,ambiguity,absolute: only
+singapore-places-tnf,12,consensus,"5/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,13,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-places-tnf,14,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,16,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,17,consensus,"5/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,19,time_sensitive,now
+singapore-places-tnf,23,ambiguity,hedge: most
+singapore-places-tnf,25,ambiguity,hedge: most
+singapore-places-tnf,25,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,26,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,29,ambiguity,hedge: most
+singapore-places-tnf,32,ambiguity,hedge: commonly
+singapore-places-tnf,32,consensus,"5/5 models answer TRUE, key is FALSE"
+singapore-places-tnf,38,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-places-tnf,43,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,44,consensus,"4/5 models answer FALSE, key is TRUE"
+singapore-places-tnf,46,ambiguity,absolute: all
+singapore-places-tnf,48,consensus,"4/5 models answer TRUE, key is FALSE"
+singapore-places-tnf,48,time_sensitive,2026
+singapore-pofma-statements-2023,1,ambiguity,hedge: Most
+singapore-pofma-statements-2023,2,time_sensitive,minister
+singapore-pofma-statements-2023,3,ambiguity,absolute: only
+singapore-pofma-statements-2023,4,time_sensitive,2023
+singapore-pofma-statements-2023,5,time_sensitive,prime minister
+singapore-pofma-statements-2023,6,time_sensitive,prime minister
+singapore-pofma-statements-2023,7,time_sensitive,prime minister
+singapore-pofma-statements-2023,8,ambiguity,absolute: only
+singapore-pofma-statements-2023,8,time_sensitive,minister
+singapore-pofma-statements-2023,9,ambiguity,absolute: only
+singapore-pofma-statements-2023,9,time_sensitive,minister
+singapore-pofma-statements-2023,10,time_sensitive,2023
+singapore-pofma-statements-2023,13,time_sensitive,minister
+singapore-pofma-statements-2023,15,time_sensitive,minister
+singapore-pofma-statements-2023,16,time_sensitive,minister
+singapore-pofma-statements-2023,21,time_sensitive,"2023, minister"
+singapore-pofma-statements-2023,22,time_sensitive,minister
+singapore-pofma-statements-2023,23,time_sensitive,minister
+singapore-pofma-statements-2023,26,time_sensitive,minister
+singapore-pofma-statements-2023,31,time_sensitive,"2023, minister, prime minister"
+singapore-pofma-statements-2023,33,time_sensitive,minister
+singapore-pofma-statements-2024,6,time_sensitive,minister
+singapore-pofma-statements-2024,7,time_sensitive,president
+singapore-pofma-statements-2024,9,time_sensitive,minister
+singapore-pofma-statements-2024,19,time_sensitive,2024
+singapore-pofma-statements-2024,21,time_sensitive,2024
+singapore-pofma-statements-2024,25,ambiguity,absolute: only
+singapore-pofma-statements-2024,31,time_sensitive,minister
+singapore-pofma-statements-2024,32,time_sensitive,"minister, prime minister"
+singapore-pofma-statements-2024,33,ambiguity,absolute: only
+singapore-pofma-statements-2024,34,time_sensitive,minister
+singapore-pofma-true-statements,0,ambiguity,absolute: all; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,1,ambiguity,absolute: all; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,2,ambiguity,hedge: may; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,3,ambiguity,absolute: all
+singapore-pofma-true-statements,4,ambiguity,absolute: all; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,5,ambiguity,long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,5,time_sensitive,2021
+singapore-pofma-true-statements,6,ambiguity,absolute: all; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,7,ambiguity,absolute: all; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,8,ambiguity,absolute: all; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,9,ambiguity,long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,10,ambiguity,long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,11,ambiguity,long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,12,ambiguity,hedge: may; long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,13,ambiguity,long compound claim keyed TRUE: every part must hold
+singapore-pofma-true-statements,13,time_sensitive,minister
+singapore-political-history,0,time_sensitive,prime minister
+singapore-political-history,2,time_sensitive,prime minister
+singapore-political-history,4,time_sensitive,"2023, as of 2023, prime minister"
+singapore-political-history,5,time_sensitive,president
+singapore-political-history,6,time_sensitive,prime minister
+singapore-political-history,9,time_sensitive,minister
+singapore-political-history,12,time_sensitive,president
+singapore-political-history,13,time_sensitive,prime minister
+singapore-political-history,14,consensus,"5/5 models answer B, key is A"
+singapore-political-history,19,time_sensitive,president
+singapore-public-housing,0,exact_duplicate,singapore-public-housing#0 ~ singapore-public-housing#1 (jaccard 1.0)
+singapore-public-housing,1,exact_duplicate,singapore-public-housing#0 ~ singapore-public-housing#1 (jaccard 1.0)
+singapore-public-housing,2,mcq_key_mismatch,target says B) but its text is option A
+singapore-public-housing,2,time_sensitive,"2023, as of 2023"
+singapore-public-housing,4,time_sensitive,"2023, as of 2023"
+singapore-public-housing,5,time_sensitive,"2023, as of 2023"
+singapore-public-housing,6,time_sensitive,"2023, as of 2023"
+singapore-public-housing,7,time_sensitive,"2023, as of 2023"
+singapore-public-housing,8,time_sensitive,"2023, as of 2023"
+singapore-public-housing,9,exact_duplicate,singapore-public-housing#9 ~ singapore-public-housing#10 (jaccard 1.0)
+singapore-public-housing,10,exact_duplicate,singapore-public-housing#9 ~ singapore-public-housing#10 (jaccard 1.0)
+singapore-public-housing,11,consensus,"4/5 models answer B, key is A"
+singapore-transport-system,10,consensus,"4/5 models answer C, key is B"
+singapore-transport-system,11,consensus,"4/5 models answer B, key is C"
+singapore-transport-system,12,time_sensitive,"2017, 2020, 2023"
+singapore-transport-system,14,consensus,"5/5 models answer B, key is D"
+singapore-transport-system,15,mcq_key_mismatch,target says B) but its text is option A
+singapore-transport-system,18,consensus,"4/5 models answer A, key is D"
+singapore-transport-system,20,consensus,"5/5 models answer A, key is B"
+singapore-transport-system,24,time_sensitive,"2023, as of 2023"
+singapore-transport-system,26,consensus,"4/5 models answer C, key is B"
+singapore-transport-system,26,mcq_key_missing,target text does not match option B
+singapore-transport-system,26,time_sensitive,current

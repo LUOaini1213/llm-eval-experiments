@@ -1,0 +1,206 @@
+{
+ "moonshot_result_files": [
+  "e3-sgbus-ollama-qwen2-5-3b.json",
+  "e3-sgbus-ollama-llama3-2-3b.json",
+  "e3-sgbus-ollama-phi4-mini-3-8b.json",
+  "e3-sgbus-ollama-gemma3-4b.json",
+  "e3-sgbus-ollama-qwen3-5-4b.json"
+ ],
+ "run_ids": [
+  "e3-sgbus-ollama-qwen2-5-3b",
+  "e3-sgbus-ollama-llama3-2-3b",
+  "e3-sgbus-ollama-phi4-mini-3-8b",
+  "e3-sgbus-ollama-gemma3-4b",
+  "e3-sgbus-ollama-qwen3-5-4b"
+ ],
+ "percentage": 34,
+ "duration_s": 1832,
+ "models": {
+  "ollama-qwen2-5-3b": {
+   "n": 61,
+   "rule_accuracy": 0.0,
+   "rule_accuracy_ci95": [
+    0.0,
+    0.0592438687773587
+   ],
+   "jury_accuracy": 0.0,
+   "jury_false_accepts": 0,
+   "rule_wrong": 61,
+   "jury_false_rejects": 0,
+   "rule_right": 0,
+   "jury_fleiss_kappa": -0.03977272727272537,
+   "judge_pass_rate": {
+    "ollama-phi4-mini-3-8b": 0.0,
+    "ollama-gemma3-4b": 11.475409836065573,
+    "ollama-qwen3-5-4b": 0.0
+   },
+   "examples": [
+    {
+     "prompt": "On which road is Singapore bus stop 92051 (Marine Pde Stn Exit 4)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 69009 (Punggol Coast Int)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 15109 (LP 30)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    }
+   ]
+  },
+  "ollama-llama3-2-3b": {
+   "n": 61,
+   "rule_accuracy": 0.0,
+   "rule_accuracy_ci95": [
+    0.0,
+    0.0592438687773587
+   ],
+   "jury_accuracy": 0.0,
+   "jury_false_accepts": 0,
+   "rule_wrong": 61,
+   "jury_false_rejects": 0,
+   "rule_right": 0,
+   "jury_fleiss_kappa": 1.0,
+   "judge_pass_rate": {
+    "ollama-phi4-mini-3-8b": 0.0,
+    "ollama-gemma3-4b": 0.0,
+    "ollama-qwen3-5-4b": 0.0
+   },
+   "examples": [
+    {
+     "prompt": "On which road is Singapore bus stop 92051 (Marine Pde Stn Exit 4)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 69009 (Punggol Coast Int)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 15109 (LP 30)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    }
+   ]
+  },
+  "ollama-phi4-mini-3-8b": {
+   "n": 61,
+   "rule_accuracy": 0.01639344262295082,
+   "rule_accuracy_ci95": [
+    0.0028997307672401287,
+    0.08718860132889372
+   ],
+   "jury_accuracy": 0.08196721311475409,
+   "jury_false_accepts": 4,
+   "rule_wrong": 60,
+   "jury_false_rejects": 0,
+   "rule_right": 1,
+   "jury_fleiss_kappa": 0.26242722794446915,
+   "judge_pass_rate": {
+    "ollama-phi4-mini-3-8b": 4.918032786885246,
+    "ollama-gemma3-4b": 34.42622950819672,
+    "ollama-qwen3-5-4b": 8.19672131147541
+   },
+   "examples": [
+    {
+     "prompt": "How many different bus services call at Singapore bus stop 14051 (Aft Telok Blangah Hts)? Use LTA DataMall data for September 2026.",
+     "rule": true,
+     "jury": true
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 92051 (Marine Pde Stn Exit 4)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": true
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 69009 (Punggol Coast Int)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": true
+    }
+   ]
+  },
+  "ollama-gemma3-4b": {
+   "n": 61,
+   "rule_accuracy": 0.01639344262295082,
+   "rule_accuracy_ci95": [
+    0.0028997307672401287,
+    0.08718860132889372
+   ],
+   "jury_accuracy": 0.04918032786885246,
+   "jury_false_accepts": 2,
+   "rule_wrong": 60,
+   "jury_false_rejects": 0,
+   "rule_right": 1,
+   "jury_fleiss_kappa": 0.33755656108597404,
+   "judge_pass_rate": {
+    "ollama-phi4-mini-3-8b": 1.639344262295082,
+    "ollama-gemma3-4b": 14.754098360655737,
+    "ollama-qwen3-5-4b": 4.918032786885246
+   },
+   "examples": [
+    {
+     "prompt": "On which road is Singapore bus stop 92051 (Marine Pde Stn Exit 4)? Use LTA DataMall data for September 2026.",
+     "rule": true,
+     "jury": true
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 69009 (Punggol Coast Int)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 15109 (LP 30)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    }
+   ]
+  },
+  "ollama-qwen3-5-4b": {
+   "n": 61,
+   "rule_accuracy": 0.03278688524590164,
+   "rule_accuracy_ci95": [
+    0.009037890316981302,
+    0.11189490509792765
+   ],
+   "jury_accuracy": 0.03278688524590164,
+   "jury_false_accepts": 0,
+   "rule_wrong": 59,
+   "jury_false_rejects": 0,
+   "rule_right": 2,
+   "jury_fleiss_kappa": 0.649425287356323,
+   "judge_pass_rate": {
+    "ollama-phi4-mini-3-8b": 3.278688524590164,
+    "ollama-gemma3-4b": 8.19672131147541,
+    "ollama-qwen3-5-4b": 3.278688524590164
+   },
+   "examples": [
+    {
+     "prompt": "On which road is Singapore bus stop 92051 (Marine Pde Stn Exit 4)? Use LTA DataMall data for September 2026.",
+     "rule": true,
+     "jury": true
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 92079 (Marine Terr Stn Exit 1)? Use LTA DataMall data for September 2026.",
+     "rule": true,
+     "jury": true
+    },
+    {
+     "prompt": "On which road is Singapore bus stop 69009 (Punggol Coast Int)? Use LTA DataMall data for September 2026.",
+     "rule": false,
+     "jury": false
+    }
+   ]
+  }
+ },
+ "usage": {
+  "calls": 1220,
+  "prompt_tokens": 178584,
+  "output_tokens": 9176,
+  "seconds": 1828.6
+ }
+}

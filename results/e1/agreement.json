@@ -1,0 +1,66 @@
+{
+ "bin_ref": {
+  "condition": "bin_ref",
+  "fleiss_kappa": 0.5915552036167387,
+  "cohen_kappa_pairs": {
+   "qwen2.5:3b~llama3.2:3b": 0.5230444823777487,
+   "qwen2.5:3b~phi4-mini:3.8b": 0.6972067321036561,
+   "qwen2.5:3b~gemma3:4b": 0.5681485568964276,
+   "qwen2.5:3b~qwen3.5:4b": 0.546387814544239,
+   "llama3.2:3b~phi4-mini:3.8b": 0.6046441797617856,
+   "llama3.2:3b~gemma3:4b": 0.45722537595856994,
+   "llama3.2:3b~qwen3.5:4b": 0.4127015727652797,
+   "phi4-mini:3.8b~gemma3:4b": 0.682925016720751,
+   "phi4-mini:3.8b~qwen3.5:4b": 0.6783292918295641,
+   "gemma3:4b~qwen3.5:4b": 0.784855958440468
+  }
+ },
+ "strict_ref": {
+  "condition": "strict_ref",
+  "fleiss_kappa": 0.6547293077772974,
+  "cohen_kappa_pairs": {
+   "qwen2.5:3b~llama3.2:3b": 0.6663886572143453,
+   "qwen2.5:3b~phi4-mini:3.8b": 0.6941272430668841,
+   "qwen2.5:3b~gemma3:4b": 0.5535714285714286,
+   "qwen2.5:3b~qwen3.5:4b": 0.5733126454615981,
+   "llama3.2:3b~phi4-mini:3.8b": 0.7769667477696675,
+   "llama3.2:3b~gemma3:4b": 0.5855022170811646,
+   "llama3.2:3b~qwen3.5:4b": 0.6086488601898054,
+   "phi4-mini:3.8b~gemma3:4b": 0.6560534591194969,
+   "phi4-mini:3.8b~qwen3.5:4b": 0.7030878859857481,
+   "gemma3:4b~qwen3.5:4b": 0.7735227506691373
+  }
+ },
+ "bin_free": {
+  "condition": "bin_free",
+  "fleiss_kappa": 0.18736241056686848,
+  "cohen_kappa_pairs": {
+   "qwen2.5:3b~llama3.2:3b": 0.3517351374990354,
+   "qwen2.5:3b~phi4-mini:3.8b": 0.26133346207695657,
+   "qwen2.5:3b~gemma3:4b": 0.19072152821888153,
+   "qwen2.5:3b~qwen3.5:4b": 0.0318529512501427,
+   "llama3.2:3b~phi4-mini:3.8b": 0.3354709791347181,
+   "llama3.2:3b~gemma3:4b": 0.20601662954059247,
+   "llama3.2:3b~qwen3.5:4b": 0.09327233024851826,
+   "phi4-mini:3.8b~gemma3:4b": 0.34420311653931784,
+   "phi4-mini:3.8b~qwen3.5:4b": 0.1333557272421902,
+   "gemma3:4b~qwen3.5:4b": 0.3640699523052463
+  }
+ },
+ "score_ref": {
+  "condition": "score_ref",
+  "fleiss_kappa": 0.2976989125897981,
+  "cohen_kappa_pairs": {
+   "qwen2.5:3b~llama3.2:3b": 0.2363080951341916,
+   "qwen2.5:3b~phi4-mini:3.8b": 0.22249793217535152,
+   "qwen2.5:3b~gemma3:4b": 0.18077983458054347,
+   "qwen2.5:3b~qwen3.5:4b": 0.1679626749611198,
+   "llama3.2:3b~phi4-mini:3.8b": 0.4273323696208163,
+   "llama3.2:3b~gemma3:4b": 0.3162098488766305,
+   "llama3.2:3b~qwen3.5:4b": 0.2867084203201114,
+   "phi4-mini:3.8b~gemma3:4b": 0.6805111821086263,
+   "phi4-mini:3.8b~qwen3.5:4b": 0.48903290129611177,
+   "gemma3:4b~qwen3.5:4b": 0.5169082125603864
+  }
+ }
+}

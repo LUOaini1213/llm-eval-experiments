@@ -1,0 +1,728 @@
+{
+ "name": "Singapore bus network facts",
+ "description": "Short-answer questions with exact answers about Singapore's public bus network (stops, services, routes, first-bus times, planning areas), generated from LTA DataMall and URA open data by a seeded generator with an independent verification step. Every question names the data snapshot it is true for.",
+ "license": "Derived from data under the Singapore Open Data Licence v1.0 (see reference)",
+ "reference": "Contains information from LTA DataMall (bus stops, services and routes, snapshot of 26 September 2026) and URA Master Plan 2019 Planning Area Boundary (No Sea) from data.gov.sg, made available under the terms of the Singapore Open Data Licence version 1.0 (https://beta.data.gov.sg/open-data-license).",
+ "examples": [
+  {
+   "input": "On which road is Singapore bus stop 92051 (Marine Pde Stn Exit 4)? Use LTA DataMall data for September 2026.",
+   "target": "Marine Parade Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 96049 (Upp Changi Stn/SUTD)? Use LTA DataMall data for September 2026.",
+   "target": "Upp Changi Rd East"
+  },
+  {
+   "input": "On which road is Singapore bus stop 46479 (Blk 774)? Use LTA DataMall data for September 2026.",
+   "target": "Woodlands Ave 9"
+  },
+  {
+   "input": "On which road is Singapore bus stop 69009 (Punggol Coast Int)? Use LTA DataMall data for September 2026.",
+   "target": "Sentul Wk"
+  },
+  {
+   "input": "On which road is Singapore bus stop 21409 (Blk 191)? Use LTA DataMall data for September 2026.",
+   "target": "Boon Lay Dr"
+  },
+  {
+   "input": "On which road is Singapore bus stop 60199 (Boon Keng Stn/Blk 22)? Use LTA DataMall data for September 2026.",
+   "target": "Boon Keng Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 92141 (KiddiWinkie S/H @ East Coast)? Use LTA DataMall data for September 2026.",
+   "target": "East Coast Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 47021 (Khalsa Cres Drug Rehab Ctr)? Use LTA DataMall data for September 2026.",
+   "target": "Admiralty Rd West"
+  },
+  {
+   "input": "On which road is Singapore bus stop 55351 (Opp Fudu Wk P/G)? Use LTA DataMall data for September 2026.",
+   "target": "Lentor Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 32151 (Opp Lim Chu Kang Substation No. 1)? Use LTA DataMall data for September 2026.",
+   "target": "Lim Chu Kang Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 15109 (LP 30)? Use LTA DataMall data for September 2026.",
+   "target": "Sth Buona Vista Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 74949 (Blk 961A)? Use LTA DataMall data for September 2026.",
+   "target": "Bedok Reservoir Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 59749 (Orchid Country Club)? Use LTA DataMall data for September 2026.",
+   "target": "Yishun Ave 1"
+  },
+  {
+   "input": "On which road is Singapore bus stop 68139 (Youth Flying Club)? Use LTA DataMall data for September 2026.",
+   "target": "West Camp Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 26081 (Bef Tuas Ave 18A)? Use LTA DataMall data for September 2026.",
+   "target": "Tuas Cres"
+  },
+  {
+   "input": "On which road is Singapore bus stop 92079 (Marine Terr Stn Exit 1)? Use LTA DataMall data for September 2026.",
+   "target": "Marine Parade Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 96151 (Blk 106)? Use LTA DataMall data for September 2026.",
+   "target": "Simei St 1"
+  },
+  {
+   "input": "On which road is Singapore bus stop 59219 (Opp Blk 288)? Use LTA DataMall data for September 2026.",
+   "target": "Yishun Ave 7"
+  },
+  {
+   "input": "On which road is Singapore bus stop 66331 (Blk 554)? Use LTA DataMall data for September 2026.",
+   "target": "Ang Mo Kio Ave 3"
+  },
+  {
+   "input": "On which road is Singapore bus stop 12061 (Blk 109)? Use LTA DataMall data for September 2026.",
+   "target": "Clementi Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 03129 (UIC Bldg)? Use LTA DataMall data for September 2026.",
+   "target": "Shenton Way"
+  },
+  {
+   "input": "On which road is Singapore bus stop 92071 (Marine Terr Stn Exit 4)? Use LTA DataMall data for September 2026.",
+   "target": "Marine Parade Rd"
+  },
+  {
+   "input": "On which road is Singapore bus stop 46381 (Opp W'lands Ind Pk D St 1)? Use LTA DataMall data for September 2026.",
+   "target": "Woodlands Ave 3"
+  },
+  {
+   "input": "On which road is Singapore bus stop 54571 (Blk 532)? Use LTA DataMall data for September 2026.",
+   "target": "Ang Mo Kio Ave 10"
+  },
+  {
+   "input": "Which company operates Singapore bus service 118B? Use LTA DataMall data for September 2026.",
+   "target": "Go-Ahead Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 25? Use LTA DataMall data for September 2026.",
+   "target": "SBS Transit"
+  },
+  {
+   "input": "Which company operates Singapore bus service 188e? Use LTA DataMall data for September 2026.",
+   "target": "SMRT Buses"
+  },
+  {
+   "input": "Which company operates Singapore bus service 663? Use LTA DataMall data for September 2026.",
+   "target": "Tower Transit Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 127A? Use LTA DataMall data for September 2026.",
+   "target": "Go-Ahead Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 102A? Use LTA DataMall data for September 2026.",
+   "target": "SBS Transit"
+  },
+  {
+   "input": "Which company operates Singapore bus service 302A? Use LTA DataMall data for September 2026.",
+   "target": "SMRT Buses"
+  },
+  {
+   "input": "Which company operates Singapore bus service 984A? Use LTA DataMall data for September 2026.",
+   "target": "Tower Transit Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 3? Use LTA DataMall data for September 2026.",
+   "target": "Go-Ahead Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 141? Use LTA DataMall data for September 2026.",
+   "target": "SBS Transit"
+  },
+  {
+   "input": "Which company operates Singapore bus service 185? Use LTA DataMall data for September 2026.",
+   "target": "SMRT Buses"
+  },
+  {
+   "input": "Which company operates Singapore bus service 883B? Use LTA DataMall data for September 2026.",
+   "target": "Tower Transit Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 15A? Use LTA DataMall data for September 2026.",
+   "target": "Go-Ahead Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 51? Use LTA DataMall data for September 2026.",
+   "target": "SBS Transit"
+  },
+  {
+   "input": "Which company operates Singapore bus service 970? Use LTA DataMall data for September 2026.",
+   "target": "SMRT Buses"
+  },
+  {
+   "input": "Which company operates Singapore bus service 97? Use LTA DataMall data for September 2026.",
+   "target": "Tower Transit Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 43e? Use LTA DataMall data for September 2026.",
+   "target": "Go-Ahead Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 147A? Use LTA DataMall data for September 2026.",
+   "target": "SBS Transit"
+  },
+  {
+   "input": "Which company operates Singapore bus service 962C? Use LTA DataMall data for September 2026.",
+   "target": "SMRT Buses"
+  },
+  {
+   "input": "Which company operates Singapore bus service 872A? Use LTA DataMall data for September 2026.",
+   "target": "Tower Transit Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 2? Use LTA DataMall data for September 2026.",
+   "target": "Go-Ahead Singapore"
+  },
+  {
+   "input": "Which company operates Singapore bus service 60A? Use LTA DataMall data for September 2026.",
+   "target": "SBS Transit"
+  },
+  {
+   "input": "Which company operates Singapore bus service 913T? Use LTA DataMall data for September 2026.",
+   "target": "SMRT Buses"
+  },
+  {
+   "input": "Which company operates Singapore bus service 856B? Use LTA DataMall data for September 2026.",
+   "target": "Tower Transit Singapore"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 80039 (Opp Lor 1 Geylang Ter) located? Use LTA DataMall data for September 2026.",
+   "target": "Kallang"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 76461 (Eden Condo) located? Use LTA DataMall data for September 2026.",
+   "target": "Tampines"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 46011 (Blk 188A) located? Use LTA DataMall data for September 2026.",
+   "target": "Woodlands"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 54261 (Aft Ang Mo Kio Stn Exit A) located? Use LTA DataMall data for September 2026.",
+   "target": "Ang Mo Kio"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 43441 (Opp Blk 258) located? Use LTA DataMall data for September 2026.",
+   "target": "Bukit Batok"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 14171 (Opp Yeo's Bldg) located? Use LTA DataMall data for September 2026.",
+   "target": "Bukit Merah"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 92151 (Christ Meth Ch) located? Use LTA DataMall data for September 2026.",
+   "target": "Bedok"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 46659 (Opp Blk 550) located? Use LTA DataMall data for September 2026.",
+   "target": "Woodlands"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 67991 (Opp Blk 461B) located? Use LTA DataMall data for September 2026.",
+   "target": "Sengkang"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 43189 (Blk 283) located? Use LTA DataMall data for September 2026.",
+   "target": "Bukit Batok"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 12031 (Pandan Valley Condo) located? Use LTA DataMall data for September 2026.",
+   "target": "Bukit Timah"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 76289 (Blk 801) located? Use LTA DataMall data for September 2026.",
+   "target": "Tampines"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 47051 (Aft W'lands Ind Pk E4) located? Use LTA DataMall data for September 2026.",
+   "target": "Woodlands"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 64131 (Bef KPE) located? Use LTA DataMall data for September 2026.",
+   "target": "Hougang"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 24631 (Bef Benoi Rd) located? Use LTA DataMall data for September 2026.",
+   "target": "Pioneer"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 01109 (Queen St Ter) located? Use LTA DataMall data for September 2026.",
+   "target": "Rochor"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 77409 (Opp UMC) located? Use LTA DataMall data for September 2026.",
+   "target": "Pasir Ris"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 46699 (888 Plaza) located? Use LTA DataMall data for September 2026.",
+   "target": "Woodlands"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 55011 (Bef Lentor Stn Exit 5) located? Use LTA DataMall data for September 2026.",
+   "target": "Ang Mo Kio"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 21271 (Opp Assyakirin Mque) located? Use LTA DataMall data for September 2026.",
+   "target": "Jurong West"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 42151 (Beauty World Stn Exit C) located? Use LTA DataMall data for September 2026.",
+   "target": "Bukit Timah"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 98309 (Carissa Pk) located? Use LTA DataMall data for September 2026.",
+   "target": "Pasir Ris"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 67281 (Blk 403A) located? Use LTA DataMall data for September 2026.",
+   "target": "Sengkang"
+  },
+  {
+   "input": "In which URA Master Plan 2019 planning area is Singapore bus stop 43589 (Opp Blk 347) located? Use LTA DataMall data for September 2026.",
+   "target": "Bukit Batok"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 136 call at when travelling from Ang Mo Kio Int (54009) to Punggol Int (65009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "40"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 55B call at when travelling from Bishan Int (53009) to Blk 443 (54381), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "8"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 172 call at when travelling from Choa Chu Kang Int (44009) to Boon Lay Int (22009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "31"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 78A call at when travelling from Jurong Town Hall Int (29009) to Opp CLP Intl (29121), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "16"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 28 call at when travelling from Tampines Int (75009) to Toa Payoh Int (52009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "59"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 174e call at when travelling from Boon Lay Int (22009) to Kampong Bahru Ter (10499), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "34"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 61 call at when travelling from Eunos Int (82009) to Bt Batok Int (43009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "90"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 98B call at when travelling from Blk 490 (28501) to Jurong Island Checkpt (21099), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "27"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 673 call at when travelling from Suntec Twr Three (02149) to Bef Punggol Pt Stn (65639), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "21"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 26 call at when travelling from Bedok Int (84009) to Toa Payoh Int (52009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "34"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 187 call at when travelling from Boon Lay Int (22009) to Woodlands Int (46009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "40"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 169 call at when travelling from Woodlands Int (46009) to Ang Mo Kio Int (54009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "55"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 3 call at when travelling from Tampines Int (75009) to Punggol Int (65009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "39"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 198 call at when travelling from Boon Lay Int (22009) to Bt Merah Int (10009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "44"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 961 call at when travelling from Woodlands Temp Int (47009) to Lor 1 Geylang Ter (80009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "85"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 452 call at when travelling from Beauty World Stn Exit C (42151) to Tengah Int (41009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "10"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 18 call at when travelling from Opp SBST Bedok Nth Depot (84599) to Tampines Nth Int (74009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "31"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 95B call at when travelling from Kent Ridge Ter (16009) to Buona Vista Stn Exit C (11361), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "12"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 193 call at when travelling from Tuas Ter (25009) to Boon Lay Int (22009), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "43"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 871A call at when travelling from Tengah Int (41009) to Blk 240 (43429), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "17"
+  },
+  {
+   "input": "How many bus stops does Singapore bus service 68B call at when travelling from Tampines Int (75009) to Reebonz Bldg (75461), counting both terminals? Use LTA DataMall data for September 2026.",
+   "target": "7"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 40039 (Opp Newton FC)? Use LTA DataMall data for September 2026.",
+   "target": "5"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 97041 (Ballota Pk Condo)? Use LTA DataMall data for September 2026.",
+   "target": "1"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 57061 (Dieppe Barracks)? Use LTA DataMall data for September 2026.",
+   "target": "6"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 54371 (Blk 409 Mkt/FC)? Use LTA DataMall data for September 2026.",
+   "target": "5"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 21571 (Opp Jurong Sec Sch)? Use LTA DataMall data for September 2026.",
+   "target": "6"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 14219 (Opp Blk 114)? Use LTA DataMall data for September 2026.",
+   "target": "4"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 73019 (Bef RSAF Roundabout)? Use LTA DataMall data for September 2026.",
+   "target": "4"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 47041 (Opp W'lands Auto Hub)? Use LTA DataMall data for September 2026.",
+   "target": "3"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 67139 (Nth Spring Pr Sch)? Use LTA DataMall data for September 2026.",
+   "target": "6"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 26299 (Bef Tuas Sth Ave 6)? Use LTA DataMall data for September 2026.",
+   "target": "2"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 70019 (Blk 125)? Use LTA DataMall data for September 2026.",
+   "target": "10"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 83063 (The Buddhist Union)? Use LTA DataMall data for September 2026.",
+   "target": "1"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 46389 (Aft W'lands Ind Pk D St 1)? Use LTA DataMall data for September 2026.",
+   "target": "7"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 54201 (Opp Blk 155)? Use LTA DataMall data for September 2026.",
+   "target": "7"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 43789 (Blk 436A)? Use LTA DataMall data for September 2026.",
+   "target": "7"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 52331 (Blk 27)? Use LTA DataMall data for September 2026.",
+   "target": "5"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 74029 (Aft Tampines Ind Ave 4)? Use LTA DataMall data for September 2026.",
+   "target": "1"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 58411 (Blk 404A CP)? Use LTA DataMall data for September 2026.",
+   "target": "4"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 68121 (Bef West Camp Rd)? Use LTA DataMall data for September 2026.",
+   "target": "2"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 44469 (Blk 414)? Use LTA DataMall data for September 2026.",
+   "target": "10"
+  },
+  {
+   "input": "How many different bus services call at Singapore bus stop 14051 (Aft Telok Blangah Hts)? Use LTA DataMall data for September 2026.",
+   "target": "5"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 646 leave its starting stop Hub Synergy Pt (03222)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "1815"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 33A leave its starting stop Kent Ridge Ter (16009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "1619"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 972A leave its starting stop Bt Panjang Int (45009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "2318"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 674 leave its starting stop Blk 306B (40451)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0715"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 83T leave its starting stop Punggol Int (65009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0021"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 458 leave its starting stop Opp Sengkang Stn/Blk 260A (67401)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0630"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 61 leave its starting stop Bt Batok Int (43009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0520"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 853 leave its starting stop Yishun Int (59009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0540"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 72 leave its starting stop Tampines Int (75009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0515"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 107 leave its starting stop Shenton Way Ter (03239)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0545"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 973A leave its starting stop Bt Panjang Int (45009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0030"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 97 leave its starting stop Tengah Int (41009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0520"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 85 leave its starting stop Punggol Int (65009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0530"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 684 leave its starting stop Opp Blk 816A (44889)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0730"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 861M leave its starting stop Blk 120A (58539)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0645"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 44 leave its starting stop Punggol Coast Int (69009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0630"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 63 leave its starting stop Eunos Int (82009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0530"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 67 leave its starting stop Tampines Int (75009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0530"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 871A leave its starting stop Tengah Int (41009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0603"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 43 leave its starting stop Upp East Coast Ter (94009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0525"
+  },
+  {
+   "input": "On weekdays, at what time does the first bus of Singapore bus service 165 leave its starting stop Clementi Int (17009)? Give the time as HHMM (24-hour clock). Use LTA DataMall data for September 2026.",
+   "target": "0545"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 39 from Yishun Int (59009) to Tampines Concourse Int (75019), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "26.5 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service SWA from Fernvale Stn/Blk 439A (67481) to Sengkang Int (67009), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "2.8 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 185 from Soon Lee Bus Pk (22609) to Buona Vista Ter (11379), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "18.6 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 963 from HarbourFront Int (14009) to Woodlands Int (46009), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "29.2 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 31 from Tampines Int (75009) to Toa Payoh Int (52009), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "23.0 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 30e from Heng Mui Keng Terr (16069) to Bedok Int (84009), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "24.6 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 925A from Woodlands Temp Int (47009) to Kranji Resvr Pk B (49199), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "8.7 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 980 from Sembawang Int (58009) to Lor 1 Geylang Ter (80009), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "25.4 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 3A from Tampines Int (75009) to Blk 747A (77331), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "10.3 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 154 from Boon Lay Int (22009) to Eunos Int (82009), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "32.0 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 192 from Tuas Ter (25009) to Boon Lay Int (22009), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "12.9 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 882A from Sembawang Int (58009) to Blk 592A (58501), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "2.3 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 459 from Punggol Stn/Waterway Pt (65251) to Aft Tai Seng Stn (70281), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "10.9 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 677 from Opp Blk 110 (65021) to Suntec Twr Two (02141), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "28.5 km"
+  },
+  {
+   "input": "According to LTA's bus route data, how long is the route of Singapore bus service 665 from Blk 32 (46141) to Prince Edward Rd Stn Exit 2 (03218), in kilometres to one decimal place? Use LTA DataMall data for September 2026.",
+   "target": "30.5 km"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Tanglin planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "49"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Pasir Ris planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "169"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Woodlands planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "214"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Ang Mo Kio planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "166"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Jurong West planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "248"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the River Valley planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "14"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Changi planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "90"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Sembawang planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "145"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Hougang planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "209"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Pioneer planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "130"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Novena planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "75"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Paya Lebar planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "40"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Lim Chu Kang planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "29"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Punggol planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "118"
+  },
+  {
+   "input": "How many of LTA's bus stops lie inside the Jurong East planning area (URA Master Plan 2019 boundaries)? Use LTA DataMall data for September 2026.",
+   "target": "147"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 65009 (Punggol Int) and bus stop 66359 (S'goon Stn Exit C/Blk 201)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "43, 43A"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 65069 (Blk 190C) and bus stop 54269 (Opp Ang Mo Kio Stn)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "88, 88A"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 45009 (Bt Panjang Int) and bus stop 34009 (Police Coast Guard)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "975, 975C"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 58009 (Sembawang Int) and bus stop 47199 (Bef Senoko Dr)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "981"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 03539 (Marina Bay Stn) and bus stop 78119 (Opp Blk 476)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "661"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 66601 (Blk 991A) and bus stop 08058 (Aft Dhoby Ghaut Stn)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "680"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 41009 (Tengah Int) and bus stop 22009 (Boon Lay Int)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "181"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 42151 (Beauty World Stn Exit C) and bus stop 41009 (Tengah Int)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "452, 871"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 02151 (Suntec Convention Ctr) and bus stop 65301 (Damai Stn Exit B)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "666"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 64009 (Hougang Ctrl Int) and bus stop 17009 (Clementi Int)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "147, 165"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 47009 (Woodlands Temp Int) and bus stop 80009 (Lor 1 Geylang Ter)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "961, 961M"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 27461 (Opp Blk 276B) and bus stop 03391 (Marina Bay Financial Ctr)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "651"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 70289 (Aft Tai Seng Stn Exit C) and bus stop 65259 (Punggol Stn/Int)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "43, 459"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 22009 (Boon Lay Int) and bus stop 10009 (Bt Merah Int)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "198"
+  },
+  {
+   "input": "Which bus services call at both Singapore bus stop 25421 (Opp Tuas Lk Stn) and bus stop 26269 (Bef Tuas Sth Ave 4)? List all of them. Use LTA DataMall data for September 2026.",
+   "target": "182, 182A, 182M"
+  }
+ ]
+}

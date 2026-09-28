@@ -1,0 +1,39 @@
+name: tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      # unit tests, including the check that every committed E1 number is recomputed from the committed judge replies
+      - run: python -m pytest -q tests
+      - run: python tests/mutate.py
+      # recompute the E1 tables and the E3 set from committed inputs (no model needed); fail if any number changed.
+      # The charts are redrawn to prove the script runs, but PNG bytes differ between platforms, so they are not diffed.
+      - run: |
+          python scripts/e1_analyze.py main
+          python scripts/e1_ranking.py
+          python scripts/e1_aggregation.py
+          python scripts/e3_generate.py
+          python scripts/make_charts.py
+          git diff --stat --exit-code -- results data
+  dataset-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      # the audited datasets at the commit recorded in results/e2/datasets.json
+      - run: |
+          SHA=$(python -c "import json;print(json.load(open('results/e2/datasets.json'))['moonshot_data_commit'])")
+          git init -q external/moonshot-data
+          git -C external/moonshot-data fetch -q --depth 1 https://github.com/aiverify-foundation/moonshot-data.git "$SHA"
+          git -C external/moonshot-data checkout -q FETCH_HEAD
+          python scripts/e2_audit.py
+          git diff --stat --exit-code -- results/e2

@@ -1,0 +1,49 @@
+[
+ {
+  "item": "singapore-public-housing#2",
+  "status": "confirmed_error",
+  "problem": "The key is 'B) 5 years', but option B is '7 years'; '5 years' is option A. A letter-based scorer marks the right answer (A) wrong.",
+  "official_fact": "HDB lists an MOP of 5 years for unclassified and Standard flats bought from HDB, and 10 years for Plus and Prime flats.",
+  "source": "https://www.hdb.gov.sg/managing-my-home/selling-a-flat/eligibility",
+  "checked": "2026-09-28",
+  "note": "The question does not say which flat classification it means, so it is also under-specified."
+ },
+ {
+  "item": "singapore-transport-system#15",
+  "status": "confirmed_error",
+  "problem": "The key is 'B) 1987', but option B is '1990'; '1987' is option A.",
+  "official_fact": "PTC: 'Established in 1987 under the Public Transport Council Act'.",
+  "source": "https://www.ptc.gov.sg/who-we-are/about-ptc/",
+  "checked": "2026-09-28"
+ },
+ {
+  "item": "singapore-transport-system#26",
+  "status": "confirmed_error",
+  "problem": "The key is 'B) 2001', but option B is '2000' and no option is 2001, so no option can be scored correct.",
+  "official_fact": "SBS Transit milestones, 2001: Singapore Bus Services Limited changed its name to SBS Transit Ltd.",
+  "source": "https://www.sbstransit.com.sg/milestones",
+  "checked": "2026-09-28"
+ },
+ {
+  "item": "singapore-food-tnf#28",
+  "status": "key_correct",
+  "problem": "All five local models answered TRUE against the key FALSE ('no pork, no lard' restaurants are acceptable halal restaurants).",
+  "official_fact": "MUIS: halal food must be prepared with facilities free from cross-mixing with non-halal substances, and consumers are pointed to MUIS's list of halal-certified eating establishments, so 'no pork, no lard' alone does not make a restaurant halal.",
+  "source": "https://www.muis.gov.sg/halal/for-consumers/",
+  "checked": "2026-09-28"
+ },
+ {
+  "item": "singapore-facts-tnf#4",
+  "status": "unverifiable",
+  "problem": "The key is FALSE for 'one of the highest density of malls ... by floor space per capita'. No official source ranks countries on this, so the item cannot be checked; it is a vague comparative claim.",
+  "source": "",
+  "checked": "2026-09-28"
+ },
+ {
+  "item": "singapore-food-tnf#21",
+  "status": "unverifiable",
+  "problem": "The key is FALSE for 'chicken rice is considered the national dish'. Singapore has no official national dish, so 'is considered' cannot be settled by an official source.",
+  "source": "",
+  "checked": "2026-09-28"
+ }
+]

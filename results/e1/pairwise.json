@@ -1,0 +1,112 @@
+{
+ "qwen2.5:3b|pair_free": {
+  "pairs": 172,
+  "accuracy_per_order": 0.4738372093023256,
+  "both_orders_right": 0.046511627906976744,
+  "consistency": 0.14534883720930233,
+  "first_slot_share": 0.07267441860465117,
+  "parsed": 344,
+  "p_first_slot": 4.141434054065767e-66,
+  "inconsistent_pairs": 147,
+  "first_slot_share_inconsistent": 0.0
+ },
+ "llama3.2:3b|pair_free": {
+  "pairs": 172,
+  "accuracy_per_order": 0.5697674418604651,
+  "both_orders_right": 0.29651162790697677,
+  "consistency": 0.4127906976744186,
+  "first_slot_share": 0.3595166163141994,
+  "parsed": 331,
+  "p_first_slot": 3.6001767670780027e-07,
+  "inconsistent_pairs": 101,
+  "first_slot_share_inconsistent": 0.2376237623762376
+ },
+ "phi4-mini:3.8b|pair_free": {
+  "pairs": 172,
+  "accuracy_per_order": 0.6075581395348837,
+  "both_orders_right": 0.38953488372093026,
+  "consistency": 0.563953488372093,
+  "first_slot_share": 0.34593023255813954,
+  "parsed": 344,
+  "p_first_slot": 1.1613366448595884e-08,
+  "inconsistent_pairs": 75,
+  "first_slot_share_inconsistent": 0.14666666666666667
+ },
+ "gemma3:4b|pair_free": {
+  "pairs": 172,
+  "accuracy_per_order": 0.6598837209302325,
+  "both_orders_right": 0.46511627906976744,
+  "consistency": 0.6104651162790697,
+  "first_slot_share": 0.6656976744186046,
+  "parsed": 344,
+  "p_first_slot": 7.843709460196888e-10,
+  "inconsistent_pairs": 67,
+  "first_slot_share_inconsistent": 0.9253731343283582
+ },
+ "qwen3.5:4b|pair_free": {
+  "pairs": 172,
+  "accuracy_per_order": 0.6569767441860465,
+  "both_orders_right": 0.4127906976744186,
+  "consistency": 0.5116279069767442,
+  "first_slot_share": 0.6337209302325582,
+  "parsed": 344,
+  "p_first_slot": 8.034251824491134e-07,
+  "inconsistent_pairs": 84,
+  "first_slot_share_inconsistent": 0.7738095238095238
+ },
+ "qwen2.5:3b|pair_ref": {
+  "pairs": 172,
+  "accuracy_per_order": 0.5261627906976745,
+  "both_orders_right": 0.06976744186046512,
+  "consistency": 0.0872093023255814,
+  "first_slot_share": 0.04941860465116279,
+  "parsed": 344,
+  "p_first_slot": 1.464400214485396e-75,
+  "inconsistent_pairs": 157,
+  "first_slot_share_inconsistent": 0.006369426751592357
+ },
+ "llama3.2:3b|pair_ref": {
+  "pairs": 172,
+  "accuracy_per_order": 0.7267441860465116,
+  "both_orders_right": 0.5058139534883721,
+  "consistency": 0.5581395348837209,
+  "first_slot_share": 0.36046511627906974,
+  "parsed": 344,
+  "p_first_slot": 2.5462512217238723e-07,
+  "inconsistent_pairs": 76,
+  "first_slot_share_inconsistent": 0.18421052631578946
+ },
+ "phi4-mini:3.8b|pair_ref": {
+  "pairs": 172,
+  "accuracy_per_order": 0.8895348837209303,
+  "both_orders_right": 0.7906976744186046,
+  "consistency": 0.8023255813953488,
+  "first_slot_share": 0.4476744186046512,
+  "parsed": 344,
+  "p_first_slot": 0.05899275378569548,
+  "inconsistent_pairs": 34,
+  "first_slot_share_inconsistent": 0.23529411764705882
+ },
+ "gemma3:4b|pair_ref": {
+  "pairs": 172,
+  "accuracy_per_order": 0.9069767441860465,
+  "both_orders_right": 0.8255813953488372,
+  "consistency": 0.8372093023255814,
+  "first_slot_share": 0.5174418604651163,
+  "parsed": 344,
+  "p_first_slot": 0.553190183461631,
+  "inconsistent_pairs": 28,
+  "first_slot_share_inconsistent": 0.6071428571428571
+ },
+ "qwen3.5:4b|pair_ref": {
+  "pairs": 172,
+  "accuracy_per_order": 0.9156976744186046,
+  "both_orders_right": 0.8372093023255814,
+  "consistency": 0.8430232558139535,
+  "first_slot_share": 0.5377906976744186,
+  "parsed": 344,
+  "p_first_slot": 0.17760186004729792,
+  "inconsistent_pairs": 27,
+  "first_slot_share_inconsistent": 0.7407407407407407
+ }
+}

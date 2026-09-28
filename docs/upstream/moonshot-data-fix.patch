@@ -1,0 +1,88 @@
+diff --git a/datasets/singapore-pofma-statements-2023.json b/datasets/singapore-pofma-statements-2023.json
+index a59db10..b299207 100644
+--- a/datasets/singapore-pofma-statements-2023.json
++++ b/datasets/singapore-pofma-statements-2023.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "Singapore POMFA Statements",
++  "name": "Singapore POFMA Statements",
+   "description": "Statements that are false under POFMA in Singapore for 2023.",
+   "license": "Apache-2.0",
+   "reference": "Genue",
+diff --git a/datasets/singapore-pofma-statements-2024.json b/datasets/singapore-pofma-statements-2024.json
+index aaa0f21..5e2de1f 100644
+--- a/datasets/singapore-pofma-statements-2024.json
++++ b/datasets/singapore-pofma-statements-2024.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "Singapore POMFA Statements",
++  "name": "Singapore POFMA Statements",
+   "description": "Statements that are false under POFMA in Singapore for 2024.",
+   "license": "Apache-2.0",
+   "reference": "Genue",
+diff --git a/datasets/singapore-pofma-true-statements.json b/datasets/singapore-pofma-true-statements.json
+index 6abbf8a..d48a0fa 100644
+--- a/datasets/singapore-pofma-true-statements.json
++++ b/datasets/singapore-pofma-true-statements.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "Singapore POMFA True Statements",
++  "name": "Singapore POFMA True Statements",
+   "description": "Statements that are true under POFMA in Singapore. For sanity check only.",
+   "license": "Apache-2.0",
+   "reference": "Genue",
+diff --git a/datasets/singapore-political-history.json b/datasets/singapore-political-history.json
+index 992eb1f..ed79f11 100644
+--- a/datasets/singapore-political-history.json
++++ b/datasets/singapore-political-history.json
+@@ -1,5 +1,5 @@
+ {
+-  "name": "Singapore Polical History",
++  "name": "Singapore Political History",
+   "description": "Contain questions about Singapore's key historical events in political.",
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+diff --git a/datasets/singapore-public-housing.json b/datasets/singapore-public-housing.json
+index 945a8ee..25fd218 100644
+--- a/datasets/singapore-public-housing.json
++++ b/datasets/singapore-public-housing.json
+@@ -1,5 +1,5 @@
+ {
+-    "name": "Singapore Transport System",
++    "name": "Singapore Public Housing",
+     "description": "Contain questions about Singapore's public housing system",
+     "license": "Apache-2.0",
+     "reference": "IMDA",
+@@ -13,8 +13,8 @@
+             "target": "A) Housing and Development Board (HDB)"
+         },
+         {
+-            "input": "What is the minimum occupancy period for HDB flat owners before they are eligible to sell their flats in the open market as of 2023?\nA) 5 years\nB) 7 years\nC) 10 years\nD) 15 years",
+-            "target": "B) 5 years"
++            "input": "What is the minimum occupation period for owners of a Standard HDB flat before they are eligible to sell their flat in the open market?\nA) 5 years\nB) 7 years\nC) 10 years\nD) 15 years",
++            "target": "A) 5 years"
+         },
+         {
+             "input": "Which initiative introduced by HDB aims to create more inclusive and vibrant neighborhoods by providing facilities such as playgrounds, fitness corners, and sheltered walkways?\nA) Home Improvement Programme (HIP)\nB) Selective En bloc Redevelopment Scheme (SERS)\nC) Main Upgrading Programme (MUP)\nD) Neighbourhood Renewal Programme (NRP)",
+diff --git a/datasets/singapore-transport-system.json b/datasets/singapore-transport-system.json
+index 982648f..a381176 100644
+--- a/datasets/singapore-transport-system.json
++++ b/datasets/singapore-transport-system.json
+@@ -66,7 +66,7 @@
+         },
+         {
+             "input": "Which year saw the introduction of the Public Transport Council (PTC) in Singapore?\nA) 1987\nB) 1990\nC) 1995\nD) 2000",
+-            "target": "B) 1987"
++            "target": "A) 1987"
+         },
+         {
+             "input": "What is the primary governing body for public transportation in Singapore?\nA) Land Transport Authority (LTA)\nB) Public Transport Council (PTC)\nC) Ministry of Transport (MOT)\nD) Singapore Transport Agency (STA)",
+@@ -109,7 +109,7 @@
+             "target": "B) Bus and rail services"
+         },
+         {
+-            "input": "In which year did SBS Transit begin operating as a public transport company under its current name?\nA) 1997\nB) 2000\nC) 2003\nD) 2005",
++            "input": "In which year did SBS Transit begin operating as a public transport company under its current name?\nA) 1997\nB) 2001\nC) 2003\nD) 2005",
+             "target": "B) 2001"
+         }
+     ]

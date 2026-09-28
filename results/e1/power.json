@@ -1,0 +1,21 @@
+{
+ "pilot_n": 48,
+ "discordant_only_jury_right": 0,
+ "discordant_only_best_right": 2,
+ "p_disc_observed": 0.041666666666666664,
+ "p_disc_planning": 0.1,
+ "mde": 0.05,
+ "alpha": 0.05,
+ "power": 0.8,
+ "n_needed_connor": 312,
+ "available_main_items": 1200,
+ "simulated_power_by_n": {
+  "200": 0.533,
+  "300": 0.7393333333333333,
+  "400": 0.8716666666666667,
+  "500": 0.9386666666666666,
+  "600": 0.9703333333333334,
+  "800": 0.996,
+  "1200": 1.0
+ }
+}

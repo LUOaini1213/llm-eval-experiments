@@ -1,0 +1,225 @@
+{
+ "moonshot_data_commit": "30fac12375476ac1eb9f47e5872ea5d379c1aa4c",
+ "population": 360,
+ "sample_n": 100,
+ "seed": 20260928,
+ "sample_status": {
+  "no_key_flag": 92,
+  "unresolved": 2,
+  "suspected": 5,
+  "flag_cleared": 1
+ },
+ "confirmed_error_rate": 0.0,
+ "confirmed_error_rate_ci95": [
+  0.0,
+  0.03621669264517641
+ ],
+ "confirmed_or_open_rate": 0.07,
+ "confirmed_or_open_ci95": [
+  0.028605288907438697,
+  0.13891972845585732
+ ],
+ "census_status": {
+  "no_key_flag": 315,
+  "unresolved": 2,
+  "suspected": 39,
+  "flag_cleared": 1,
+  "confirmed_error": 3
+ },
+ "census_key_flag_rate": 0.125,
+ "census_key_flag_ci95": [
+  0.09474723666741164,
+  0.16317130612271052
+ ],
+ "flags_by_check": {
+  "ambiguity": 99,
+  "time_sensitive": 73,
+  "mcq_key_mismatch": 2,
+  "mcq_key_missing": 1,
+  "header_row": 1,
+  "whitespace": 239,
+  "exact_duplicate": 4,
+  "consensus": 43
+ },
+ "flags_by_dataset_and_check": {
+  "singapore-facts-tnf|ambiguity": 21,
+  "singapore-facts-tnf|time_sensitive": 2,
+  "singapore-places-tnf|time_sensitive": 4,
+  "singapore-places-tnf|ambiguity": 6,
+  "singapore-food-tnf|ambiguity": 52,
+  "singapore-food-tnf|time_sensitive": 2,
+  "singapore-transport-system|time_sensitive": 3,
+  "singapore-transport-system|mcq_key_mismatch": 1,
+  "singapore-transport-system|mcq_key_missing": 1,
+  "singapore-iconic-places|time_sensitive": 2,
+  "singapore-political-history|time_sensitive": 9,
+  "singapore-public-housing|time_sensitive": 6,
+  "singapore-public-housing|mcq_key_mismatch": 1,
+  "singapore-pofma-statements-2023|ambiguity": 4,
+  "singapore-pofma-statements-2023|time_sensitive": 17,
+  "singapore-pofma-statements-2024|time_sensitive": 8,
+  "singapore-pofma-statements-2024|ambiguity": 2,
+  "singapore-pofma-true-statements|ambiguity": 14,
+  "singapore-pofma-true-statements|time_sensitive": 2,
+  "sg-legal-glossary|header_row": 1,
+  "sg-legal-glossary|whitespace": 222,
+  "sg-legal-glossary|time_sensitive": 5,
+  "sg-university-tutorial-questions-legal|whitespace": 17,
+  "sg-university-tutorial-questions-legal|time_sensitive": 13,
+  "singapore-public-housing|exact_duplicate": 4,
+  "singapore-facts-tnf|consensus": 5,
+  "singapore-food-tnf|consensus": 15,
+  "singapore-iconic-places|consensus": 2,
+  "singapore-places-tnf|consensus": 13,
+  "singapore-political-history|consensus": 1,
+  "singapore-public-housing|consensus": 1,
+  "singapore-transport-system|consensus": 6
+ },
+ "consensus_items": 43,
+ "moonshot_metric_comparison": {
+  "singapore-facts-tf|ollama-qwen2-5-3b": {
+   "n": 200,
+   "lenient_accuracy": 0.595,
+   "exactstrmatch_by_dataset": {
+    "singapore-facts-tnf": 52.0,
+    "singapore-places-tnf": 44.0,
+    "singapore-food-tnf": 66.0
+   }
+  },
+  "singapore-facts-mcq|ollama-qwen2-5-3b": {
+   "n": 76,
+   "lenient_accuracy": 0.5263157894736842,
+   "exactstrmatch_by_dataset": {
+    "singapore-iconic-places": 18.75,
+    "singapore-transport-system": 3.7037037037037033,
+    "singapore-political-history": 0.0,
+    "singapore-public-housing": 33.33333333333333
+   }
+  },
+  "singapore-facts-tf|ollama-llama3-2-3b": {
+   "n": 200,
+   "lenient_accuracy": 0.64,
+   "exactstrmatch_by_dataset": {
+    "singapore-facts-tnf": 46.0,
+    "singapore-places-tnf": 42.0,
+    "singapore-food-tnf": 3.0
+   }
+  },
+  "singapore-facts-mcq|ollama-llama3-2-3b": {
+   "n": 76,
+   "lenient_accuracy": 0.5657894736842105,
+   "exactstrmatch_by_dataset": {
+    "singapore-iconic-places": 31.25,
+    "singapore-transport-system": 18.51851851851852,
+    "singapore-political-history": 19.047619047619047,
+    "singapore-public-housing": 16.666666666666664
+   }
+  },
+  "singapore-facts-tf|ollama-phi4-mini-3-8b": {
+   "n": 200,
+   "lenient_accuracy": 0.655,
+   "exactstrmatch_by_dataset": {
+    "singapore-facts-tnf": 72.0,
+    "singapore-places-tnf": 56.00000000000001,
+    "singapore-food-tnf": 63.0
+   }
+  },
+  "singapore-facts-mcq|ollama-phi4-mini-3-8b": {
+   "n": 76,
+   "lenient_accuracy": 0.5263157894736842,
+   "exactstrmatch_by_dataset": {
+    "singapore-iconic-places": 50.0,
+    "singapore-transport-system": 40.74074074074074,
+    "singapore-political-history": 47.61904761904761,
+    "singapore-public-housing": 41.66666666666667
+   }
+  },
+  "singapore-facts-tf|ollama-gemma3-4b": {
+   "n": 200,
+   "lenient_accuracy": 0.7,
+   "exactstrmatch_by_dataset": {
+    "singapore-facts-tnf": 0.0,
+    "singapore-places-tnf": 0.0,
+    "singapore-food-tnf": 0.0
+   }
+  },
+  "singapore-facts-mcq|ollama-gemma3-4b": {
+   "n": 76,
+   "lenient_accuracy": 0.6447368421052632,
+   "exactstrmatch_by_dataset": {
+    "singapore-iconic-places": 0.0,
+    "singapore-transport-system": 22.22222222222222,
+    "singapore-political-history": 4.761904761904762,
+    "singapore-public-housing": 50.0
+   }
+  },
+  "singapore-facts-tf|ollama-qwen3-5-4b": {
+   "n": 200,
+   "lenient_accuracy": 0.68,
+   "exactstrmatch_by_dataset": {
+    "singapore-facts-tnf": 44.0,
+    "singapore-places-tnf": 16.0,
+    "singapore-food-tnf": 23.0
+   }
+  },
+  "singapore-facts-mcq|ollama-qwen3-5-4b": {
+   "n": 76,
+   "lenient_accuracy": 0.5657894736842105,
+   "exactstrmatch_by_dataset": {
+    "singapore-iconic-places": 68.75,
+    "singapore-transport-system": 40.74074074074074,
+    "singapore-political-history": 57.14285714285714,
+    "singapore-public-housing": 75.0
+   }
+  }
+ },
+ "verified": [
+  {
+   "item": "singapore-public-housing#2",
+   "status": "confirmed_error",
+   "problem": "The key is 'B) 5 years', but option B is '7 years'; '5 years' is option A. A letter-based scorer marks the right answer (A) wrong.",
+   "official_fact": "HDB lists an MOP of 5 years for unclassified and Standard flats bought from HDB, and 10 years for Plus and Prime flats.",
+   "source": "https://www.hdb.gov.sg/managing-my-home/selling-a-flat/eligibility",
+   "checked": "2026-09-28",
+   "note": "The question does not say which flat classification it means, so it is also under-specified."
+  },
+  {
+   "item": "singapore-transport-system#15",
+   "status": "confirmed_error",
+   "problem": "The key is 'B) 1987', but option B is '1990'; '1987' is option A.",
+   "official_fact": "PTC: 'Established in 1987 under the Public Transport Council Act'.",
+   "source": "https://www.ptc.gov.sg/who-we-are/about-ptc/",
+   "checked": "2026-09-28"
+  },
+  {
+   "item": "singapore-transport-system#26",
+   "status": "confirmed_error",
+   "problem": "The key is 'B) 2001', but option B is '2000' and no option is 2001, so no option can be scored correct.",
+   "official_fact": "SBS Transit milestones, 2001: Singapore Bus Services Limited changed its name to SBS Transit Ltd.",
+   "source": "https://www.sbstransit.com.sg/milestones",
+   "checked": "2026-09-28"
+  },
+  {
+   "item": "singapore-food-tnf#28",
+   "status": "key_correct",
+   "problem": "All five local models answered TRUE against the key FALSE ('no pork, no lard' restaurants are acceptable halal restaurants).",
+   "official_fact": "MUIS: halal food must be prepared with facilities free from cross-mixing with non-halal substances, and consumers are pointed to MUIS's list of halal-certified eating establishments, so 'no pork, no lard' alone does not make a restaurant halal.",
+   "source": "https://www.muis.gov.sg/halal/for-consumers/",
+   "checked": "2026-09-28"
+  },
+  {
+   "item": "singapore-facts-tnf#4",
+   "status": "unverifiable",
+   "problem": "The key is FALSE for 'one of the highest density of malls ... by floor space per capita'. No official source ranks countries on this, so the item cannot be checked; it is a vague comparative claim.",
+   "source": "",
+   "checked": "2026-09-28"
+  },
+  {
+   "item": "singapore-food-tnf#21",
+   "status": "unverifiable",
+   "problem": "The key is FALSE for 'chicken rice is considered the national dish'. Singapore has no official national dish, so 'is considered' cannot be settled by an official source.",
+   "source": "",
+   "checked": "2026-09-28"
+  }
+ ]
+}

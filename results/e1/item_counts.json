@@ -1,0 +1,45 @@
+{
+ "pool": {
+  "fm|correct": 121,
+  "fm|refusal": 35,
+  "fm|incorrect": 213,
+  "fm|ambiguous": 14,
+  "sgbus|correct": 398,
+  "sgbus|incorrect": 386,
+  "sgbus|refusal": 26,
+  "sgbus|ambiguous": 57,
+  "sql|correct": 101,
+  "sql|incorrect": 29
+ },
+ "pilot": {
+  "fm|correct": 8,
+  "fm|incorrect": 8,
+  "sgbus|correct": 8,
+  "sgbus|incorrect": 8,
+  "sql|correct": 8,
+  "sql|incorrect": 8
+ },
+ "main_order": {
+  "fm|correct": 113,
+  "fm|incorrect": 205,
+  "sgbus|correct": 390,
+  "sgbus|incorrect": 378,
+  "sql|correct": 93,
+  "sql|incorrect": 21
+ },
+ "robust": {
+  "fm|terse|correct": 39,
+  "fm|verbose|correct": 39,
+  "fm|terse|incorrect": 39,
+  "fm|verbose|incorrect": 39,
+  "sgbus|terse|correct": 54,
+  "sgbus|verbose|correct": 54,
+  "sgbus|terse|incorrect": 54,
+  "sgbus|verbose|incorrect": 54
+ },
+ "pairs": {
+  "fm": 26,
+  "sgbus": 132,
+  "sql": 14
+ }
+}

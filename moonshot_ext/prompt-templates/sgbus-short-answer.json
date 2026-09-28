@@ -1,0 +1,5 @@
+{
+ "name": "sgbus-short-answer",
+ "description": "Ask for the answer only, so that short-answer metrics can score it.",
+ "template": "Answer the question about Singapore's public bus network. Reply with the answer only, without explanation.\n\n{{ prompt }}"
+}

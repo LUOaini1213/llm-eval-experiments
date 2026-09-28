@@ -1,0 +1,22 @@
+{
+ "qwen2.5:3b|bin_ref": 0,
+ "qwen2.5:3b|strict_ref": 0,
+ "qwen2.5:3b|score_ref": 0,
+ "qwen2.5:3b|bin_free": 0,
+ "llama3.2:3b|bin_ref": 0,
+ "llama3.2:3b|strict_ref": 0,
+ "llama3.2:3b|score_ref": 0,
+ "llama3.2:3b|bin_free": 0,
+ "phi4-mini:3.8b|bin_ref": 0,
+ "phi4-mini:3.8b|strict_ref": 0,
+ "phi4-mini:3.8b|score_ref": 0,
+ "phi4-mini:3.8b|bin_free": 0,
+ "gemma3:4b|bin_ref": 0,
+ "gemma3:4b|strict_ref": 0,
+ "gemma3:4b|score_ref": 0,
+ "gemma3:4b|bin_free": 0,
+ "qwen3.5:4b|bin_ref": 0,
+ "qwen3.5:4b|strict_ref": 0,
+ "qwen3.5:4b|score_ref": 0,
+ "qwen3.5:4b|bin_free": 0
+}

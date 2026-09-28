@@ -1,0 +1,18 @@
+{
+ "name": "ollama-phi4-mini-3-8b",
+ "connector_type": "ollama-connector",
+ "uri": "http://127.0.0.1:11434",
+ "token": "",
+ "max_calls_per_second": 50,
+ "max_concurrency": 1,
+ "model": "phi4-mini:3.8b",
+ "params": {
+  "timeout": 300,
+  "max_attempts": 2,
+  "temperature": 0,
+  "seed": 0,
+  "num_ctx": 4096,
+  "num_predict": 64,
+  "think": false
+ }
+}

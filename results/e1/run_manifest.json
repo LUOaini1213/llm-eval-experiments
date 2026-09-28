@@ -1,0 +1,12 @@
+{
+ "started": "2026-09-28T13:47:31+0800",
+ "n_items": 400,
+ "preregistration_sha256": "cf3fa4d5eea9535e08f44e97126aa21d2d8029023881a83fa849f779d25e84d5",
+ "judges": {
+  "qwen2.5:3b": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+  "llama3.2:3b": "a80c4f17acd55265feec403c7aef86be0c25983ab279d83f3bcd3abbcb5b8b72",
+  "phi4-mini:3.8b": "78fad5d182a7c33065e153a5f8ba210754207ba9d91973f57dffa7f487363753",
+  "gemma3:4b": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+  "qwen3.5:4b": "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd"
+ }
+}

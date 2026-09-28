@@ -1,0 +1,880 @@
+{
+ "note": "Exploratory (docs/PREREGISTRATION.md, amendment 1). Family C: exact McNemar on accuracy against the fixed best single judge (qwen3.5:4b), Holm-adjusted over 7 tests.",
+ "design": {
+  "n_items": 400,
+  "folds": 10,
+  "cv_seed": 20260928,
+  "grouped_by": "question",
+  "stratified_by": "source",
+  "fold_sizes": [
+   42,
+   42,
+   41,
+   40,
+   40,
+   40,
+   39,
+   38,
+   39,
+   39
+  ],
+  "bootstrap": {
+   "replicates": 4000,
+   "seed": 0
+  },
+  "family_C": [
+   "best_single_cv",
+   "J5_majority",
+   "J5_unanimity",
+   "one_coin",
+   "two_coin",
+   "two_coin_per_source",
+   "dawid_skene"
+  ],
+  "cv_best_single_by_fold": [
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b",
+   "qwen3.5:4b"
+  ]
+ },
+ "methods": {
+  "best_single_fixed": {
+   "label": "best single, fixed (qwen3.5:4b)",
+   "accuracy": 0.9325,
+   "false_accept_rate": 0.1329479769,
+   "false_reject_rate": 0.01762114537,
+   "accuracy_ci": [
+    0.9075,
+    0.955
+   ],
+   "false_accepts": 23,
+   "false_accept_ci": [
+    0.0902498069,
+    0.1915928062
+   ],
+   "false_rejects": 4,
+   "false_reject_ci": [
+    0.006873317622,
+    0.04442361551
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": 0.0,
+     "diff_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "false_accept_rate": {
+     "diff": 0.0,
+     "diff_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.0,
+     "diff_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "only_this_right": 0,
+    "only_best_single_right": 0,
+    "p_mcnemar": 1.0
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9013157895,
+     "false_accept_rate": 0.1842105263,
+     "false_reject_rate": 0.01315789474
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9802631579,
+     "false_accept_rate": 0.03947368421,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.90625,
+     "false_accept_rate": 0.2857142857,
+     "false_reject_rate": 0.04
+    }
+   }
+  },
+  "J5_majority": {
+   "label": "J5 majority",
+   "accuracy": 0.8675,
+   "false_accept_rate": 0.07514450867,
+   "false_reject_rate": 0.1762114537,
+   "accuracy_ci": [
+    0.835,
+    0.9
+   ],
+   "false_accepts": 13,
+   "false_accept_ci": [
+    0.04443793136,
+    0.1243090303
+   ],
+   "false_rejects": 40,
+   "false_reject_ci": [
+    0.1321560211,
+    0.2310432902
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": -0.065,
+     "diff_ci": [
+      -0.0975,
+      -0.03
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.05780346821,
+     "diff_ci": [
+      -0.1040462428,
+      -0.01734104046
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.1585903084,
+     "diff_ci": [
+      0.1101321586,
+      0.2070484581
+     ]
+    },
+    "only_this_right": 12,
+    "only_best_single_right": 38,
+    "p_mcnemar": 0.0003058640016,
+    "p_holm": 0.00183518401,
+    "beats_best_single": false
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9407894737,
+     "false_accept_rate": 0.1052631579,
+     "false_reject_rate": 0.01315789474
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9736842105,
+     "false_accept_rate": 0.05263157895,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.5833333333,
+     "false_accept_rate": 0.04761904762,
+     "false_reject_rate": 0.52
+    }
+   }
+  },
+  "J5_unanimity": {
+   "label": "J5 unanimity",
+   "accuracy": 0.75,
+   "false_accept_rate": 0.005780346821,
+   "false_reject_rate": 0.436123348,
+   "accuracy_ci": [
+    0.7075,
+    0.7925
+   ],
+   "false_accepts": 1,
+   "false_accept_ci": [
+    0.00102110293,
+    0.03201107696
+   ],
+   "false_rejects": 99,
+   "false_reject_ci": [
+    0.3732057925,
+    0.5011668607
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": -0.1825,
+     "diff_ci": [
+      -0.2325,
+      -0.13
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.1271676301,
+     "diff_ci": [
+      -0.1791907514,
+      -0.08092485549
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.4185022026,
+     "diff_ci": [
+      0.3524229075,
+      0.4845814978
+     ]
+    },
+    "only_this_right": 22,
+    "only_best_single_right": 95,
+    "p_mcnemar": 5.314402991e-12,
+    "p_holm": 3.720082094e-11,
+    "beats_best_single": false
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.8815789474,
+     "false_accept_rate": 0.0,
+     "false_reject_rate": 0.2368421053
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9539473684,
+     "false_accept_rate": 0.01315789474,
+     "false_reject_rate": 0.07894736842
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.21875,
+     "false_accept_rate": 0.0,
+     "false_reject_rate": 1.0
+    }
+   }
+  },
+  "J3_majority": {
+   "label": "J3 majority (pilot-chosen)",
+   "accuracy": 0.925,
+   "false_accept_rate": 0.09826589595,
+   "false_reject_rate": 0.05726872247,
+   "accuracy_ci": [
+    0.8975,
+    0.95
+   ],
+   "false_accepts": 17,
+   "false_accept_ci": [
+    0.06226018281,
+    0.1517250394
+   ],
+   "false_rejects": 13,
+   "false_reject_ci": [
+    0.03377013356,
+    0.09550239412
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": -0.0075,
+     "diff_ci": [
+      -0.03,
+      0.015
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.03468208092,
+     "diff_ci": [
+      -0.07514450867,
+      0.0
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.03964757709,
+     "diff_ci": [
+      0.01762114537,
+      0.06607929515
+     ]
+    },
+    "only_this_right": 9,
+    "only_best_single_right": 12,
+    "p_mcnemar": 0.6636238098
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9342105263,
+     "false_accept_rate": 0.1184210526,
+     "false_reject_rate": 0.01315789474
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9605263158,
+     "false_accept_rate": 0.07894736842,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.8541666667,
+     "false_accept_rate": 0.09523809524,
+     "false_reject_rate": 0.16
+    }
+   }
+  },
+  "best_single_cv": {
+   "label": "best single, cross-validated",
+   "accuracy": 0.9325,
+   "false_accept_rate": 0.1329479769,
+   "false_reject_rate": 0.01762114537,
+   "accuracy_ci": [
+    0.9075,
+    0.955
+   ],
+   "false_accepts": 23,
+   "false_accept_ci": [
+    0.0902498069,
+    0.1915928062
+   ],
+   "false_rejects": 4,
+   "false_reject_ci": [
+    0.006873317622,
+    0.04442361551
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": 0.0,
+     "diff_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "false_accept_rate": {
+     "diff": 0.0,
+     "diff_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.0,
+     "diff_ci": [
+      0.0,
+      0.0
+     ]
+    },
+    "only_this_right": 0,
+    "only_best_single_right": 0,
+    "p_mcnemar": 1.0,
+    "p_holm": 1.0,
+    "beats_best_single": false
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9013157895,
+     "false_accept_rate": 0.1842105263,
+     "false_reject_rate": 0.01315789474
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9802631579,
+     "false_accept_rate": 0.03947368421,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.90625,
+     "false_accept_rate": 0.2857142857,
+     "false_reject_rate": 0.04
+    }
+   }
+  },
+  "one_coin": {
+   "label": "weighted vote, one-coin NB",
+   "accuracy": 0.9275,
+   "false_accept_rate": 0.09248554913,
+   "false_reject_rate": 0.05726872247,
+   "accuracy_ci": [
+    0.9,
+    0.9525
+   ],
+   "false_accepts": 16,
+   "false_accept_ci": [
+    0.05773066457,
+    0.1449449925
+   ],
+   "false_rejects": 13,
+   "false_reject_ci": [
+    0.03377013356,
+    0.09550239412
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": -0.005,
+     "diff_ci": [
+      -0.0275,
+      0.0175
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.04046242775,
+     "diff_ci": [
+      -0.08092485549,
+      -0.005780346821
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.03964757709,
+     "diff_ci": [
+      0.01762114537,
+      0.06607929515
+     ]
+    },
+    "only_this_right": 9,
+    "only_best_single_right": 11,
+    "p_mcnemar": 0.823802948,
+    "p_holm": 1.0,
+    "beats_best_single": false
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9342105263,
+     "false_accept_rate": 0.1184210526,
+     "false_reject_rate": 0.01315789474
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9671052632,
+     "false_accept_rate": 0.06578947368,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.8541666667,
+     "false_accept_rate": 0.09523809524,
+     "false_reject_rate": 0.16
+    }
+   }
+  },
+  "two_coin": {
+   "label": "weighted vote, two-coin NB",
+   "accuracy": 0.935,
+   "false_accept_rate": 0.08670520231,
+   "false_reject_rate": 0.04845814978,
+   "accuracy_ci": [
+    0.91,
+    0.9575
+   ],
+   "false_accepts": 15,
+   "false_accept_ci": [
+    0.05324769184,
+    0.1381184001
+   ],
+   "false_rejects": 11,
+   "false_reject_ci": [
+    0.02727067799,
+    0.08467393978
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": 0.0025,
+     "diff_ci": [
+      -0.02,
+      0.025
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.04624277457,
+     "diff_ci": [
+      -0.08670520231,
+      -0.01156069364
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.03083700441,
+     "diff_ci": [
+      0.008810572687,
+      0.05286343612
+     ]
+    },
+    "only_this_right": 10,
+    "only_best_single_right": 9,
+    "p_mcnemar": 1.0,
+    "p_holm": 1.0,
+    "beats_best_single": false
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9407894737,
+     "false_accept_rate": 0.1052631579,
+     "false_reject_rate": 0.01315789474
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9671052632,
+     "false_accept_rate": 0.06578947368,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.875,
+     "false_accept_rate": 0.09523809524,
+     "false_reject_rate": 0.1333333333
+    }
+   }
+  },
+  "two_coin_per_source": {
+   "label": "two-coin NB per source",
+   "accuracy": 0.945,
+   "false_accept_rate": 0.08670520231,
+   "false_reject_rate": 0.03083700441,
+   "accuracy_ci": [
+    0.9225,
+    0.9650625
+   ],
+   "false_accepts": 15,
+   "false_accept_ci": [
+    0.05324769184,
+    0.1381184001
+   ],
+   "false_rejects": 7,
+   "false_reject_ci": [
+    0.01501617193,
+    0.06227262605
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": 0.0125,
+     "diff_ci": [
+      -0.0075,
+      0.0325
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.04624277457,
+     "diff_ci": [
+      -0.08092485549,
+      -0.01156069364
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.01321585903,
+     "diff_ci": [
+      -0.008810572687,
+      0.03524229075
+     ]
+    },
+    "only_this_right": 11,
+    "only_best_single_right": 6,
+    "p_mcnemar": 0.3323059082,
+    "p_holm": 1.0,
+    "beats_best_single": false
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9276315789,
+     "false_accept_rate": 0.1052631579,
+     "false_reject_rate": 0.03947368421
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9934210526,
+     "false_accept_rate": 0.01315789474,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.8958333333,
+     "false_accept_rate": 0.2857142857,
+     "false_reject_rate": 0.05333333333
+    }
+   }
+  },
+  "dawid_skene": {
+   "label": "Dawid-Skene (no gold)",
+   "accuracy": 0.8675,
+   "false_accept_rate": 0.05780346821,
+   "false_reject_rate": 0.1894273128,
+   "accuracy_ci": [
+    0.835,
+    0.9
+   ],
+   "false_accepts": 10,
+   "false_accept_ci": [
+    0.03169735943,
+    0.1031209068
+   ],
+   "false_rejects": 43,
+   "false_reject_ci": [
+    0.1437835397,
+    0.2454076364
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": -0.065,
+     "diff_ci": [
+      -0.1,
+      -0.03
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.07514450867,
+     "diff_ci": [
+      -0.1213872832,
+      -0.03468208092
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.1718061674,
+     "diff_ci": [
+      0.1233480176,
+      0.2246696035
+     ]
+    },
+    "only_this_right": 14,
+    "only_best_single_right": 40,
+    "p_mcnemar": 0.0005354355029,
+    "p_holm": 0.002677177514,
+    "beats_best_single": false
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9276315789,
+     "false_accept_rate": 0.09210526316,
+     "false_reject_rate": 0.05263157895
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9868421053,
+     "false_accept_rate": 0.02631578947,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.5833333333,
+     "false_accept_rate": 0.04761904762,
+     "false_reject_rate": 0.52
+    }
+   }
+  },
+  "dawid_skene_transductive": {
+   "label": "Dawid-Skene, transductive (no gold)",
+   "accuracy": 0.87,
+   "false_accept_rate": 0.05202312139,
+   "false_reject_rate": 0.1894273128,
+   "accuracy_ci": [
+    0.8375,
+    0.9025
+   ],
+   "false_accepts": 9,
+   "false_accept_ci": [
+    0.02760783025,
+    0.09590087082
+   ],
+   "false_rejects": 43,
+   "false_reject_ci": [
+    0.1437835397,
+    0.2454076364
+   ],
+   "vs_best_single": {
+    "accuracy": {
+     "diff": -0.0625,
+     "diff_ci": [
+      -0.0975,
+      -0.025
+     ]
+    },
+    "false_accept_rate": {
+     "diff": -0.08092485549,
+     "diff_ci": [
+      -0.1271676301,
+      -0.03468208092
+     ]
+    },
+    "false_reject_rate": {
+     "diff": 0.1718061674,
+     "diff_ci": [
+      0.1233480176,
+      0.2246696035
+     ]
+    },
+    "only_this_right": 16,
+    "only_best_single_right": 41,
+    "p_mcnemar": 0.001263559472
+   },
+   "by_source": {
+    "fm": {
+     "n": 152,
+     "accuracy": 0.9407894737,
+     "false_accept_rate": 0.06578947368,
+     "false_reject_rate": 0.05263157895
+    },
+    "sgbus": {
+     "n": 152,
+     "accuracy": 0.9802631579,
+     "false_accept_rate": 0.03947368421,
+     "false_reject_rate": 0.0
+    },
+    "sql": {
+     "n": 96,
+     "accuracy": 0.5833333333,
+     "false_accept_rate": 0.04761904762,
+     "false_reject_rate": 0.52
+    }
+   }
+  }
+ },
+ "parameters": {
+  "note": "fitted on all 400 items for display only; the evaluated predictions are out of fold",
+  "one_coin_weight": {
+   "qwen2.5:3b": 1.472472057,
+   "llama3.2:3b": 0.7841189588,
+   "phi4-mini:3.8b": 1.682865381,
+   "gemma3:4b": 2.230841188,
+   "qwen3.5:4b": 2.592051287
+  },
+  "two_coin": {
+   "qwen2.5:3b": {
+    "sensitivity": 0.6855895197,
+    "specificity": 0.9771428571
+   },
+   "llama3.2:3b": {
+    "sensitivity": 0.6550218341,
+    "specificity": 0.7257142857
+   },
+   "phi4-mini:3.8b": {
+    "sensitivity": 0.7816593886,
+    "specificity": 0.92
+   },
+   "gemma3:4b": {
+    "sensitivity": 0.943231441,
+    "specificity": 0.8457142857
+   },
+   "qwen3.5:4b": {
+    "sensitivity": 0.9781659389,
+    "specificity": 0.8628571429
+   }
+  },
+  "two_coin_per_source": {
+   "fm": {
+    "qwen2.5:3b": {
+     "sensitivity": 0.7564102564,
+     "specificity": 0.9871794872
+    },
+    "llama3.2:3b": {
+     "sensitivity": 0.9871794872,
+     "specificity": 0.6153846154
+    },
+    "phi4-mini:3.8b": {
+     "sensitivity": 0.9487179487,
+     "specificity": 0.8974358974
+    },
+    "gemma3:4b": {
+     "sensitivity": 0.9743589744,
+     "specificity": 0.8461538462
+    },
+    "qwen3.5:4b": {
+     "sensitivity": 0.9743589744,
+     "specificity": 0.8076923077
+    }
+   },
+   "sgbus": {
+    "qwen2.5:3b": {
+     "sensitivity": 0.9487179487,
+     "specificity": 0.9615384615
+    },
+    "llama3.2:3b": {
+     "sensitivity": 0.9487179487,
+     "specificity": 0.7820512821
+    },
+    "phi4-mini:3.8b": {
+     "sensitivity": 0.9871794872,
+     "specificity": 0.9230769231
+    },
+    "gemma3:4b": {
+     "sensitivity": 0.9871794872,
+     "specificity": 0.8461538462
+    },
+    "qwen3.5:4b": {
+     "sensitivity": 0.9871794872,
+     "specificity": 0.9487179487
+    }
+   },
+   "sql": {
+    "qwen2.5:3b": {
+     "sensitivity": 0.3376623377,
+     "specificity": 0.9130434783
+    },
+    "llama3.2:3b": {
+     "sensitivity": 0.01298701299,
+     "specificity": 0.8695652174
+    },
+    "phi4-mini:3.8b": {
+     "sensitivity": 0.3896103896,
+     "specificity": 0.9130434783
+    },
+    "gemma3:4b": {
+     "sensitivity": 0.8441558442,
+     "specificity": 0.7826086957
+    },
+    "qwen3.5:4b": {
+     "sensitivity": 0.9480519481,
+     "specificity": 0.6956521739
+    }
+   }
+  },
+  "dawid_skene_transductive": {
+   "prior": 0.4874210858,
+   "iterations": 37,
+   "qwen2.5:3b": {
+    "sensitivity": 0.7753382329,
+    "specificity": 0.9599030262
+   },
+   "llama3.2:3b": {
+    "sensitivity": 0.792412834,
+    "specificity": 0.7974486439
+   },
+   "phi4-mini:3.8b": {
+    "sensitivity": 0.9344057278,
+    "specificity": 0.9566540307
+   },
+   "gemma3:4b": {
+    "sensitivity": 0.9859627941,
+    "specificity": 0.7642131296
+   },
+   "qwen3.5:4b": {
+    "sensitivity": 0.9885113023,
+    "specificity": 0.7424891867
+   }
+  },
+  "gold_prior": 0.5675
+ },
+ "split_sensitivity": {
+  "best_single_cv": {
+   "mean": 0.9325,
+   "min": 0.9325,
+   "max": 0.9325,
+   "seeds": 50
+  },
+  "one_coin": {
+   "mean": 0.92675,
+   "min": 0.925,
+   "max": 0.93,
+   "seeds": 50
+  },
+  "two_coin": {
+   "mean": 0.93265,
+   "min": 0.9275,
+   "max": 0.9375,
+   "seeds": 50
+  },
+  "two_coin_per_source": {
+   "mean": 0.94875,
+   "min": 0.94,
+   "max": 0.96,
+   "seeds": 50
+  },
+  "dawid_skene": {
+   "mean": 0.8706,
+   "min": 0.8625,
+   "max": 0.88,
+   "seeds": 50
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "n": 180,
+ "seed": 20260928,
+ "verified": 180,
+ "verification_problems": [],
+ "by_template": {
+  "road": 24,
+  "operator": 24,
+  "area": 24,
+  "n_stops": 21,
+  "n_services": 21,
+  "first_bus": 21,
+  "route_km": 15,
+  "area_count": 15,
+  "common_services": 15
+ },
+ "by_difficulty": {
+  "easy": 72,
+  "medium": 63,
+  "hard": 45
+ },
+ "by_stratum": {
+  "CENTRAL REGION": 18,
+  "EAST REGION": 17,
+  "NORTH REGION": 16,
+  "NORTH-EAST REGION": 17,
+  "WEST REGION": 16,
+  "GAS": 26,
+  "SBST": 24,
+  "SMRT": 24,
+  "TTS": 22
+ },
+ "distinct_gold_share_max": {
+  "area": 0.16666666666666666,
+  "area_count": 0.06666666666666667,
+  "common_services": 0.06666666666666667,
+  "first_bus": 0.14285714285714285,
+  "n_services": 0.19047619047619047,
+  "n_stops": 0.09523809523809523,
+  "operator": 0.25,
+  "road": 0.125,
+  "route_km": 0.06666666666666667
+ }
+}

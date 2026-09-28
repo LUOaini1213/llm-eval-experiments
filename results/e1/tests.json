@@ -1,0 +1,314 @@
+{
+ "primary_H1": {
+  "a": "J5-majority|bin_ref",
+  "b": "phi4-mini:3.8b|bin_ref",
+  "subset": "all",
+  "n": 400,
+  "a_right": 347,
+  "b_right": 338,
+  "only_a_right": 15,
+  "only_b_right": 6,
+  "diff": 0.0225,
+  "diff_ci": [
+   0.0,
+   0.045
+  ],
+  "discordant_odds_ratio": 2.5,
+  "odds_ratio_ci": [
+   0.916622629117924,
+   7.864509209639617
+  ],
+  "p_mcnemar": 0.0783538818359375
+ },
+ "family_A": {
+  "A1 reference-guided vs reference-free (J5 majority)": {
+   "a": "J5-majority|bin_ref",
+   "b": "J5-majority|bin_free",
+   "subset": "all",
+   "n": 400,
+   "a_right": 347,
+   "b_right": 217,
+   "only_a_right": 148,
+   "only_b_right": 18,
+   "diff": 0.325,
+   "diff_ci": [
+    0.2725,
+    0.38
+   ],
+   "discordant_odds_ratio": 8.222222222222221,
+   "odds_ratio_ci": [
+    5.025857792683394,
+    14.256993297989442
+   ],
+   "p_mcnemar": 1.336388829332673e-26,
+   "p_holm": 8.018332975996038e-26
+  },
+  "A2 unanimity vs majority, false accepts (J5)": {
+   "a": "J5-unanimity|bin_ref",
+   "b": "J5-majority|bin_ref",
+   "subset": "incorrect",
+   "n": 173,
+   "a_right": 172,
+   "b_right": 160,
+   "only_a_right": 12,
+   "only_b_right": 0,
+   "diff": 0.06936416184971098,
+   "diff_ci": [
+    0.03468208092485549,
+    0.10982658959537572
+   ],
+   "discordant_odds_ratio": Infinity,
+   "odds_ratio_ci": [
+    2.7785973305581577,
+    Infinity
+   ],
+   "p_mcnemar": 0.00048828125,
+   "p_holm": 0.00146484375
+  },
+  "A3 unanimity vs majority, false rejects (J5)": {
+   "a": "J5-unanimity|bin_ref",
+   "b": "J5-majority|bin_ref",
+   "subset": "correct",
+   "n": 227,
+   "a_right": 128,
+   "b_right": 187,
+   "only_a_right": 0,
+   "only_b_right": 59,
+   "diff": -0.2599118942731278,
+   "diff_ci": [
+    -0.31718061674008813,
+    -0.2026431718061674
+   ],
+   "discordant_odds_ratio": 0.0,
+   "odds_ratio_ci": [
+    0.0,
+    0.06451934770475805
+   ],
+   "p_mcnemar": 3.469446951953614e-18,
+   "p_holm": 1.734723475976807e-17
+  },
+  "A4 mean score vs majority vote (J5)": {
+   "a": "J5-mean_score|score_ref",
+   "b": "J5-majority|bin_ref",
+   "subset": "all",
+   "n": 400,
+   "a_right": 326,
+   "b_right": 347,
+   "only_a_right": 11,
+   "only_b_right": 32,
+   "diff": -0.0525,
+   "diff_ci": [
+    -0.085,
+    -0.0225
+   ],
+   "discordant_odds_ratio": 0.34375,
+   "odds_ratio_ci": [
+    0.1563179394849488,
+    0.6998584457230574
+   ],
+   "p_mcnemar": 0.001913961001264397,
+   "p_holm": 0.003827922002528794
+  },
+  "A5 three-judge vs five-judge majority": {
+   "a": "J3-majority|bin_ref",
+   "b": "J5-majority|bin_ref",
+   "subset": "all",
+   "n": 400,
+   "a_right": 370,
+   "b_right": 347,
+   "only_a_right": 27,
+   "only_b_right": 4,
+   "diff": 0.0575,
+   "diff_ci": [
+    0.03,
+    0.085
+   ],
+   "discordant_odds_ratio": 6.75,
+   "odds_ratio_ci": [
+    2.3519272670861935,
+    26.54694814173323
+   ],
+   "p_mcnemar": 3.39532271027565e-05,
+   "p_holm": 0.000135812908411026
+  },
+  "A6 strict rubric vs basic rubric (best single judge)": {
+   "a": "phi4-mini:3.8b|strict_ref",
+   "b": "phi4-mini:3.8b|bin_ref",
+   "subset": "all",
+   "n": 400,
+   "a_right": 331,
+   "b_right": 338,
+   "only_a_right": 2,
+   "only_b_right": 9,
+   "diff": -0.0175,
+   "diff_ci": [
+    -0.0325,
+    -0.0025
+   ],
+   "discordant_odds_ratio": 0.2222222222222222,
+   "odds_ratio_ci": [
+    0.0233646410530492,
+    1.0736384358299518
+   ],
+   "p_mcnemar": 0.0654296875,
+   "p_holm": 0.0654296875
+  }
+ },
+ "family_B": {
+  "B verbosity: false accepts verbose vs terse, qwen2.5:3b": {
+   "verbose_rate": 0.0,
+   "terse_rate": 0.03225806451612903,
+   "diff": -0.03225806451612903,
+   "diff_ci": [
+    -0.07526881720430108,
+    0.0
+   ],
+   "only_verbose": 0,
+   "only_terse": 3,
+   "p_mcnemar": 0.25,
+   "n_questions": 93,
+   "p": 0.25,
+   "p_holm": 1.0
+  },
+  "B verbosity: false accepts verbose vs terse, llama3.2:3b": {
+   "verbose_rate": 0.07526881720430108,
+   "terse_rate": 0.03225806451612903,
+   "diff": 0.043010752688172046,
+   "diff_ci": [
+    0.0,
+    0.0967741935483871
+   ],
+   "only_verbose": 5,
+   "only_terse": 1,
+   "p_mcnemar": 0.21875,
+   "n_questions": 93,
+   "p": 0.21875,
+   "p_holm": 1.0
+  },
+  "B verbosity: false accepts verbose vs terse, phi4-mini:3.8b": {
+   "verbose_rate": 0.06451612903225806,
+   "terse_rate": 0.021505376344086023,
+   "diff": 0.043010752688172046,
+   "diff_ci": [
+    0.010752688172043012,
+    0.08602150537634409
+   ],
+   "only_verbose": 4,
+   "only_terse": 0,
+   "p_mcnemar": 0.125,
+   "n_questions": 93,
+   "p": 0.125,
+   "p_holm": 0.75
+  },
+  "B verbosity: false accepts verbose vs terse, gemma3:4b": {
+   "verbose_rate": 0.043010752688172046,
+   "terse_rate": 0.03225806451612903,
+   "diff": 0.010752688172043012,
+   "diff_ci": [
+    -0.021505376344086023,
+    0.043010752688172046
+   ],
+   "only_verbose": 2,
+   "only_terse": 1,
+   "p_mcnemar": 1.0,
+   "n_questions": 93,
+   "p": 1.0,
+   "p_holm": 1.0
+  },
+  "B verbosity: false accepts verbose vs terse, qwen3.5:4b": {
+   "verbose_rate": 0.043010752688172046,
+   "terse_rate": 0.043010752688172046,
+   "diff": 0.0,
+   "diff_ci": [
+    -0.053763440860215055,
+    0.053763440860215055
+   ],
+   "only_verbose": 3,
+   "only_terse": 3,
+   "p_mcnemar": 1.0,
+   "n_questions": 93,
+   "p": 1.0,
+   "p_holm": 1.0
+  },
+  "B verbosity: false accepts verbose vs terse, J5-majority": {
+   "verbose_rate": 0.010752688172043012,
+   "terse_rate": 0.021505376344086023,
+   "diff": -0.010752688172043012,
+   "diff_ci": [
+    -0.03225806451612903,
+    0.0
+   ],
+   "only_verbose": 0,
+   "only_terse": 1,
+   "p_mcnemar": 1.0,
+   "n_questions": 93,
+   "p": 1.0,
+   "p_holm": 1.0
+  },
+  "B position: first-slot share, qwen2.5:3b, no reference": {
+   "pairs": 172,
+   "accuracy_per_order": 0.4738372093023256,
+   "both_orders_right": 0.046511627906976744,
+   "consistency": 0.14534883720930233,
+   "first_slot_share": 0.07267441860465117,
+   "parsed": 344,
+   "p_first_slot": 4.141434054065767e-66,
+   "inconsistent_pairs": 147,
+   "first_slot_share_inconsistent": 0.0,
+   "p": 4.141434054065767e-66,
+   "p_holm": 4.555577459472344e-65
+  },
+  "B position: first-slot share, llama3.2:3b, no reference": {
+   "pairs": 172,
+   "accuracy_per_order": 0.5697674418604651,
+   "both_orders_right": 0.29651162790697677,
+   "consistency": 0.4127906976744186,
+   "first_slot_share": 0.3595166163141994,
+   "parsed": 331,
+   "p_first_slot": 3.6001767670780027e-07,
+   "inconsistent_pairs": 101,
+   "first_slot_share_inconsistent": 0.2376237623762376,
+   "p": 3.6001767670780027e-07,
+   "p_holm": 2.880141413662402e-06
+  },
+  "B position: first-slot share, phi4-mini:3.8b, no reference": {
+   "pairs": 172,
+   "accuracy_per_order": 0.6075581395348837,
+   "both_orders_right": 0.38953488372093026,
+   "consistency": 0.563953488372093,
+   "first_slot_share": 0.34593023255813954,
+   "parsed": 344,
+   "p_first_slot": 1.1613366448595884e-08,
+   "inconsistent_pairs": 75,
+   "first_slot_share_inconsistent": 0.14666666666666667,
+   "p": 1.1613366448595884e-08,
+   "p_holm": 1.0452029803736295e-07
+  },
+  "B position: first-slot share, gemma3:4b, no reference": {
+   "pairs": 172,
+   "accuracy_per_order": 0.6598837209302325,
+   "both_orders_right": 0.46511627906976744,
+   "consistency": 0.6104651162790697,
+   "first_slot_share": 0.6656976744186046,
+   "parsed": 344,
+   "p_first_slot": 7.843709460196888e-10,
+   "inconsistent_pairs": 67,
+   "first_slot_share_inconsistent": 0.9253731343283582,
+   "p": 7.843709460196888e-10,
+   "p_holm": 7.843709460196888e-09
+  },
+  "B position: first-slot share, qwen3.5:4b, no reference": {
+   "pairs": 172,
+   "accuracy_per_order": 0.6569767441860465,
+   "both_orders_right": 0.4127906976744186,
+   "consistency": 0.5116279069767442,
+   "first_slot_share": 0.6337209302325582,
+   "parsed": 344,
+   "p_first_slot": 8.034251824491134e-07,
+   "inconsistent_pairs": 84,
+   "first_slot_share_inconsistent": 0.7738095238095238,
+   "p": 8.034251824491134e-07,
+   "p_holm": 5.623976277143793e-06
+  }
+ }
+}

@@ -1,0 +1,101 @@
+{
+ "moonshot_data_commit": "30fac12375476ac1eb9f47e5872ea5d379c1aa4c",
+ "datasets": {
+  "singapore-facts-tnf": {
+   "n": 50,
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+   "name": "Facts about Singapore in True and False",
+   "name_check": null,
+   "redistributable": true
+  },
+  "singapore-places-tnf": {
+   "n": 50,
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+   "name": "Places in Singapore",
+   "name_check": null,
+   "redistributable": true
+  },
+  "singapore-food-tnf": {
+   "n": 100,
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+   "name": "Food in Singapore",
+   "name_check": null,
+   "redistributable": true
+  },
+  "singapore-transport-system": {
+   "n": 27,
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+   "name": "Singapore Transport System",
+   "name_check": null,
+   "redistributable": true
+  },
+  "singapore-iconic-places": {
+   "n": 16,
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+   "name": "Iconic Places in Singapore",
+   "name_check": null,
+   "redistributable": true
+  },
+  "singapore-political-history": {
+   "n": 21,
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+   "name": "Singapore Polical History",
+   "name_check": "name 'Singapore Polical History': 'polical' looks like a misspelling of 'political'",
+   "redistributable": true
+  },
+  "singapore-public-housing": {
+   "n": 12,
+   "license": "Apache-2.0",
+   "reference": "IMDA",
+   "name": "Singapore Transport System",
+   "name_check": "name 'Singapore Transport System' does not match file 'singapore-public-housing'",
+   "redistributable": true
+  },
+  "singapore-pofma-statements-2023": {
+   "n": 34,
+   "license": "Apache-2.0",
+   "reference": "Genue",
+   "name": "Singapore POMFA Statements",
+   "name_check": "name 'Singapore POMFA Statements': 'pomfa' looks like a misspelling of 'pofma'",
+   "redistributable": true
+  },
+  "singapore-pofma-statements-2024": {
+   "n": 36,
+   "license": "Apache-2.0",
+   "reference": "Genue",
+   "name": "Singapore POMFA Statements",
+   "name_check": "name 'Singapore POMFA Statements': 'pomfa' looks like a misspelling of 'pofma'",
+   "redistributable": true
+  },
+  "singapore-pofma-true-statements": {
+   "n": 14,
+   "license": "Apache-2.0",
+   "reference": "Genue",
+   "name": "Singapore POMFA True Statements",
+   "name_check": "name 'Singapore POMFA True Statements': 'pomfa' looks like a misspelling of 'pofma'",
+   "redistributable": true
+  },
+  "sg-legal-glossary": {
+   "n": 425,
+   "license": "(none stated)",
+   "reference": "https://www.sicc.gov.sg/glossary-of-legal-terms",
+   "name": "sg-legal-glossary",
+   "name_check": null,
+   "redistributable": false
+  },
+  "sg-university-tutorial-questions-legal": {
+   "n": 32,
+   "license": "(none stated)",
+   "reference": "",
+   "name": "sg-university-tutorial-questions-legal",
+   "name_check": null,
+   "redistributable": false
+  }
+ }
+}

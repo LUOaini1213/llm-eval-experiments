@@ -1,0 +1,17 @@
+{
+ "llm-jury": {
+  "endpoints": [
+   "ollama-phi4-mini-3-8b",
+   "ollama-gemma3-4b",
+   "ollama-qwen3-5-4b"
+  ],
+  "configurations": {
+   "condition": "bin_ref",
+   "aggregation": "majority"
+  }
+ },
+ "sgfacts-match": {
+  "endpoints": [],
+  "configurations": {}
+ }
+}

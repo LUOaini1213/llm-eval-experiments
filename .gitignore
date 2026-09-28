@@ -1,0 +1,15 @@
+# environments and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# model-call caches (the committed results/ files hold every reply that the analysis uses)
+cache/
+logs/
+# local-only material: code passages from fm-knowledge-assistant (not redistributable), the Moonshot workspace
+local/
+# third-party clone (aiverify-foundation/moonshot-data), fetched by the setup step
+external/
+# raw LTA DataMall files are never copied here; only derived facts in data/sg_facts/
+*.parquet
+*.duckdb

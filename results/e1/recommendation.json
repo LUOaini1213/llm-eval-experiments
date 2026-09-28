@@ -1,0 +1,16 @@
+{
+ "most_accurate": "qwen3.5:4b|bin_ref",
+ "recommended": "qwen3.5:4b|bin_ref",
+ "recommended_vs_most_accurate": null,
+ "pareto_front_seconds": [
+  "qwen2.5:3b|bin_ref",
+  "phi4-mini:3.8b|bin_ref",
+  "gemma3:4b|bin_ref",
+  "qwen3.5:4b|bin_ref",
+  "qwen2.5:3b|strict_ref",
+  "gemma3:4b|strict_ref",
+  "qwen2.5:3b|score_ref",
+  "qwen2.5:3b|bin_free"
+ ],
+ "lowest_false_accept_with_false_reject_at_most_20pct": "J5-majority|strict_ref"
+}
