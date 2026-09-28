@@ -1,3 +1,5 @@
+Posted as https://github.com/aiverify-foundation/moonshot-data/issues/222 (links filled in when posted).
+
 **Title:** Answer-key errors and metadata typos in the Singapore MCQ datasets; `exactstrmatch` scores mostly answer format on the TF/MCQ recipes
 
 ---

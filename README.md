@@ -439,6 +439,8 @@ into it.
 
 ## E2: audit of Moonshot's Singapore datasets
 
+**Reported upstream (2026-09-28):** issue [aiverify-foundation/moonshot-data#222](https://github.com/aiverify-foundation/moonshot-data/issues/222), and pull request [#223](https://github.com/aiverify-foundation/moonshot-data/pull/223), which fixes the three answer keys and the dataset-name typos. The texts are in [`docs/upstream/`](docs/upstream/).
+
 **Scope.** moonshot-data at commit `30fac123` has ten Singapore fact datasets, 360 items in all.
 
 - They are all Apache-2.0: three true/false sets, four multiple-choice sets and three POFMA sets.
