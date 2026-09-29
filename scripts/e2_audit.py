@@ -29,6 +29,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from evalab import audit as A  # noqa: E402
+from evalab.stable import stable_round  # noqa: E402
 from evalab.stats import clopper_pearson, wilson  # noqa: E402
 
 DATA = Path(os.environ.get("MOONSHOT_DATA", ROOT / "external" / "moonshot-data"))
@@ -160,7 +161,7 @@ def main():
         "moonshot_metric_comparison": metric_cmp,
         "verified": verified,
     }
-    (OUT / "summary.json").write_text(json.dumps(summary, indent=1), encoding="utf-8", newline="\n")
+    (OUT / "summary.json").write_text(json.dumps(stable_round(summary), indent=1), encoding="utf-8", newline="\n")
     print(json.dumps({k: summary[k] for k in ("sample_status", "confirmed_error_rate", "confirmed_error_rate_ci95",
                                                "confirmed_or_open_rate", "census_status", "flags_by_check",
                                                "consensus_items")}, indent=1))

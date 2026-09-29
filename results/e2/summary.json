@@ -12,12 +12,12 @@
  "confirmed_error_rate": 0.0,
  "confirmed_error_rate_ci95": [
   0.0,
-  0.03621669264517641
+  0.03621669265
  ],
  "confirmed_or_open_rate": 0.07,
  "confirmed_or_open_ci95": [
-  0.028605288907438697,
-  0.13891972845585732
+  0.02860528891,
+  0.1389197285
  ],
  "census_status": {
   "no_key_flag": 315,
@@ -28,8 +28,8 @@
  },
  "census_key_flag_rate": 0.125,
  "census_key_flag_ci95": [
-  0.09474723666741164,
-  0.16317130612271052
+  0.09474723667,
+  0.1631713061
  ],
  "flags_by_check": {
   "ambiguity": 99,
@@ -88,12 +88,12 @@
   },
   "singapore-facts-mcq|ollama-qwen2-5-3b": {
    "n": 76,
-   "lenient_accuracy": 0.5263157894736842,
+   "lenient_accuracy": 0.5263157895,
    "exactstrmatch_by_dataset": {
     "singapore-iconic-places": 18.75,
-    "singapore-transport-system": 3.7037037037037033,
+    "singapore-transport-system": 3.703703704,
     "singapore-political-history": 0.0,
-    "singapore-public-housing": 33.33333333333333
+    "singapore-public-housing": 33.33333333
    }
   },
   "singapore-facts-tf|ollama-llama3-2-3b": {
@@ -107,12 +107,12 @@
   },
   "singapore-facts-mcq|ollama-llama3-2-3b": {
    "n": 76,
-   "lenient_accuracy": 0.5657894736842105,
+   "lenient_accuracy": 0.5657894737,
    "exactstrmatch_by_dataset": {
     "singapore-iconic-places": 31.25,
-    "singapore-transport-system": 18.51851851851852,
-    "singapore-political-history": 19.047619047619047,
-    "singapore-public-housing": 16.666666666666664
+    "singapore-transport-system": 18.51851852,
+    "singapore-political-history": 19.04761905,
+    "singapore-public-housing": 16.66666667
    }
   },
   "singapore-facts-tf|ollama-phi4-mini-3-8b": {
@@ -120,18 +120,18 @@
    "lenient_accuracy": 0.655,
    "exactstrmatch_by_dataset": {
     "singapore-facts-tnf": 72.0,
-    "singapore-places-tnf": 56.00000000000001,
+    "singapore-places-tnf": 56.0,
     "singapore-food-tnf": 63.0
    }
   },
   "singapore-facts-mcq|ollama-phi4-mini-3-8b": {
    "n": 76,
-   "lenient_accuracy": 0.5263157894736842,
+   "lenient_accuracy": 0.5263157895,
    "exactstrmatch_by_dataset": {
     "singapore-iconic-places": 50.0,
-    "singapore-transport-system": 40.74074074074074,
-    "singapore-political-history": 47.61904761904761,
-    "singapore-public-housing": 41.66666666666667
+    "singapore-transport-system": 40.74074074,
+    "singapore-political-history": 47.61904762,
+    "singapore-public-housing": 41.66666667
    }
   },
   "singapore-facts-tf|ollama-gemma3-4b": {
@@ -145,11 +145,11 @@
   },
   "singapore-facts-mcq|ollama-gemma3-4b": {
    "n": 76,
-   "lenient_accuracy": 0.6447368421052632,
+   "lenient_accuracy": 0.6447368421,
    "exactstrmatch_by_dataset": {
     "singapore-iconic-places": 0.0,
-    "singapore-transport-system": 22.22222222222222,
-    "singapore-political-history": 4.761904761904762,
+    "singapore-transport-system": 22.22222222,
+    "singapore-political-history": 4.761904762,
     "singapore-public-housing": 50.0
    }
   },
@@ -164,11 +164,11 @@
   },
   "singapore-facts-mcq|ollama-qwen3-5-4b": {
    "n": 76,
-   "lenient_accuracy": 0.5657894736842105,
+   "lenient_accuracy": 0.5657894737,
    "exactstrmatch_by_dataset": {
     "singapore-iconic-places": 68.75,
-    "singapore-transport-system": 40.74074074074074,
-    "singapore-political-history": 57.14285714285714,
+    "singapore-transport-system": 40.74074074,
+    "singapore-political-history": 57.14285714,
     "singapore-public-housing": 75.0
    }
   }

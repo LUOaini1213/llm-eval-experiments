@@ -17,6 +17,7 @@ from evalab import analysis as A  # noqa: E402
 from evalab import judge as J  # noqa: E402
 from evalab import stats as S  # noqa: E402
 from evalab.items import load_jsonl  # noqa: E402
+from evalab.stable import stable_round  # noqa: E402
 
 JUDGES = ["qwen2.5:3b", "llama3.2:3b", "phi4-mini:3.8b", "gemma3:4b", "qwen3.5:4b"]
 OUT = ROOT / "results" / "e1"
@@ -26,7 +27,7 @@ ALPHA, POWER = 0.05, 0.8
 
 def dump(name, obj):
     OUT.mkdir(parents=True, exist_ok=True)
-    (OUT / name).write_text(json.dumps(obj, indent=1, default=float), encoding="utf-8", newline="\n")
+    (OUT / name).write_text(json.dumps(stable_round(obj), indent=1, default=float), encoding="utf-8", newline="\n")
 
 
 def pipelines(items, idx, best, jury3):
