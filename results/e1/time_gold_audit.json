@@ -1,0 +1,136 @@
+{
+ "scope": "Post-hoc lexical time-label correction; frozen experimental samples are not resampled.",
+ "input_sha256": {
+  "data/e1/pool.jsonl": "44ea08765a2b28cfada3ebeb315a33e76ae6d54e11931f11052b98dfaf345cfb",
+  "data/e1/items_main_order.jsonl": "fbc5d5f32625a27fe504623aad1a5c6942d2afec517568d6ed576a0c1ac970f1",
+  "results/e1/run_manifest.json": "7483041f46c23906185369624768bcbec6418cc0637cbe57cc4f1bde0cbd6180"
+ },
+ "pool_size": 1380,
+ "time_candidates_checked": 107,
+ "original_pool_labels": {
+  "ambiguous": 71,
+  "correct": 620,
+  "incorrect": 628,
+  "refusal": 61
+ },
+ "corrected_pool_labels": {
+  "ambiguous": 61,
+  "correct": 630,
+  "incorrect": 628,
+  "refusal": 61
+ },
+ "changes": [
+  {
+   "item_id": "sgbus-0127|qwen2.5:3b|closed",
+   "qid": "sgbus-0127",
+   "candidate": "To provide the exact time, I would need to access real-time data from LTA DataMall for September 2026, which I cannot do here. However, typically bus services start around 5:30 AM in the morning.",
+   "reference": "0530",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0131|qwen2.5:3b|closed",
+   "qid": "sgbus-0131",
+   "candidate": "To provide the exact time, I would need to access real-time data from the LTA DataMall for September 2026, which I cannot do here. However, typically bus services start around 5:30 AM in the morning.",
+   "reference": "0530",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0115|qwen3.5:4b|card",
+   "qid": "sgbus-0115",
+   "candidate": "On weekdays, the first bus of Singapore bus service 646 from Hub Synergy Pt (03222) leaves at 1815. This information is based on the provided reference table which lists the weekday first bus time for this specific route direction.",
+   "reference": "1815",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0129|qwen3.5:4b|card",
+   "qid": "sgbus-0129",
+   "candidate": "On weekdays, the first bus of service 861M leaves its starting stop Blk 120A at 0645. This time is based on the provided reference table which lists the weekday first bus departure as 0645.",
+   "reference": "0645",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0115|llama3.2:3b|card",
+   "qid": "sgbus-0115",
+   "candidate": "According to the reference table, the first bus of service 646 leaves its starting stop Hub Synergy Pt (03222) at 1815.",
+   "reference": "1815",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0129|llama3.2:3b|card",
+   "qid": "sgbus-0129",
+   "candidate": "According to the reference table, the first bus of service 861M leaves its starting stop Blk 120A (58539) at 0645.",
+   "reference": "0645",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0115|gemma3:4b|card",
+   "qid": "sgbus-0115",
+   "candidate": "The first bus of Singapore bus service 646 leaves Hub Synergy Pt (03222) at 1815 on weekdays.",
+   "reference": "1815",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0129|gemma3:4b|card",
+   "qid": "sgbus-0129",
+   "candidate": "The first bus of Singapore bus service 861M leaves Blk 120A (58539) at 0645 on weekdays.",
+   "reference": "0645",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0115|phi4-mini:3.8b|card",
+   "qid": "sgbus-0115",
+   "candidate": "The first bus of Singapore bus service 646 leaves Hub Synergy Pt (03222) at 1815, which is 18:15 in HHMM (24-hour clock) format.",
+   "reference": "1815",
+   "before": "ambiguous",
+   "after": "correct"
+  },
+  {
+   "item_id": "sgbus-0129|phi4-mini:3.8b|card",
+   "qid": "sgbus-0129",
+   "candidate": "The first bus of Singapore bus service 861M leaves its starting stop Blk 120A (58539) at 0645 on weekdays.",
+   "reference": "0645",
+   "before": "ambiguous",
+   "after": "correct"
+  }
+ ],
+ "frozen_set_impact": {
+  "pilot": {
+   "items": 48,
+   "time_labels_checked": 3,
+   "changed_item_ids": []
+  },
+  "main": {
+   "items": 400,
+   "time_labels_checked": 18,
+   "changed_item_ids": []
+  },
+  "main_order": {
+   "items": 1200,
+   "time_labels_checked": 94,
+   "changed_item_ids": []
+  },
+  "robust": {
+   "items": 372,
+   "time_labels_checked": 24,
+   "changed_item_ids": []
+  },
+  "pairs": {
+   "items": 172,
+   "time_labels_checked": 36,
+   "changed_item_ids": []
+  }
+ },
+ "limitations": [
+  "These are deterministic lexical labels, not new human annotations or semantic entailment judgments.",
+  "Tentative statements (for example 'typically' or 'around') can still match the expected clock value.",
+  "Originally excluded candidates have no E1 judge replies; no scores are imputed for them."
+ ]
+}
