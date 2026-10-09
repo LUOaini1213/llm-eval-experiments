@@ -26,9 +26,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.7631578947,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 621.4144737,
-  "seconds_per_item": 1.209894737
+  "calls_per_item": 1.0,
+  "tokens_per_item": 159.2894737,
+  "seconds_per_item": 0.42225
  },
  "fm|llama3.2:3b|bin_ref": {
   "pipeline": "llama3.2:3b|bin_ref",
@@ -57,9 +57,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.6184210526,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 626.2236842,
-  "seconds_per_item": 1.314690789
+  "calls_per_item": 1.0,
+  "tokens_per_item": 167.9934211,
+  "seconds_per_item": 0.4815
  },
  "fm|phi4-mini:3.8b|bin_ref": {
   "pipeline": "phi4-mini:3.8b|bin_ref",
@@ -88,9 +88,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.8684210526,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 571.0,
-  "seconds_per_item": 1.837309211
+  "calls_per_item": 1.0,
+  "tokens_per_item": 145.4342105,
+  "seconds_per_item": 0.6797434211
  },
  "fm|gemma3:4b|bin_ref": {
   "pipeline": "gemma3:4b|bin_ref",
@@ -119,9 +119,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.8421052632,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 680.2960526,
-  "seconds_per_item": 5.026822368
+  "calls_per_item": 1.0,
+  "tokens_per_item": 160.8026316,
+  "seconds_per_item": 1.537348684
  },
  "fm|qwen3.5:4b|bin_ref": {
   "pipeline": "qwen3.5:4b|bin_ref",
@@ -150,9 +150,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.8026315789,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 641.0065789,
-  "seconds_per_item": 5.857677632
+  "calls_per_item": 1.0,
+  "tokens_per_item": 163.9539474,
+  "seconds_per_item": 1.826861842
  },
  "fm|J5-majority|bin_ref": {
   "pipeline": "J5-majority|bin_ref",
@@ -185,9 +185,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.8815789474,
-  "calls_per_item": 13.15789474,
-  "tokens_per_item": 3139.940789,
-  "seconds_per_item": 15.24639474
+  "calls_per_item": 5.0,
+  "tokens_per_item": 797.4736842,
+  "seconds_per_item": 4.947703947
  },
  "fm|J5-unanimity|bin_ref": {
   "pipeline": "J5-unanimity|bin_ref",
@@ -220,9 +220,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.7631578947,
-  "calls_per_item": 13.15789474,
-  "tokens_per_item": 3139.940789,
-  "seconds_per_item": 15.24639474
+  "calls_per_item": 5.0,
+  "tokens_per_item": 797.4736842,
+  "seconds_per_item": 4.947703947
  },
  "fm|J3-majority|bin_ref": {
   "pipeline": "J3-majority|bin_ref",
@@ -253,9 +253,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.8684210526,
-  "calls_per_item": 7.894736842,
-  "tokens_per_item": 1892.302632,
-  "seconds_per_item": 12.72180921
+  "calls_per_item": 3.0,
+  "tokens_per_item": 470.1907895,
+  "seconds_per_item": 4.043953947
  },
  "fm|J5-majority|bin_free": {
   "pipeline": "J5-majority|bin_free",
@@ -288,9 +288,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": -0.03947368421,
-  "calls_per_item": 13.15789474,
-  "tokens_per_item": 2677.611842,
-  "seconds_per_item": 13.85236842
+  "calls_per_item": 5.0,
+  "tokens_per_item": 646.6513158,
+  "seconds_per_item": 4.179677632
  },
  "sgbus|qwen2.5:3b|bin_ref": {
   "pipeline": "qwen2.5:3b|bin_ref",
@@ -319,9 +319,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.9342105263,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 621.4144737,
-  "seconds_per_item": 1.209894737
+  "calls_per_item": 1.0,
+  "tokens_per_item": 178.5723684,
+  "seconds_per_item": 0.4931842105
  },
  "sgbus|llama3.2:3b|bin_ref": {
   "pipeline": "llama3.2:3b|bin_ref",
@@ -350,9 +350,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.75,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 626.2236842,
-  "seconds_per_item": 1.314690789
+  "calls_per_item": 1.0,
+  "tokens_per_item": 177.5526316,
+  "seconds_per_item": 0.4962960526
  },
  "sgbus|phi4-mini:3.8b|bin_ref": {
   "pipeline": "phi4-mini:3.8b|bin_ref",
@@ -381,9 +381,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.9342105263,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 571.0,
-  "seconds_per_item": 1.837309211
+  "calls_per_item": 1.0,
+  "tokens_per_item": 153.0986842,
+  "seconds_per_item": 0.6588486842
  },
  "sgbus|gemma3:4b|bin_ref": {
   "pipeline": "gemma3:4b|bin_ref",
@@ -412,9 +412,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.8552631579,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 680.2960526,
-  "seconds_per_item": 5.026822368
+  "calls_per_item": 1.0,
+  "tokens_per_item": 178.5065789,
+  "seconds_per_item": 1.548486842
  },
  "sgbus|qwen3.5:4b|bin_ref": {
   "pipeline": "qwen3.5:4b|bin_ref",
@@ -443,9 +443,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.9605263158,
-  "calls_per_item": 2.631578947,
-  "tokens_per_item": 641.0065789,
-  "seconds_per_item": 5.857677632
+  "calls_per_item": 1.0,
+  "tokens_per_item": 182.9539474,
+  "seconds_per_item": 1.907993421
  },
  "sgbus|J5-majority|bin_ref": {
   "pipeline": "J5-majority|bin_ref",
@@ -478,9 +478,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.9473684211,
-  "calls_per_item": 13.15789474,
-  "tokens_per_item": 3139.940789,
-  "seconds_per_item": 15.24639474
+  "calls_per_item": 5.0,
+  "tokens_per_item": 870.6842105,
+  "seconds_per_item": 5.104809211
  },
  "sgbus|J5-unanimity|bin_ref": {
   "pipeline": "J5-unanimity|bin_ref",
@@ -513,9 +513,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.9078947368,
-  "calls_per_item": 13.15789474,
-  "tokens_per_item": 3139.940789,
-  "seconds_per_item": 15.24639474
+  "calls_per_item": 5.0,
+  "tokens_per_item": 870.6842105,
+  "seconds_per_item": 5.104809211
  },
  "sgbus|J3-majority|bin_ref": {
   "pipeline": "J3-majority|bin_ref",
@@ -546,9 +546,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.9210526316,
-  "calls_per_item": 7.894736842,
-  "tokens_per_item": 1892.302632,
-  "seconds_per_item": 12.72180921
+  "calls_per_item": 3.0,
+  "tokens_per_item": 514.5592105,
+  "seconds_per_item": 4.115328947
  },
  "sgbus|J5-majority|bin_free": {
   "pipeline": "J5-majority|bin_free",
@@ -581,9 +581,9 @@
   ],
   "n_right_answers": 76,
   "kappa_vs_gold": 0.09210526316,
-  "calls_per_item": 13.15789474,
-  "tokens_per_item": 2677.611842,
-  "seconds_per_item": 13.85236842
+  "calls_per_item": 5.0,
+  "tokens_per_item": 743.3355263,
+  "seconds_per_item": 4.652855263
  },
  "sql|qwen2.5:3b|bin_ref": {
   "pipeline": "qwen2.5:3b|bin_ref",
@@ -612,9 +612,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.1552795031,
-  "calls_per_item": 4.166666667,
-  "tokens_per_item": 983.90625,
-  "seconds_per_item": 1.915666667
+  "calls_per_item": 1.0,
+  "tokens_per_item": 448.9583333,
+  "seconds_per_item": 0.4662291667
  },
  "sql|llama3.2:3b|bin_ref": {
   "pipeline": "llama3.2:3b|bin_ref",
@@ -643,9 +643,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": -0.04230118443,
-  "calls_per_item": 4.166666667,
-  "tokens_per_item": 991.5208333,
-  "seconds_per_item": 2.08159375
+  "calls_per_item": 1.0,
+  "tokens_per_item": 444.40625,
+  "seconds_per_item": 0.5334166667
  },
  "sql|phi4-mini:3.8b|bin_ref": {
   "pipeline": "phi4-mini:3.8b|bin_ref",
@@ -674,9 +674,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.1913978495,
-  "calls_per_item": 4.166666667,
-  "tokens_per_item": 904.0833333,
-  "seconds_per_item": 2.909072917
+  "calls_per_item": 1.0,
+  "tokens_per_item": 431.40625,
+  "seconds_per_item": 0.7896354167
  },
  "sql|gemma3:4b|bin_ref": {
   "pipeline": "gemma3:4b|bin_ref",
@@ -705,9 +705,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.5918367347,
-  "calls_per_item": 4.166666667,
-  "tokens_per_item": 1077.135417,
-  "seconds_per_item": 7.959135417
+  "calls_per_item": 1.0,
+  "tokens_per_item": 539.8958333,
+  "seconds_per_item": 3.073229167
  },
  "sql|qwen3.5:4b|bin_ref": {
   "pipeline": "qwen3.5:4b|bin_ref",
@@ -736,9 +736,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.7108433735,
-  "calls_per_item": 4.166666667,
-  "tokens_per_item": 1014.927083,
-  "seconds_per_item": 9.27465625
+  "calls_per_item": 1.0,
+  "tokens_per_item": 465.65625,
+  "seconds_per_item": 3.361135417
  },
  "sql|J5-majority|bin_ref": {
   "pipeline": "J5-majority|bin_ref",
@@ -771,9 +771,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.261822376,
-  "calls_per_item": 20.83333333,
-  "tokens_per_item": 4971.572917,
-  "seconds_per_item": 24.140125
+  "calls_per_item": 5.0,
+  "tokens_per_item": 2330.322917,
+  "seconds_per_item": 8.223645833
  },
  "sql|J5-unanimity|bin_ref": {
   "pipeline": "J5-unanimity|bin_ref",
@@ -806,9 +806,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.0,
-  "calls_per_item": 20.83333333,
-  "tokens_per_item": 4971.572917,
-  "seconds_per_item": 24.140125
+  "calls_per_item": 5.0,
+  "tokens_per_item": 2330.322917,
+  "seconds_per_item": 8.223645833
  },
  "sql|J3-majority|bin_ref": {
   "pipeline": "J3-majority|bin_ref",
@@ -839,9 +839,9 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.6357723577,
-  "calls_per_item": 12.5,
-  "tokens_per_item": 2996.145833,
-  "seconds_per_item": 20.14286458
+  "calls_per_item": 3.0,
+  "tokens_per_item": 1436.958333,
+  "seconds_per_item": 7.224
  },
  "sql|J5-majority|bin_free": {
   "pipeline": "J5-majority|bin_free",
@@ -874,8 +874,8 @@
   ],
   "n_right_answers": 75,
   "kappa_vs_gold": 0.2349726776,
-  "calls_per_item": 20.83333333,
-  "tokens_per_item": 4239.552083,
-  "seconds_per_item": 21.93291667
+  "calls_per_item": 5.0,
+  "tokens_per_item": 2038.739583,
+  "seconds_per_item": 7.948072917
  }
 }

@@ -19,8 +19,7 @@ def test_main_metrics_recompute_from_judgments():
 
     choices = json.loads((R1 / "pilot_choices.json").read_text(encoding="utf-8"))
     rows = load_jsonl(R1 / "judgments_main.jsonl")
-    n = len({r["item_id"] for r in rows})
-    items = load_jsonl(ROOT / "data" / "e1" / "items_main_order.jsonl")[:n]
+    items = A.load_main_items(ROOT)
     ps = pipelines(items, A.index_judgments(rows), choices["best_single"], choices["jury3"])
     committed = json.loads((R1 / "main_metrics.json").read_text(encoding="utf-8"))
     assert set(committed) == set(ps)
@@ -41,13 +40,40 @@ def test_main_set_size_matches_preregistration():
 
 @pytest.mark.skipif(not (R1 / "judgments_main.jsonl").exists(), reason="E1 main run not present")
 def test_every_main_item_has_every_judgment():
+    from evalab import analysis as A, judge as J
+    from evalab.experiment import JUDGES
     from evalab.items import load_jsonl
     rows = load_jsonl(R1 / "judgments_main.jsonl")
-    keys = {(r["judge"], r["condition"], r["item_id"]) for r in rows}
-    judges = {r["judge"] for r in rows}
-    conds = {r["condition"] for r in rows}
-    items = {r["item_id"] for r in rows}
-    assert len(keys) == len(judges) * len(conds) * len(items) == len(rows)
+    items = A.load_main_items(ROOT)
+    idx = A.validate_matrix(rows, items, JUDGES, J.POINTWISE)
+    assert len(idx) == len(JUDGES) * len(J.POINTWISE) * len(items) == len(rows)
+
+
+def test_committed_subset_costs_match_only_the_selected_raw_calls():
+    from evalab import analysis as A
+    from evalab.items import load_jsonl
+    items = A.load_main_items(ROOT)
+    rows = load_jsonl(R1 / "judgments_main.jsonl")
+    per_source = json.loads((R1 / "per_source.json").read_text(encoding="utf-8"))
+    sensitivity = json.loads((R1 / "sensitivity_phrase_gold.json").read_text(encoding="utf-8"))
+    for source, report in [(s, [v for k, v in per_source.items() if k.startswith(s + "|")])
+                            for s in {it["source"] for it in items}] + [(None, list(sensitivity["metrics"].values()))]:
+        ids = {it["item_id"] for it in items if (it["source"] == source if source else
+                                                it["qid"] not in sensitivity["excluded_questions"])}
+        for m in report:
+            calls = [r for r in rows if r["item_id"] in ids and r["judge"] in m["judges"]
+                     and r["condition"] == m["condition"]]
+            assert m["calls_per_item"] == pytest.approx(len(calls) / len(ids))
+            assert m["tokens_per_item"] == pytest.approx(
+                sum(r["prompt_tokens"] + r["output_tokens"] for r in calls) / len(ids))
+            assert m["seconds_per_item"] == pytest.approx(sum(r["seconds"] for r in calls) / len(ids))
+
+
+def test_time_gold_audit_is_reproducible_and_preserves_frozen_labels():
+    from e1_audit_time_gold import audit
+    committed = json.loads((R1 / "time_gold_audit.json").read_text(encoding="utf-8"))
+    assert audit() == committed
+    assert all(not s["changed_item_ids"] for s in committed["frozen_set_impact"].values())
 
 
 @pytest.mark.skipif(not (R1 / "run_manifest.json").exists(), reason="E1 main run not present")

@@ -1,10 +1,22 @@
-"""Mutation check: each deliberate bug below must make at least one unit test fail."""
+"""Mutation check: compileable defects must cause real pytest test failures.
+
+Run without arguments for the full clean baseline and mutation suite, or use --self-test
+to check the harness in temporary toy projects without touching repository sources.
+Collection/setup errors, missing reports, crashes and timeouts are infrastructure errors,
+not mutation kills. Each subprocess gets a fresh bytecode location and every source write
+is covered by restoration, including compilation and test-launch failures.
+"""
+import os
 import subprocess
 import sys
+import tempfile
+import time
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TESTS = str(ROOT / "tests")
+TEST_TIMEOUT_S = 300
 S = "src/evalab/"
 MUTANTS = [
     # statistics
@@ -79,29 +91,203 @@ MUTANTS = [
      "            pass\n"),
     ("moonshot_ext/connectors/ollama-connector.py", '"think": bool(params.get("think", False))',
      '"think": bool(params.get("think", True))'),
+    # Review regressions: missing replies are not votes; subsets carry only their own costs.
+    (S + "analysis.py",
+     '    if key not in idx:\n        raise ValueError(f"Missing judgment: {key}")\n    return idx[key]',
+     '    if key not in idx:\n        return dict(parsed=False, prompt_tokens=0, output_tokens=0, seconds=0)\n'
+     '    return idx[key]'),
+    (S + "analysis.py",
+     '        if key in idx:\n            raise ValueError(f"Duplicate judgment: {key}")\n        _validate_record(r)',
+     '        _validate_record(r)'),
+    (S + "analysis.py", "    if missing:\n", "    if False:\n"),
+    (S + "analysis.py",
+     '    cost = {k: sum(p.item_cost[it["item_id"]][k] for it in items)\n'
+     '            for k in ("calls", "prompt_tokens", "output_tokens", "seconds")}',
+     '    cost = p.cost'),
+    # Exclude identifier/date occurrences, while retaining independently stated clock values.
+    (S + "gold.py", "match.span() in identifiers", "False"),
+    (S + "gold.py", "any(start <= match.start() < end for start, end in date_spans)", "False"),
+    # Appending an amendment preserves the original hash; changing the original does not.
+    (S + "experiment.py", "return raw[:raw.index(marker) + 1] if marker in raw else raw", "return raw"),
+    (S + "experiment.py",
+     'if manifest.get("preregistration_sha256") != preregistration_sha256(prereg):', 'if False:'),
 ]
 
-# The unmutated code must pass, otherwise every mutant would look "killed".
-base = subprocess.run([sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", TESTS], capture_output=True,
-                      cwd=ROOT)
-assert base.returncode == 0, "tests fail on the unmutated code; fix them before running the mutation check"
+class HarnessError(RuntimeError):
+    """The run supplies no valid evidence about a mutant."""
 
-escaped = 0
-for fname, old, new in MUTANTS:
-    f = ROOT / fname
-    raw = f.read_bytes()
+
+def replacement(root, mutant):
+    fname, old, new = mutant
+    path = root / fname
+    raw = path.read_bytes()
     text = raw.decode("utf-8")
-    assert text.count(old) == 1, f"mutation target not unique in {fname}: {old[:70]}"
-    f.write_bytes(text.replace(old, new).encode("utf-8"))
-    compiled = subprocess.run([sys.executable, "-m", "py_compile", str(f)], capture_output=True)
-    assert compiled.returncode == 0, f"mutant does not compile, so it proves nothing: {old[:70]}"
+    if text.count(old) != 1 or old == new:
+        raise HarnessError(f"mutation target must occur once and change: {fname}: {old[:70]}")
+    return path, raw, text.replace(old, new).encode("utf-8")
+
+
+def compile_source(raw, path):
+    # Compile without importing the module or creating a .pyc next to product sources.
     try:
-        r = subprocess.run([sys.executable, "-m", "pytest", "-q", "-x", "-p", "no:cacheprovider", TESTS],
-                           capture_output=True, text=True, cwd=ROOT)
+        compile(raw, str(path), "exec")
+    except (SyntaxError, ValueError) as exc:
+        raise HarnessError(f"mutant does not compile; not a kill: {path}: {exc}") from exc
+
+
+def run_tests(root, tests, output_dir, *, fail_fast=False, timeout=TEST_TIMEOUT_S):
+    output_dir.mkdir(parents=True)
+    report = output_dir / "pytest.xml"
+    env = dict(os.environ)
+    env.pop("PYTEST_ADDOPTS", None)  # always run the declared suite, not a shell's -k filter
+    env["PYTHONPATH"] = os.pathsep.join(filter(None, [str(root / "src"), str(root), env.get("PYTHONPATH")]))
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    env["PYTHONPYCACHEPREFIX"] = str(output_dir / "pycache")
+    cmd = [sys.executable, "-B", "-m", "pytest", "-q", "-p", "no:cacheprovider",
+           f"--junitxml={report}", str(tests)]
+    if fail_fast:
+        cmd.append("-x")
+    try:
+        result = subprocess.run(cmd, cwd=root, env=env, capture_output=True, text=True,
+                                encoding="utf-8", errors="replace", timeout=timeout)
+    except subprocess.TimeoutExpired as exc:
+        raise HarnessError(f"pytest timed out after {timeout}s; not a kill") from exc
+    output = result.stdout + result.stderr
+    (output_dir / "pytest.log").write_text(output, encoding="utf-8")
+    try:
+        document = ET.parse(report)
+    except (OSError, ET.ParseError) as exc:
+        raise HarnessError(f"pytest exited {result.returncode} without a valid report; not a kill:\n"
+                           + output[-3000:]) from exc
+    cases = document.findall(".//testcase")
+    errors = document.findall(".//error")
+    skipped = sum(case.find("skipped") is not None for case in cases)
+    failures = []
+    for case in cases:
+        failure = case.find("failure")
+        if failure is not None:
+            name = f"{case.get('classname', '')}::{case.get('name', '')}"
+            message = " ".join((failure.get("message") or failure.text or "test failure").split())
+            failures.append(f"{name}: {message[:180]}")
+    if errors or not cases or len(cases) == skipped or result.returncode not in (0, 1):
+        raise HarnessError(f"pytest exited {result.returncode}, {len(errors)} errors, "
+                           f"{len(cases)} cases/{skipped} skipped; not a kill:\n" + output[-3000:])
+    if (result.returncode == 1) != bool(failures):
+        raise HarnessError(f"pytest exit/report disagree; not a kill:\n" + output[-3000:])
+    return {"killed": bool(failures), "tests": len(cases), "skipped": skipped, "failures": failures}
+
+
+def run_mutant(root, tests, mutant, output_dir, *, timeout=TEST_TIMEOUT_S):
+    path, raw, changed = replacement(root, mutant)
+    try:
+        path.write_bytes(changed)
+        compile_source(path.read_bytes(), path)
+        return run_tests(root, tests, output_dir, fail_fast=True, timeout=timeout)
     finally:
-        f.write_bytes(raw)
-    killed = r.returncode != 0
-    escaped += not killed
-    print(f"{'killed ' if killed else 'ESCAPED'}  {fname}: {old[:70]}", flush=True)
-print(f"{len(MUTANTS) - escaped}/{len(MUTANTS)} mutants killed")
-sys.exit(1 if escaped else 0)
+        path.write_bytes(raw)
+        if path.read_bytes() != raw:
+            raise HarnessError(f"source restoration failed: {path}")
+
+
+def main():
+    # Check every anchor and the syntax of every proposed mutant before any source write.
+    originals = {}
+    for mutant in MUTANTS:
+        path, raw, changed = replacement(ROOT, mutant)
+        originals[path] = raw
+        compile_source(changed, path)
+    started = time.monotonic()
+    escaped = 0
+    try:
+        with tempfile.TemporaryDirectory(prefix="evalab-mutation-") as scratch:
+            output_dir = Path(scratch)
+            base = run_tests(ROOT, TESTS, output_dir / "baseline")
+            if base["killed"]:
+                raise HarnessError("unmodified tests fail; fix the baseline first:\n" + "\n".join(base["failures"]))
+            print(f"baseline: {base['tests']} cases, {base['skipped']} skipped, "
+                  f"{time.monotonic() - started:.1f}s", flush=True)
+            for i, mutant in enumerate(MUTANTS, 1):
+                result = run_mutant(ROOT, TESTS, mutant, output_dir / f"mutant-{i:03d}")
+                escaped += not result["killed"]
+                evidence = result["failures"][0] if result["killed"] else "no test failed"
+                anchor = " ".join(mutant[1].split())[:70]
+                print(f"{'killed ' if result['killed'] else 'ESCAPED'} [{i}/{len(MUTANTS)}] "
+                      f"{mutant[0]}: {anchor} -- {evidence}", flush=True)
+                if not result["killed"]:
+                    raise HarnessError(f"mutant {i}/{len(MUTANTS)} escaped; stopped for review after restoring source")
+    finally:
+        unexpected = [path for path, raw in originals.items() if not path.exists() or path.read_bytes() != raw]
+        for path in unexpected:
+            path.write_bytes(originals[path])
+        if unexpected:
+            raise HarnessError("unexpected source changes restored: " + ", ".join(map(str, unexpected)))
+    print(f"{len(MUTANTS) - escaped}/{len(MUTANTS)} mutants killed "
+          f"({time.monotonic() - started:.1f}s); all source bytes restored", flush=True)
+    return 1 if escaped else 0
+
+
+def self_test():
+    """Exercise failure classification/restoration without importing product code."""
+    import py_compile
+    import unittest
+
+    class HarnessTests(unittest.TestCase):
+        def setUp(self):
+            self.scratch = tempfile.TemporaryDirectory(prefix="evalab-harness-test-")
+            self.addCleanup(self.scratch.cleanup)
+            self.root = Path(self.scratch.name)
+            self.source = self.root / "subject.py"
+            self.original = b"VALUE = 1\n"
+            self.source.write_bytes(self.original)
+            self.tests = self.root / "test_subject.py"
+            self.tests.write_text("from subject import VALUE\ndef test_value():\n    assert VALUE == 1\n")
+
+        def mutate(self, new, **kwargs):
+            try:
+                return run_mutant(self.root, self.tests, ("subject.py", "VALUE = 1", new),
+                                  self.root / "run", **kwargs)
+            finally:
+                self.assertEqual(self.source.read_bytes(), self.original)
+
+        def test_assertion_failure_ignores_stale_bytecode(self):
+            py_compile.compile(str(self.source), doraise=True,
+                               invalidation_mode=py_compile.PycInvalidationMode.UNCHECKED_HASH)
+            result = self.mutate("VALUE = 2")
+            self.assertTrue(result["killed"])
+            self.assertIn("test_value", result["failures"][0])
+
+        def test_survivor_is_not_a_kill(self):
+            self.assertFalse(self.mutate("VALUE = 1 # unchanged behavior")["killed"])
+
+        def test_compile_failure_restores_source(self):
+            with self.assertRaisesRegex(HarnessError, "does not compile"):
+                self.mutate("VALUE = (")
+
+        def test_collection_failure_is_not_a_kill(self):
+            with self.assertRaisesRegex(HarnessError, "not a kill"):
+                self.mutate("raise ImportError('synthetic collection failure')")
+
+        def test_setup_failure_is_not_a_kill(self):
+            self.tests.write_text("import pytest\n@pytest.fixture(autouse=True)\n"
+                                  "def broken():\n    raise RuntimeError('synthetic fixture failure')\n"
+                                  "def test_value():\n    assert False\n")
+            with self.assertRaisesRegex(HarnessError, "not a kill"):
+                self.mutate("VALUE = 2")
+
+        def test_timeout_is_not_a_kill_and_restores_source(self):
+            with self.assertRaisesRegex(HarnessError, "timed out"):
+                self.mutate("import time; time.sleep(10); VALUE = 1", timeout=1)
+
+    result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(HarnessTests))
+    return 0 if result.wasSuccessful() else 1
+
+
+if __name__ == "__main__":
+    if sys.argv[1:] == ["--self-test"]:
+        sys.exit(self_test())
+    if sys.argv[1:]:
+        sys.exit("usage: python tests/mutate.py [--self-test]")
+    try:
+        sys.exit(main())
+    except HarnessError as exc:
+        sys.exit(f"MUTATION ERROR: {exc}")

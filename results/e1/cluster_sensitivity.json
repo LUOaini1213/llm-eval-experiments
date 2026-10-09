@@ -3594,10 +3594,11 @@
   "code_sha256": {
    "src/evalab/stats.py": "ee32178c5abe8d2495297eb29a6b192a1d3dbe4986ff9b6853b26aeb928ea6e5",
    "src/evalab/cluster_sensitivity.py": "052a9dcb9e54b80ca650259f082b9106f6618454f6b2096871ab922dbdf93bcc",
-   "src/evalab/analysis.py": "c70fc5dc1cbf0cd18ac9610e72fbca4f890b5711b28c157bab982930d318693a",
+   "src/evalab/analysis.py": "14274d8c2547e38847fc3d2d943c2d85f8e6e41f8be1d656f0374e4a30d0195b",
    "src/evalab/judge.py": "61f0a1b9d77b244f89a68afbacdc139fee325f3f55988efba26e8e162c4d25c4",
-   "scripts/e1_analyze.py": "2043b88de753318872a055233f947c43ae3ea95ae0606d779b472989cdb41d80",
-   "scripts/e1_cluster_sensitivity.py": "3d8578948ec260f382d57c3889773f6d2efde9df245ee507288001490b3726f6"
+   "src/evalab/experiment.py": "4a8ce2f2506aa562a12849c5539e56a7b721868b72481dd55fdd4a11804c8497",
+   "scripts/e1_analyze.py": "4ed75e315dc47d8564b114cd675d1d3c5b16fa46f37f6ade9bd83519ae991238",
+   "scripts/e1_cluster_sensitivity.py": "0181a4a75f8cbc5e28859a1c5f4e6de8a04467cb35eaecf600e726ddac5154c7"
   },
   "legacy_consistency": "all 34 pipeline points/intervals and H1/family A match originals",
   "model_calls": 0

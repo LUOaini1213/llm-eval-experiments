@@ -31,7 +31,8 @@ INPUTS = ["data/e1/items_main_order.jsonl", "results/e1/judgments_main.jsonl", "
           "results/e1/run_manifest.json", "results/e1/main_metrics.json", "results/e1/tests.json",
           "docs/PREREGISTRATION.md", "requirements.txt"]
 CODE = ["src/evalab/stats.py", "src/evalab/cluster_sensitivity.py", "src/evalab/analysis.py",
-        "src/evalab/judge.py", "scripts/e1_analyze.py", "scripts/e1_cluster_sensitivity.py"]
+        "src/evalab/judge.py", "src/evalab/experiment.py", "scripts/e1_analyze.py",
+        "scripts/e1_cluster_sensitivity.py"]
 README_START, README_END = "<!-- cluster-sensitivity:start -->", "<!-- cluster-sensitivity:end -->"
 
 
