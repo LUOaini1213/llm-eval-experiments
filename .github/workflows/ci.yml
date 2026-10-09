@@ -20,6 +20,7 @@ jobs:
           python scripts/e1_ranking.py
           python scripts/e1_aggregation.py
           python scripts/e1_audit_time_gold.py
+          python scripts/e1_cluster_sensitivity.py --check
           python scripts/e3_generate.py
           python scripts/make_charts.py
           git diff --stat --exit-code -- results data

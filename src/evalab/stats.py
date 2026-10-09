@@ -121,6 +121,69 @@ def paired_bootstrap_diff(x: Sequence[float], y: Sequence[float], b: int = 10000
     return float(d.mean()), float(np.quantile(diffs, alpha / 2)), float(np.quantile(diffs, 1 - alpha / 2))
 
 
+def _cluster_bootstrap_means(values, clusters, strata, b, seed, alpha):
+    """Resample whole clusters; unequal sizes use a ratio of sums, not a mean of cluster means."""
+    v = np.asarray(values, dtype=float)
+    if v.ndim != 1 or not len(v) or not np.isfinite(v).all():
+        raise ValueError("values must be a finite, non-empty one-dimensional sample")
+    if not isinstance(b, (int, np.integer)) or isinstance(b, bool) or b <= 0:
+        raise ValueError("b must be a positive integer")
+    if not 0 < alpha < 1:
+        raise ValueError("alpha must be between zero and one")
+    clusters = list(clusters)
+    strata = [None] * len(v) if strata is None else list(strata)
+    if len(clusters) != len(v) or len(strata) != len(v):
+        raise ValueError("values, clusters and strata must have the same length")
+    groups, group_strata = {}, {}
+    for i, (cluster, stratum) in enumerate(zip(clusters, strata)):
+        try:
+            if cluster in group_strata and group_strata[cluster] != stratum:
+                raise ValueError("a cluster cannot span multiple strata")
+            group_strata[cluster] = stratum
+            groups.setdefault(cluster, []).append(i)
+        except TypeError:
+            raise ValueError("cluster and stratum labels must be hashable") from None
+    sums = np.array([v[indices].sum() for indices in groups.values()])
+    sizes = np.array([len(indices) for indices in groups.values()])
+    by_stratum = {}
+    try:
+        for i, cluster in enumerate(groups):
+            by_stratum.setdefault(group_strata[cluster], []).append(i)
+    except TypeError:
+        raise ValueError("cluster and stratum labels must be hashable") from None
+    rng = np.random.default_rng(seed)
+    totals, counts = np.zeros(b), np.zeros(b, dtype=int)
+    for group_indices in by_stratum.values():
+        pool = np.asarray(group_indices)
+        draws = pool[rng.integers(0, len(pool), size=(b, len(pool)))]
+        totals += sums[draws].sum(axis=1)
+        counts += sizes[draws].sum(axis=1)
+    return v, totals / counts
+
+
+def cluster_bootstrap_ci(values: Sequence[float], clusters: Sequence, strata: Sequence | None = None,
+                         b: int = 10000, seed: int = 0, alpha: float = 0.05):
+    """Percentile CI for the item-weighted mean, resampling whole clusters with replacement.
+
+    Every selected cluster contributes all its items, including repeated selections. With strata, resample the
+    original number of clusters within each stratum. Cluster sizes and thus replicate item counts may differ.
+    This assumes clusters are independent; it does not establish that assumption from repeated observations.
+    """
+    _, means = _cluster_bootstrap_means(values, clusters, strata, b, seed, alpha)
+    return float(np.quantile(means, alpha / 2)), float(np.quantile(means, 1 - alpha / 2))
+
+
+def paired_cluster_bootstrap_diff(x: Sequence[float], y: Sequence[float], clusters: Sequence,
+                                  strata: Sequence | None = None, b: int = 10000, seed: int = 0,
+                                  alpha: float = 0.05):
+    """Item-weighted x-minus-y difference; pairs and all items of a cluster travel together."""
+    x, y = np.asarray(x, dtype=float), np.asarray(y, dtype=float)
+    if x.shape != y.shape:
+        raise ValueError("paired samples must have the same length")
+    d, diffs = _cluster_bootstrap_means(x - y, clusters, strata, b, seed, alpha)
+    return float(d.mean()), float(np.quantile(diffs, alpha / 2)), float(np.quantile(diffs, 1 - alpha / 2))
+
+
 # ------------------------------------------------------------------------------------------------ multiplicity
 def holm(pvalues: Sequence[float]) -> list[float]:
     """Holm step-down adjusted p-values, returned in the input order."""
