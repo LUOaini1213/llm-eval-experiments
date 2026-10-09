@@ -16,7 +16,7 @@ Candidate count per question: 1 candidates: 83 questions, 2 candidates: 50 quest
 
 ## Method and assumptions
 
-All intervals use 4,000 percentile-bootstrap draws, seed 0, alpha 0.05. The item column reproduces
+The canonical intervals use 4,000 percentile-bootstrap draws, seed 0, alpha 0.05. The item column reproduces
 the original item-resampled interval. The pooled question column samples 188 questions with replacement,
 taking every candidate of each selected question together. The stratified column samples the original
 number of questions within each source. Both retain the item-weighted statistic: total successes
@@ -170,6 +170,55 @@ and labelled accordingly; newly computed item and question bootstrap intervals a
 | J5-mean_score / score_ref | false_reject_rate | 227 / 136 | 26.87 | [21.53, 32.99] | [19.81, 34.50] | [22.31, 31.42] |
 | J3-mean_score / score_ref | false_accept_rate | 173 / 118 | 27.75 | [21.61, 34.85] | [20.71, 34.88] | [21.43, 34.46] |
 | J3-mean_score / score_ref | false_reject_rate | 227 / 136 | 0.88 | [0.24, 3.15] | [0.00, 2.27] | [0.00, 2.26] |
+
+## H1 bootstrap Monte Carlo endpoint stability
+
+This diagnostic holds the same paired replies and question clusters fixed. It repeats only H1
+at 4,000, 16,000 draws with each of seeds 0, 1, 2, 3, 4. Both question-resampling designs are included.
+The original 4,000-draw, seed-0 intervals above are retained exactly; no seed is selected or discarded.
+A larger draw budget is an additional diagnostic, not an exact reference distribution or convergence proof.
+
+Endpoint ranges below are minimum and maximum across this finite seed grid, in percentage points.
+They are not new confidence intervals or bounds on Monte Carlo error. Interval endpoints remain
+quantiles of the same bootstrap distribution; seed variation does not create new statistical evidence.
+No significance decision, p-value or recommendation is derived from whether an endpoint crosses zero.
+
+| Resampling | Draws per seed | Lower endpoint range | Upper endpoint range | Largest endpoint spread | Largest absolute shift from canonical endpoint |
+|---|---:|---|---|---:|---:|
+| question_cluster | 4,000 | [-0.26, -0.25] | [4.88, 4.98] | 0.091 | 0.090 |
+| question_cluster | 16,000 | [-0.26, -0.25] | [4.90, 5.01] | 0.112 | 0.073 |
+| source_stratified_question | 4,000 | [-0.26, -0.25] | [4.85, 4.95] | 0.106 | 0.087 |
+| source_stratified_question | 16,000 | [-0.25, -0.25] | [4.89, 4.95] | 0.060 | 0.084 |
+
+All individual intervals (points; rounding is for display only):
+
+| Resampling | Draws | Seed | H1 bootstrap interval |
+|---|---:|---:|---|
+| question_cluster | 4,000 | 0 | [-0.25, 4.98] |
+| question_cluster | 4,000 | 1 | [-0.25, 4.94] |
+| question_cluster | 4,000 | 2 | [-0.26, 4.88] |
+| question_cluster | 4,000 | 3 | [-0.26, 4.98] |
+| question_cluster | 4,000 | 4 | [-0.25, 4.90] |
+| question_cluster | 16,000 | 0 | [-0.25, 4.94] |
+| question_cluster | 16,000 | 1 | [-0.26, 4.94] |
+| question_cluster | 16,000 | 2 | [-0.26, 4.95] |
+| question_cluster | 16,000 | 3 | [-0.25, 5.01] |
+| question_cluster | 16,000 | 4 | [-0.26, 4.90] |
+| source_stratified_question | 4,000 | 0 | [-0.25, 4.87] |
+| source_stratified_question | 4,000 | 1 | [-0.25, 4.95] |
+| source_stratified_question | 4,000 | 2 | [-0.26, 4.89] |
+| source_stratified_question | 4,000 | 3 | [-0.26, 4.85] |
+| source_stratified_question | 4,000 | 4 | [-0.25, 4.95] |
+| source_stratified_question | 16,000 | 0 | [-0.25, 4.94] |
+| source_stratified_question | 16,000 | 1 | [-0.25, 4.95] |
+| source_stratified_question | 16,000 | 2 | [-0.25, 4.89] |
+| source_stratified_question | 16,000 | 3 | [-0.25, 4.90] |
+| source_stratified_question | 16,000 | 4 | [-0.25, 4.92] |
+
+The JSON records endpoints at canonical ten-significant-digit precision; tables round to two decimals.
+The reported spread is empirical over five seeds; another seed can fall outside this range.
+This checks simulation variability conditional on the sample, not robustness to new questions,
+model replies, model selection, labels or between-question dependence.
 
 ## Reproduce
 

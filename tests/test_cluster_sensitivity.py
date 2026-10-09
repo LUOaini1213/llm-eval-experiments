@@ -8,7 +8,7 @@ import pytest
 
 from evalab import stats as S
 from evalab.analysis import Pipeline
-from evalab.cluster_sensitivity import build_report, mean_sensitivity, question_profile
+from evalab.cluster_sensitivity import build_report, endpoint_stability, mean_sensitivity, question_profile
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("cluster_script", ROOT / "scripts/e1_cluster_sensitivity.py")
@@ -123,6 +123,52 @@ def test_identical_question_text_cannot_hide_under_multiple_ids():
         question_profile(items)
 
 
+def test_endpoint_diagnostic_matches_explicit_two_question_draws():
+    # Two clusters: A has three successes, B one failure. Enumerated draws AA/AB/BA/BB have
+    # means 1, 3/4, 3/4, 0. Within-source resampling is always exactly 3/4 (one question/source).
+    counts, seeds = [7, 43], [0, 2, 7]
+    diagnostic = endpoint_stability([1, 1, 1, 0], tiny_items(), replicate_counts=counts, seeds=seeds)
+    expected_canonical = None
+    for budget in diagnostic["designs"]["question_cluster"]:
+        expected = []
+        for seed in seeds:
+            draws = np.random.default_rng(seed).integers(0, 2, size=(budget["bootstrap_replicates"], 2))
+            a = (draws == 0).sum(axis=1)
+            means = 3 * a / (3 * a + (2 - a))
+            expected.append(np.quantile(means, [0.025, 0.975], method="linear"))
+        endpoints = np.asarray(expected)
+        if expected_canonical is None:
+            expected_canonical = expected[0]
+        assert [run["seed"] for run in budget["runs"]] == seeds
+        assert np.asarray([run["ci"] for run in budget["runs"]]) == pytest.approx(endpoints)
+        assert budget["lower_endpoint_range"] == pytest.approx([endpoints[:, 0].min(), endpoints[:, 0].max()])
+        assert budget["upper_endpoint_range"] == pytest.approx([endpoints[:, 1].min(), endpoints[:, 1].max()])
+        assert budget["max_endpoint_spread"] == pytest.approx(np.ptp(endpoints, axis=0).max())
+        assert budget["max_abs_endpoint_shift_from_canonical"] == pytest.approx(
+            np.abs(endpoints - expected_canonical).max())
+    for budget in diagnostic["designs"]["source_stratified_question"]:
+        assert all(run["ci"] == [0.75, 0.75] for run in budget["runs"])
+        assert budget["max_endpoint_spread"] == budget["max_abs_endpoint_shift_from_canonical"] == 0
+    assert diagnostic["canonical"]["intervals"]["question_cluster"] == pytest.approx(expected_canonical)
+    assert diagnostic == endpoint_stability([1, 1, 1, 0], tiny_items(), replicate_counts=counts, seeds=seeds)
+
+
+@pytest.mark.parametrize("counts,seeds", [([4000], [0, 1]), ([0, 4], [0, 1]), ([4, 4], [0, 1]),
+                                          ([4, 1], [0, 1]), ([True, 4], [0, 1]), ([1.5, 4], [0, 1]),
+                                          ([1, 4], [0]), ([1, 4], [0, 0]), ([1, 4], [-1, 0]),
+                                          ([1, 4], [0, True]), ([1, 4], [0, 1.5])])
+def test_endpoint_diagnostic_refuses_invalid_or_duplicate_grid(counts, seeds):
+    with pytest.raises(ValueError):
+        endpoint_stability([1, 1, 1, 0], tiny_items(), replicate_counts=counts, seeds=seeds)
+
+
+def test_generator_refuses_to_replace_canonical_h1_interval(monkeypatch):
+    monkeypatch.setattr(E, "endpoint_stability", lambda *args, **kwargs:
+                        {"canonical": {"intervals": {"question_cluster": [0.0, 0.04975124378]}}})
+    with pytest.raises(ValueError, match="retain the canonical H1 interval"):
+        E.generate()
+
+
 def write_loader_fixture(root):
     (root / "data/e1").mkdir(parents=True)
     (root / "results/e1").mkdir(parents=True)
@@ -167,6 +213,19 @@ def test_new_report_reproduces_from_frozen_judgments_and_tracks_provenance():
     assert report["provenance"]["model_calls"] == 0
     assert len(report["pipelines"]) == 34
     assert report["comparisons"]["H1"]["estimate"] == 0.0225
+    # Protect all three published canonical H1 intervals, independently of regenerating report snapshots.
+    h1 = report["comparisons"]["H1"]
+    assert h1["item_bootstrap_ci"] == [0.0, 0.045]
+    assert h1["question_cluster_ci"] == [-0.002475247525, 0.04975124378]
+    assert h1["source_stratified_question_ci"] == [-0.002525252525, 0.04866476767]
+    diagnostic = report["monte_carlo_stability"]
+    assert diagnostic["contrast"] == "H1" and diagnostic["estimate"] == h1["estimate"]
+    assert diagnostic["replicate_counts"] == [4000, 16000] and diagnostic["seeds"] == [0, 1, 2, 3, 4]
+    for design, budgets in diagnostic["designs"].items():
+        assert diagnostic["canonical"]["intervals"][design] == h1[design + "_ci"]
+        assert budgets[0]["runs"][0]["ci"] == h1[design + "_ci"]
+        assert [budget["bootstrap_replicates"] for budget in budgets] == [4000, 16000]
+        assert all([run["seed"] for run in budget["runs"]] == [0, 1, 2, 3, 4] for budget in budgets)
     committed = json.loads(E.REPORT_JSON.read_text(encoding="utf-8"))
     # A source fingerprint alone must not kill a behavioral mutant. The CLI/CI --check covers fingerprints;
     # here all computed outcomes, input identities and rendered tables must still match independently.

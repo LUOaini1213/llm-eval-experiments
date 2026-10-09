@@ -3334,6 +3334,250 @@
    }
   }
  },
+ "monte_carlo_stability": {
+  "contrast": "H1",
+  "a": "J5-majority|bin_ref",
+  "b": "phi4-mini:3.8b|bin_ref",
+  "subset": "all",
+  "status": "post-hoc Monte Carlo diagnostic; canonical intervals are retained",
+  "n_items": 400,
+  "n_questions": 188,
+  "estimate": 0.0225,
+  "alpha": 0.05,
+  "replicate_counts": [
+   4000,
+   16000
+  ],
+  "seeds": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "quantile_method": "numpy.quantile linear interpolation",
+  "canonical": {
+   "bootstrap_replicates": 4000,
+   "seed": 0,
+   "intervals": {
+    "question_cluster": [
+     -0.002475247525,
+     0.04975124378
+    ],
+    "source_stratified_question": [
+     -0.002525252525,
+     0.04866476767
+    ]
+   }
+  },
+  "interpretation": "endpoint ranges describe only this finite seed grid, not statistical uncertainty or a bound on Monte Carlo error; no seed selection, p-values or convergence guarantee",
+  "designs": {
+   "question_cluster": [
+    {
+     "bootstrap_replicates": 4000,
+     "runs": [
+      {
+       "seed": 0,
+       "ci": [
+        -0.002475247525,
+        0.04975124378
+       ]
+      },
+      {
+       "seed": 1,
+       "ci": [
+        -0.002519050709,
+        0.04938512731
+       ]
+      },
+      {
+       "seed": 2,
+       "ci": [
+        -0.002557708702,
+        0.04884826601
+       ]
+      },
+      {
+       "seed": 3,
+       "ci": [
+        -0.002551677888,
+        0.04975434548
+       ]
+      },
+      {
+       "seed": 4,
+       "ci": [
+        -0.002481389578,
+        0.04896907216
+       ]
+      }
+     ],
+     "lower_endpoint_range": [
+      -0.002557708702,
+      -0.002475247525
+     ],
+     "upper_endpoint_range": [
+      0.04884826601,
+      0.04975434548
+     ],
+     "max_endpoint_spread": 0.0009060794723,
+     "max_abs_endpoint_shift_from_canonical": 0.0009029777738
+    },
+    {
+     "bootstrap_replicates": 16000,
+     "runs": [
+      {
+       "seed": 0,
+       "ci": [
+        -0.002500156642,
+        0.04938271605
+       ]
+      },
+      {
+       "seed": 1,
+       "ci": [
+        -0.002577319588,
+        0.04935064935
+       ]
+      },
+      {
+       "seed": 2,
+       "ci": [
+        -0.002570859725,
+        0.04945126488
+       ]
+      },
+      {
+       "seed": 3,
+       "ci": [
+        -0.002538071066,
+        0.05013460883
+       ]
+      },
+      {
+       "seed": 4,
+       "ci": [
+        -0.002551020408,
+        0.04901960784
+       ]
+      }
+     ],
+     "lower_endpoint_range": [
+      -0.002577319588,
+      -0.002500156642
+     ],
+     "upper_endpoint_range": [
+      0.04901960784,
+      0.05013460883
+     ],
+     "max_endpoint_spread": 0.001115000986,
+     "max_abs_endpoint_shift_from_canonical": 0.000731635938
+    }
+   ],
+   "source_stratified_question": [
+    {
+     "bootstrap_replicates": 4000,
+     "runs": [
+      {
+       "seed": 0,
+       "ci": [
+        -0.002525252525,
+        0.04866476767
+       ]
+      },
+      {
+       "seed": 1,
+       "ci": [
+        -0.002506265664,
+        0.04953030322
+       ]
+      },
+      {
+       "seed": 2,
+       "ci": [
+        -0.002638522427,
+        0.0488997555
+       ]
+      },
+      {
+       "seed": 3,
+       "ci": [
+        -0.002564102564,
+        0.04846938776
+       ]
+      },
+      {
+       "seed": 4,
+       "ci": [
+        -0.002531806207,
+        0.04947916667
+       ]
+      }
+     ],
+     "lower_endpoint_range": [
+      -0.002638522427,
+      -0.002506265664
+     ],
+     "upper_endpoint_range": [
+      0.04846938776,
+      0.04953030322
+     ],
+     "max_endpoint_spread": 0.001060915462,
+     "max_abs_endpoint_shift_from_canonical": 0.0008655355473
+    },
+    {
+     "bootstrap_replicates": 16000,
+     "runs": [
+      {
+       "seed": 0,
+       "ci": [
+        -0.002493921446,
+        0.04938271605
+       ]
+      },
+      {
+       "seed": 1,
+       "ci": [
+        -0.002538071066,
+        0.0495049505
+       ]
+      },
+      {
+       "seed": 2,
+       "ci": [
+        -0.002481389578,
+        0.04890148842
+       ]
+      },
+      {
+       "seed": 3,
+       "ci": [
+        -0.002487717274,
+        0.04895149953
+       ]
+      },
+      {
+       "seed": 4,
+       "ci": [
+        -0.002512721036,
+        0.04922375507
+       ]
+      }
+     ],
+     "lower_endpoint_range": [
+      -0.002538071066,
+      -0.002481389578
+     ],
+     "upper_endpoint_range": [
+      0.04890148842,
+      0.0495049505
+     ],
+     "max_endpoint_spread": 0.0006034620772,
+     "max_abs_endpoint_shift_from_canonical": 0.0008401828255
+    }
+   ]
+  }
+ },
  "provenance": {
   "numpy": "2.1.3",
   "random_generator": "numpy PCG64",
@@ -3349,11 +3593,11 @@
   },
   "code_sha256": {
    "src/evalab/stats.py": "ee32178c5abe8d2495297eb29a6b192a1d3dbe4986ff9b6853b26aeb928ea6e5",
-   "src/evalab/cluster_sensitivity.py": "ea5d50ab93b6a4d425af5669dc6a48845e2ce5954e580a2d9fe9b89ba81f841e",
+   "src/evalab/cluster_sensitivity.py": "052a9dcb9e54b80ca650259f082b9106f6618454f6b2096871ab922dbdf93bcc",
    "src/evalab/analysis.py": "c70fc5dc1cbf0cd18ac9610e72fbca4f890b5711b28c157bab982930d318693a",
    "src/evalab/judge.py": "61f0a1b9d77b244f89a68afbacdc139fee325f3f55988efba26e8e162c4d25c4",
    "scripts/e1_analyze.py": "2043b88de753318872a055233f947c43ae3ea95ae0606d779b472989cdb41d80",
-   "scripts/e1_cluster_sensitivity.py": "9ba1b35580233ab25ab7b6588f764d4064f17e018bc8c6493cfc00996971c307"
+   "scripts/e1_cluster_sensitivity.py": "3d8578948ec260f382d57c3889773f6d2efde9df245ee507288001490b3726f6"
   },
   "legacy_consistency": "all 34 pipeline points/intervals and H1/family A match originals",
   "model_calls": 0

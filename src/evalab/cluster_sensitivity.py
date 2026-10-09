@@ -61,6 +61,50 @@ def mean_sensitivity(values, items, b=4000, seed=0):
                           "source_stratified_question": stratified_ci[1] - stratified_ci[0]}}
 
 
+def endpoint_stability(values, items, *, replicate_counts, seeds, alpha=0.05):
+    """Describe finite Monte Carlo endpoint variation, without selecting a new confidence interval.
+
+    The first replicate count and seed identify the retained canonical interval. Different seeds are
+    separate PRNG runs; the larger budget is a diagnostic, not a claim about the exact bootstrap quantile.
+    """
+    replicate_counts, seeds = list(replicate_counts), list(seeds)
+    for grid, minimum, name in ((replicate_counts, 1, "replicate counts"), (seeds, 0, "seeds")):
+        if len(grid) < 2 or any(not isinstance(value, (int, np.integer)) or isinstance(value, bool) or
+                                value < minimum for value in grid) or len(set(grid)) != len(grid):
+            raise ValueError(f"{name} must contain at least two distinct valid integers")
+    if replicate_counts != sorted(replicate_counts):
+        raise ValueError("replicate counts must be increasing")
+    profile = question_profile(items)
+    qids, sources = [it["qid"] for it in items], [it["source"] for it in items]
+    designs, canonical = {}, {}
+    for name, strata in (("question_cluster", None), ("source_stratified_question", sources)):
+        budgets = []
+        for count in replicate_counts:
+            runs = [{"seed": int(seed), "ci": list(S.cluster_bootstrap_ci(values, qids, strata=strata,
+                                                                           b=count, seed=seed, alpha=alpha))}
+                    for seed in seeds]
+            endpoints = np.asarray([run["ci"] for run in runs])
+            if not budgets:
+                canonical[name] = runs[0]["ci"]
+            budgets.append({"bootstrap_replicates": int(count), "runs": runs,
+                            "lower_endpoint_range": [float(endpoints[:, 0].min()), float(endpoints[:, 0].max())],
+                            "upper_endpoint_range": [float(endpoints[:, 1].min()), float(endpoints[:, 1].max())],
+                            "max_endpoint_spread": float(np.ptp(endpoints, axis=0).max()),
+                            "max_abs_endpoint_shift_from_canonical": float(
+                                np.abs(endpoints - np.asarray(canonical[name])).max())})
+        designs[name] = budgets
+    return {"status": "post-hoc Monte Carlo diagnostic; canonical intervals are retained",
+            "n_items": profile["n_items"], "n_questions": profile["n_questions"],
+            "estimate": float(np.mean(values)), "alpha": alpha,
+            "replicate_counts": [int(count) for count in replicate_counts], "seeds": [int(seed) for seed in seeds],
+            "quantile_method": "numpy.quantile linear interpolation",
+            "canonical": {"bootstrap_replicates": int(replicate_counts[0]), "seed": int(seeds[0]),
+                          "intervals": canonical},
+            "interpretation": "endpoint ranges describe only this finite seed grid, not statistical uncertainty "
+                              "or a bound on Monte Carlo error; no seed selection, p-values or convergence guarantee",
+            "designs": designs}
+
+
 def build_report(items, pipelines, comparisons, b=4000, seed=0):
     """comparisons maps a label to (pipeline a, pipeline b, gold subset or None). No clustered p-values."""
     profile = question_profile(items)

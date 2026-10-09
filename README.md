@@ -638,6 +638,10 @@ questions alone do not establish that dependence. These are sensitivity interval
 or significance/power claims. Original item-level results, McNemar/Holm tests and recommendations remain
 unchanged. Equal-question point estimates are reported separately to show weighting sensitivity.
 
+H1 also has a bootstrap Monte Carlo diagnostic at 4,000 and 16,000 draws with seeds 0–4.
+Every seed's interval is reported; cross-seed endpoint ranges describe simulation variability, not new
+confidence intervals or significance evidence. The original 4,000-draw, seed-0 intervals are retained.
+
 [Full tables and assumptions](results/e1/cluster_sensitivity.md), [machine-readable results and hashes](results/e1/cluster_sensitivity.json). Reproduce with
 `python scripts/e1_cluster_sensitivity.py`; CI uses `--check` to verify the JSON, Markdown and this block.
 <!-- cluster-sensitivity:end -->

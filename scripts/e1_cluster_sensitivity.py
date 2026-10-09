@@ -18,7 +18,7 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from e1_analyze import JUDGES, pipelines  # noqa: E402
 from evalab import analysis as A  # noqa: E402
 from evalab import judge as J  # noqa: E402
-from evalab.cluster_sensitivity import build_report  # noqa: E402
+from evalab.cluster_sensitivity import build_report, endpoint_stability  # noqa: E402
 from evalab.items import load_jsonl  # noqa: E402
 from evalab.stable import stable_round  # noqa: E402
 
@@ -26,6 +26,7 @@ OUT = ROOT / "results" / "e1"
 REPORT_JSON = OUT / "cluster_sensitivity.json"
 REPORT_MD = OUT / "cluster_sensitivity.md"
 B, SEED = 4000, 0
+STABILITY_REPLICATES, STABILITY_SEEDS = (B, 4 * B), (SEED, 1, 2, 3, 4)
 INPUTS = ["data/e1/items_main_order.jsonl", "results/e1/judgments_main.jsonl", "results/e1/pilot_choices.json",
           "results/e1/run_manifest.json", "results/e1/main_metrics.json", "results/e1/tests.json",
           "docs/PREREGISTRATION.md", "requirements.txt"]
@@ -87,6 +88,17 @@ def generate(root=ROOT):
                 abs(comparison["estimate"] - original["diff"]) > 1e-9 or \
                 not np.allclose(comparison["item_bootstrap_ci"], original["diff_ci"], atol=1e-9, rtol=0):
             raise ValueError(f"original comparison differs: {label}")
+    h1 = original_comparisons["H1"]
+    h1_items = [it for it in items if h1["subset"] == "all" or it["gold"] == h1["subset"]]
+    diff = np.asarray(A.right(ps[h1["a"]], h1_items), dtype=float) - \
+        np.asarray(A.right(ps[h1["b"]], h1_items), dtype=float)
+    diagnostic = endpoint_stability(diff, h1_items, replicate_counts=STABILITY_REPLICATES,
+                                    seeds=STABILITY_SEEDS)
+    for design, canonical in diagnostic["canonical"]["intervals"].items():
+        if canonical != result["comparisons"]["H1"][design + "_ci"]:
+            raise ValueError("Monte Carlo diagnostic must retain the canonical H1 interval")
+    result["monte_carlo_stability"] = {"contrast": "H1", "a": h1["a"], "b": h1["b"],
+                                       "subset": h1["subset"], **diagnostic}
     result["provenance"] = {"numpy": np.__version__, "random_generator": "numpy PCG64",
                             "inputs_sha256": {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in INPUTS},
                             "code_sha256": {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in CODE},
@@ -97,6 +109,39 @@ def generate(root=ROOT):
 
 def interval(ci):
     return f"[{100 * ci[0]:.2f}, {100 * ci[1]:.2f}]"
+
+
+def render_stability(report):
+    d = report["monte_carlo_stability"]
+    lines = ["## H1 bootstrap Monte Carlo endpoint stability", "",
+             "This diagnostic holds the same paired replies and question clusters fixed. It repeats only H1",
+             f"at {', '.join(format(count, ',') for count in d['replicate_counts'])} draws with each of seeds "
+             + ", ".join(map(str, d["seeds"])) + ". Both question-resampling designs are included.",
+             "The original 4,000-draw, seed-0 intervals above are retained exactly; no seed is selected or discarded.",
+             "A larger draw budget is an additional diagnostic, not an exact reference distribution or convergence proof.",
+             "", "Endpoint ranges below are minimum and maximum across this finite seed grid, in percentage points.",
+             "They are not new confidence intervals or bounds on Monte Carlo error. Interval endpoints remain",
+             "quantiles of the same bootstrap distribution; seed variation does not create new statistical evidence.",
+             "No significance decision, p-value or recommendation is derived from whether an endpoint crosses zero.",
+             "", "| Resampling | Draws per seed | Lower endpoint range | Upper endpoint range | Largest endpoint spread | Largest absolute shift from canonical endpoint |",
+             "|---|---:|---|---|---:|---:|"]
+    for design, budgets in d["designs"].items():
+        for budget in budgets:
+            lines.append(f"| {design} | {budget['bootstrap_replicates']:,} | "
+                         f"{interval(budget['lower_endpoint_range'])} | {interval(budget['upper_endpoint_range'])} | "
+                         f"{100*budget['max_endpoint_spread']:.3f} | "
+                         f"{100*budget['max_abs_endpoint_shift_from_canonical']:.3f} |")
+    lines += ["", "All individual intervals (points; rounding is for display only):", "",
+              "| Resampling | Draws | Seed | H1 bootstrap interval |", "|---|---:|---:|---|"]
+    for design, budgets in d["designs"].items():
+        for budget in budgets:
+            for run in budget["runs"]:
+                lines.append(f"| {design} | {budget['bootstrap_replicates']:,} | {run['seed']} | {interval(run['ci'])} |")
+    lines += ["", "The JSON records endpoints at canonical ten-significant-digit precision; tables round to two decimals.",
+              "The reported spread is empirical over five seeds; another seed can fall outside this range.",
+              "This checks simulation variability conditional on the sample, not robustness to new questions,",
+              "model replies, model selection, labels or between-question dependence.", ""]
+    return lines
 
 
 def render(report):
@@ -115,7 +160,7 @@ def render(report):
     lines += ["", "Candidate count per question: " + ", ".join(
         f"{count} candidates: {questions} questions" for count, questions in sample["candidate_count_histogram"].items()) + ".",
         "", "## Method and assumptions", "",
-        "All intervals use 4,000 percentile-bootstrap draws, seed 0, alpha 0.05. The item column reproduces",
+        "The canonical intervals use 4,000 percentile-bootstrap draws, seed 0, alpha 0.05. The item column reproduces",
         "the original item-resampled interval. The pooled question column samples 188 questions with replacement,",
         "taking every candidate of each selected question together. The stratified column samples the original",
         "number of questions within each source. Both retain the item-weighted statistic: total successes",
@@ -165,7 +210,8 @@ def render(report):
             lines.append(f"| {key.replace('|', ' / ')} | {rate} | {d['n_items']} / {d['n_questions']} | {100*d['estimate']:.2f} | "
                          f"{interval(d['original_wilson_ci'])} | {interval(d['question_cluster_ci'])} | "
                          f"{interval(d['source_stratified_question_ci'])} |")
-    lines += ["", "## Reproduce", "", "```bash", "python scripts/e1_cluster_sensitivity.py",
+    lines += [""] + render_stability(report)
+    lines += ["## Reproduce", "", "```bash", "python scripts/e1_cluster_sensitivity.py",
               "python scripts/e1_cluster_sensitivity.py --check", "```", "",
               "The JSON records input and implementation SHA-256 hashes, numpy/PRNG versions, cluster sizes and",
               "all numerical results. Before reporting it checks the frozen sample, complete judgment matrix,",
@@ -196,6 +242,9 @@ def render_readme(report):
          "questions alone do not establish that dependence. These are sensitivity intervals, with no new p-values",
          "or significance/power claims. Original item-level results, McNemar/Holm tests and recommendations remain",
          "unchanged. Equal-question point estimates are reported separately to show weighting sensitivity.", "",
+         "H1 also has a bootstrap Monte Carlo diagnostic at 4,000 and 16,000 draws with seeds 0–4.",
+         "Every seed's interval is reported; cross-seed endpoint ranges describe simulation variability, not new",
+         "confidence intervals or significance evidence. The original 4,000-draw, seed-0 intervals are retained.", "",
          "[Full tables and assumptions](results/e1/cluster_sensitivity.md), "
          "[machine-readable results and hashes](results/e1/cluster_sensitivity.json). Reproduce with",
          "`python scripts/e1_cluster_sensitivity.py`; CI uses `--check` to verify the JSON, Markdown and this block.",

@@ -16,6 +16,11 @@ MUTANTS = [
     (S + "stats.py", "centre = (p + z * z / (2 * n)) / den", "centre = p"),
     (S + "stats.py", "    d = x - y\n", "    d = x + y\n"),
     (S + "stats.py", "zb * math.sqrt(p_disc - diff ** 2)", "zb * math.sqrt(p_disc)"),
+    # Monte Carlo diagnostics must use every advertised draw budget and seed, not repeat the canonical run.
+    (S + "cluster_sensitivity.py", "b=count, seed=seed, alpha=alpha",
+     "b=replicate_counts[0], seed=seed, alpha=alpha"),
+    (S + "cluster_sensitivity.py", "b=count, seed=seed, alpha=alpha",
+     "b=count, seed=seeds[0], alpha=alpha"),
     # judge prompts, parsing and aggregation
     (S + "judge.py", 'return m.group(1).upper() == "CORRECT"', 'return m.group(1).upper() != "INCORRECT"'),
     (S + "judge.py", "return sum(1 for v in votes if v is True) * 2 > len(votes)",
