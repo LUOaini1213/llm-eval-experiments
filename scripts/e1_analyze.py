@@ -6,6 +6,7 @@
 Reads data/e1/*.jsonl and results/e1/judgments_*.jsonl only, so it runs without a model (and in CI).
 """
 import csv
+import argparse
 import json
 import sys
 from collections import defaultdict
@@ -17,9 +18,9 @@ from evalab import analysis as A  # noqa: E402
 from evalab import judge as J  # noqa: E402
 from evalab import stats as S  # noqa: E402
 from evalab.items import load_jsonl  # noqa: E402
+from evalab.experiment import JUDGES, results_dir  # noqa: E402
 from evalab.stable import stable_round  # noqa: E402
 
-JUDGES = ["qwen2.5:3b", "llama3.2:3b", "phi4-mini:3.8b", "gemma3:4b", "qwen3.5:4b"]
 OUT = ROOT / "results" / "e1"
 MDE = 0.05          # smallest accuracy difference worth detecting (pre-registered)
 ALPHA, POWER = 0.05, 0.8
@@ -47,7 +48,8 @@ def pipelines(items, idx, best, jury3):
 
 def pilot():
     items = load_jsonl(ROOT / "data" / "e1" / "items_pilot.jsonl")
-    idx = A.index_judgments(load_jsonl(OUT / "judgments_pilot.jsonl"))
+    A.validate_aux_manifest(ROOT, OUT, "pilot", items)
+    idx = A.validate_matrix(load_jsonl(OUT / "judgments_pilot.jsonl"), items, JUDGES, J.POINTWISE)
     single = {j: A.metrics(A.build_pipeline(j, [j], "bin_ref", "single", items, idx), items) for j in JUDGES}
     best, jury3 = A.choose_best_and_jury(single, JUDGES)
     ps = pipelines(items, idx, best, jury3)
@@ -79,11 +81,18 @@ def pilot():
 def main_analysis():
     choices = json.loads((OUT / "pilot_choices.json").read_text(encoding="utf-8"))
     best, jury3 = choices["best_single"], choices["jury3"]
-    items = load_jsonl(ROOT / "data" / "e1" / "items_main_order.jsonl")
+    items = A.load_main_items(ROOT, OUT)
     rows = load_jsonl(OUT / "judgments_main.jsonl")
-    n = len({r["item_id"] for r in rows})
-    items = items[:n]
-    idx = A.index_judgments(rows)
+    idx = A.validate_matrix(rows, items, JUDGES, J.POINTWISE)
+    # Validate all inputs before writing any report; a failed late set must not leave partial new results.
+    rob_items = load_jsonl(ROOT / "data" / "e1" / "items_robust.jsonl")
+    A.validate_aux_manifest(ROOT, OUT, "robust", rob_items)
+    ridx = A.validate_matrix(load_jsonl(OUT / "judgments_robust.jsonl"), rob_items, JUDGES,
+                             ("bin_ref", "strict_ref"))
+    pairs = load_jsonl(ROOT / "data" / "e1" / "pairs.jsonl")
+    A.validate_aux_manifest(ROOT, OUT, "pairs", pairs)
+    pair_idx = A.validate_matrix(load_jsonl(OUT / "judgments_pairs.jsonl"), pairs, JUDGES,
+                                 J.PAIRWISE, pairwise=True)
     ps = pipelines(items, idx, best, jury3)
     m = {k: A.metrics(p, items) for k, p in ps.items()}
     dump("main_metrics.json", m)
@@ -109,8 +118,6 @@ def main_analysis():
         fam_a[k]["p_holm"] = v
 
     # ---- robustness set: verbosity/confidence bias
-    rob_items = load_jsonl(ROOT / "data" / "e1" / "items_robust.jsonl")
-    ridx = A.index_judgments(load_jsonl(OUT / "judgments_robust.jsonl"))
     byq = defaultdict(dict)
     for it in rob_items:
         byq[it["qid"]][(it["style"], it["gold"])] = it["item_id"]
@@ -133,9 +140,8 @@ def main_analysis():
             rob[f"{name}|{cond}"] = res
 
     # ---- pairwise set: position bias
-    pairs = load_jsonl(ROOT / "data" / "e1" / "pairs.jsonl")
     prow = defaultdict(dict)
-    for r in load_jsonl(OUT / "judgments_pairs.jsonl"):
+    for r in pair_idx.values():
         prow[(r["judge"], r["condition"], r["item_id"])][r["order"]] = r
     pw = {}
     for cond in J.PAIRWISE:
@@ -257,4 +263,9 @@ def main_analysis():
 
 
 if __name__ == "__main__":
-    {"pilot": pilot, "main": main_analysis}[sys.argv[1]]()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("set", choices=("pilot", "main"))
+    parser.add_argument("--run-id", help="read and write results/e1/runs/NAME")
+    args = parser.parse_args()
+    OUT = results_dir(ROOT, args.run_id)
+    {"pilot": pilot, "main": main_analysis}[args.set]()

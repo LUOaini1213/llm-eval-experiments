@@ -11,6 +11,7 @@ Reads data/e1/items_main_order.jsonl and results/e1/judgments_main.jsonl only; n
 Writes results/e1/aggregation.json and results/e1/aggregation_predictions.csv.
 """
 import csv
+import argparse
 import json
 import sys
 from pathlib import Path
@@ -27,6 +28,7 @@ from evalab import analysis as A  # noqa: E402
 from evalab import judge as J  # noqa: E402
 from evalab import stats as S  # noqa: E402
 from evalab.items import load_jsonl  # noqa: E402
+from evalab.experiment import results_dir  # noqa: E402
 
 OUT = ROOT / "results" / "e1"
 K, CV_SEED = 10, 20260928
@@ -46,10 +48,9 @@ LABELS = {"best_single_fixed": f"best single, fixed ({BEST})", "best_single_cv":
 def load():
     choices = json.loads((OUT / "pilot_choices.json").read_text(encoding="utf-8"))
     rows = load_jsonl(OUT / "judgments_main.jsonl")
-    n = len({r["item_id"] for r in rows})
-    items = load_jsonl(ROOT / "data" / "e1" / "items_main_order.jsonl")[:n]
-    idx = A.index_judgments(rows)
-    votes = np.array([[int(A._pass(idx.get((j, "bin_ref", it["item_id"])), "bin_ref")) for j in JUDGES]
+    items = A.load_main_items(ROOT, OUT)
+    idx = A.validate_matrix(rows, items, JUDGES, J.POINTWISE)
+    votes = np.array([[int(A._pass(idx[(j, "bin_ref", it["item_id"])], "bin_ref")) for j in JUDGES]
                       for it in items])
     y = np.array([int(it["gold"] == "correct") for it in items])
     src = np.array([it["source"] for it in items])
@@ -169,4 +170,8 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--run-id", help="read and write results/e1/runs/NAME")
+    args = parser.parse_args()
+    OUT = results_dir(ROOT, args.run_id)
     main()

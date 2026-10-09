@@ -12,6 +12,7 @@ Reads data/e1/*.jsonl and results/e1/judgments_main.jsonl only; no model is need
 Writes results/e1/ranking.json and results/e1/ranking_systems.csv.
 """
 import csv
+import argparse
 import json
 import sys
 import warnings
@@ -26,6 +27,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from e1_analyze import JUDGES, pipelines  # noqa: E402
 
 from evalab import analysis as A  # noqa: E402
+from evalab import judge as J  # noqa: E402
+from evalab.experiment import results_dir  # noqa: E402
 from evalab import ranking as R  # noqa: E402
 from evalab import stats as S  # noqa: E402
 from evalab.items import load_jsonl  # noqa: E402
@@ -51,9 +54,9 @@ def load():
     choices = json.loads((OUT / "pilot_choices.json").read_text(encoding="utf-8"))
     order = load_jsonl(ROOT / "data" / "e1" / "items_main_order.jsonl")
     rows = load_jsonl(OUT / "judgments_main.jsonl")
-    n = len({r["item_id"] for r in rows})
-    items = order[:n]
-    ps = pipelines(items, A.index_judgments(rows), choices["best_single"], choices["jury3"])
+    items = A.load_main_items(ROOT, OUT)
+    idx = A.validate_matrix(rows, items, JUDGES, J.POINTWISE)
+    ps = pipelines(items, idx, choices["best_single"], choices["jury3"])
     systems = sorted({system_name(it) for it in items}, key=lambda s: (SOURCES.index(s.split("|")[0]), s))
     sys_idx = np.array([systems.index(system_name(it)) for it in items])
     # inverse sampling fraction of each (source, gold) stratum: the main set is a stratified prefix of the order file
@@ -263,4 +266,8 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--run-id", help="read and write results/e1/runs/NAME")
+    args = parser.parse_args()
+    OUT = results_dir(ROOT, args.run_id)
     main()

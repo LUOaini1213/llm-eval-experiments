@@ -8,7 +8,7 @@ Each check returns one of three labels:
   another count, a unit-converted variant of the expected number ...), so a string rule cannot decide.
 
 Ambiguous items are not labelled by hand. They are excluded from the primary analysis and listed in
-results/e1/ambiguous_items.csv, so the reader can see exactly what was left out.
+data/e1/ambiguous_items.csv, so the reader can see exactly what was left out.
 """
 from __future__ import annotations
 
@@ -72,17 +72,47 @@ def check_number(answer: str, gold: float, exclude: set[float] = frozenset(), to
     return "ambiguous" if others else "correct"
 
 
+TIME_TOKEN = re.compile(
+    r"(?<![\w.])(?<!\d:)(?P<hour>\d{1,2})[:.]?(?P<minute>\d{2})"
+    r"(?:\s*(?P<meridiem>am|pm|a\.m\.|p\.m\.))?"
+    r"(?:\s*(?:hrs?|hours?))?(?!\w|[.:]\d)", re.I)
+TRANSIT_IDENTIFIER = re.compile(
+    r"\b(?:bus(?:\s+(?:service|route))?|service|route)\s*"
+    r"(?:(?:no\.?|number)\s*)?[#:]?\s*[*_`]*"
+    r"(?P<identifier>\d+[A-Za-z]?)(?!\w|[.:]\d)", re.I)
+DATE_CONTEXT = re.compile(
+    r"\b(?:(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|"
+    r"aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\.?\s+"
+    r"(?:\d{1,2}(?:st|nd|rd|th)?(?:,\s*|\s+))?|year\s+)\d{4}\b|"
+    r"(?<!\w)(?:\d{4}([/.-])\d{1,2}\1\d{1,2}|\d{1,2}([/.-])\d{1,2}\2\d{4})(?!\w)", re.I)
+
+
 def hhmm(text: str) -> list[str]:
+    """Read complete HMM/HHMM, H:MM or H.MM tokens, optionally with am/pm or hours.
+
+    Bare numbers explicitly labelled as bus/service/route identifiers are not clock values.
+    Exclude their occurrences, not their values: service 646 can still depart at 0646.
+    Named-month/year expressions and complete numeric dates likewise do not supply times.
+    This is a bounded lexical check, not a general date or natural-language parser.
+    The end-of-day notation 24:00 is retained as 2400; other 24:xx values are invalid.
+    """
+    identifiers = {m.span("identifier") for m in TRANSIT_IDENTIFIER.finditer(text)}
+    date_spans = [m.span() for m in DATE_CONTEXT.finditer(text)]
     out = []
-    for h, m, ap in re.findall(r"(?<!\d)(\d{1,2})[:.]?(\d{2})\s*(am|pm|a\.m\.|p\.m\.)?(?!\d)", text, re.I):
-        h = int(h)
-        ap = ap.lower().replace(".", "")
-        if ap == "pm" and h < 12:
-            h += 12
-        if ap == "am" and h == 12:
-            h = 0
-        if 0 <= h <= 24 and 0 <= int(m) < 60:
-            out.append(f"{h:02d}{m}")
+    for match in TIME_TOKEN.finditer(text):
+        if match.span() in identifiers or any(start <= match.start() < end for start, end in date_spans):
+            continue
+        h, m = int(match["hour"]), int(match["minute"])
+        ap = (match["meridiem"] or "").lower().replace(".", "")
+        if m >= 60:
+            continue
+        if ap:
+            if not 1 <= h <= 12:
+                continue
+            h = h % 12 + (12 if ap == "pm" else 0)
+        elif h > 24 or (h == 24 and m != 0):
+            continue
+        out.append(f"{h:02d}{m:02d}")
     return out
 
 
