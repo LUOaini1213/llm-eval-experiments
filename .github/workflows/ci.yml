@@ -18,6 +18,7 @@ jobs:
           python scripts/e1_analyze.py main
           python scripts/e1_ranking.py
           python scripts/e1_aggregation.py
+          python scripts/e1_cluster_sensitivity.py --check
           python scripts/e3_generate.py
           python scripts/make_charts.py
           git diff --stat --exit-code -- results data
