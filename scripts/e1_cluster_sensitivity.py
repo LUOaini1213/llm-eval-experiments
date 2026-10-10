@@ -6,7 +6,6 @@
 import argparse
 import hashlib
 import json
-import re
 import sys
 from pathlib import Path
 
@@ -39,33 +38,21 @@ README_START, README_END = "<!-- cluster-sensitivity:start -->", "<!-- cluster-s
 def load_main(root=ROOT):
     """Require the declared frozen sample and complete judgment matrix, before any result is written."""
     out = root / "results" / "e1"
-    manifest = json.loads((out / "run_manifest.json").read_text(encoding="utf-8"))
-    prereg = (root / "docs" / "PREREGISTRATION.md").read_text(encoding="utf-8")
-    declared = int(re.search(r"Main-set size:\s*\**\s*(\d+)", prereg).group(1))
-    if manifest["n_items"] != declared:
-        raise ValueError("manifest sample size differs from pre-registration")
-    all_items = load_jsonl(root / "data" / "e1" / "items_main_order.jsonl")
-    items = all_items[:declared]
-    ids = {it["item_id"] for it in items}
-    if len(items) != declared or len(ids) != declared:
-        raise ValueError("declared main sample is incomplete or has duplicate item IDs")
+    items = A.load_main_items(root, out)
     if any(it["gold"] not in {"correct", "incorrect"} for it in items):
         raise ValueError("main sample has an unsupported gold label")
     rows = load_jsonl(out / "judgments_main.jsonl")
-    expected = {(judge, condition, item_id) for judge in JUDGES for condition in J.POINTWISE for item_id in ids}
-    actual = [(r["judge"], r["condition"], r["item_id"]) for r in rows]
-    if len(actual) != len(set(actual)) or set(actual) != expected or any("order" in r for r in rows):
-        raise ValueError("main judgments must contain the complete, unique declared matrix")
+    idx = A.validate_matrix(rows, items, JUDGES, J.POINTWISE)
     choices = json.loads((out / "pilot_choices.json").read_text(encoding="utf-8"))
     if choices["best_single"] not in JUDGES or len(choices["jury3"]) != 3 or \
             len(set(choices["jury3"])) != 3 or not set(choices["jury3"]) <= set(JUDGES):
         raise ValueError("pilot choices must identify known, distinct judges")
-    return items, rows, choices
+    return items, idx, choices
 
 
 def generate(root=ROOT):
-    items, rows, choices = load_main(root)
-    ps = pipelines(items, A.index_judgments(rows), choices["best_single"], choices["jury3"])
+    items, idx, choices = load_main(root)
+    ps = pipelines(items, idx, choices["best_single"], choices["jury3"])
     original_tests = json.loads((root / "results/e1/tests.json").read_text(encoding="utf-8"))
     original_comparisons = {"H1": original_tests["primary_H1"], **original_tests["family_A"]}
     comparisons = {label: (test["a"], test["b"], None if test["subset"] == "all" else test["subset"])
