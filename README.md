@@ -620,7 +620,7 @@ python -m venv .venv && .venv/Scripts/activate        # Python 3.11
 pip install -r requirements.txt                        # requirements-lock.txt has the full frozen set
 python -m pytest -q
 python tests/mutate.py --self-test                     # verifies the mutation harness itself
-python tests/mutate.py                                 # 54 planted bugs; each must fail a test
+python tests/mutate.py                                 # 56 planted bugs; each must fail a test
 python scripts/e1_analyze.py main                      # E1 tables from the committed judge replies
 python scripts/e1_ranking.py && python scripts/e1_aggregation.py   # exploratory follow-ups (amendment 1)
 python scripts/e1_audit_time_gold.py                    # post-hoc audit; preserves the frozen experiment

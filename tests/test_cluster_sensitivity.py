@@ -1,6 +1,8 @@
 """Hand-computable clustered samples and frozen-reply report reproduction (no model endpoint)."""
 import importlib.util
+import hashlib
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -9,6 +11,7 @@ import pytest
 from evalab import stats as S
 from evalab.analysis import Pipeline
 from evalab.cluster_sensitivity import build_report, endpoint_stability, mean_sensitivity, question_profile
+from evalab.experiment import run_identity
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("cluster_script", ROOT / "scripts/e1_cluster_sensitivity.py")
@@ -173,17 +176,93 @@ def write_loader_fixture(root):
     (root / "data/e1").mkdir(parents=True)
     (root / "results/e1").mkdir(parents=True)
     (root / "docs").mkdir()
-    (root / "docs/PREREGISTRATION.md").write_text("Main-set size: **4**", encoding="utf-8")
-    items = tiny_items()
+    prereg = root / "docs/PREREGISTRATION.md"
+    prereg.write_text("Main-set size: **4**\nDesign fixed before judging.\n", encoding="utf-8", newline="\n")
+    items = [dict(it, reference="known answer", candidate="candidate answer") for it in tiny_items()]
     (root / "data/e1/items_main_order.jsonl").write_text("\n".join(json.dumps(it) for it in items), encoding="utf-8")
-    (root / "results/e1/run_manifest.json").write_text(json.dumps({"n_items": 4}), encoding="utf-8")
+    manifest = {"n_items": 4, "preregistration_sha256": hashlib.sha256(prereg.read_bytes()).hexdigest()}
+    (root / "results/e1/run_manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
     choices = {"best_single": E.JUDGES[0], "jury3": E.JUDGES[:3]}
     (root / "results/e1/pilot_choices.json").write_text(json.dumps(choices), encoding="utf-8")
-    rows = [{"judge": j, "condition": c, "item_id": it["item_id"]}
+    rows = [{"judge": j, "condition": c, "item_id": it["item_id"], "parsed": 4 if c == "score_ref" else True,
+             "prompt_tokens": 2, "output_tokens": 1, "seconds": 0.01}
             for j in E.JUDGES for c in E.J.POINTWISE for it in items]
     path = root / "results/e1/judgments_main.jsonl"
     path.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
     return rows, path
+
+
+@pytest.mark.parametrize("defect", ["original_text", "recorded_sha"])
+def test_cluster_loader_refuses_preregistration_tampering_at_unchanged_size(tmp_path, defect):
+    write_loader_fixture(tmp_path)
+    assert len(E.load_main(tmp_path)[0]) == 4
+    if defect == "original_text":
+        prereg = tmp_path / "docs/PREREGISTRATION.md"
+        prereg.write_bytes(prereg.read_bytes().replace(b"before judging", b"after judging"))
+    else:
+        path = tmp_path / "results/e1/run_manifest.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest["preregistration_sha256"] = "0" * 64
+        path.write_text(json.dumps(manifest), encoding="utf-8")
+    # The declared four items and complete verdict matrix are still present.
+    assert "Main-set size: **4**" in (tmp_path / "docs/PREREGISTRATION.md").read_text(encoding="utf-8")
+    with pytest.raises(ValueError, match="pre-registration original bytes"):
+        E.load_main(tmp_path)
+
+
+def test_cluster_loader_retains_original_preregistration_boundary_for_amendments(tmp_path):
+    write_loader_fixture(tmp_path)
+    prereg = tmp_path / "docs/PREREGISTRATION.md"
+    prereg.write_bytes(prereg.read_bytes() + b"\n## Amendments\nPost-hoc note.\nMain-set size: **1**\n")
+    # An appended note cannot replace the original sample size or invalidate its original byte hash.
+    assert len(E.load_main(tmp_path)[0]) == 4
+
+
+def test_cluster_loader_checks_versioned_experiment_identity(tmp_path):
+    write_loader_fixture(tmp_path)
+    items = [json.loads(line) for line in (tmp_path / "data/e1/items_main_order.jsonl").read_text().splitlines()]
+    path = tmp_path / "results/e1/run_manifest.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    manifest.update(schema_version=1, identity=run_identity("main", items))
+    path.write_text(json.dumps(manifest), encoding="utf-8")
+    assert len(E.load_main(tmp_path)[0]) == 4
+    manifest["identity"]["prompts_sha256"] = "0" * 64
+    path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(ValueError, match="identity/configuration"):
+        E.load_main(tmp_path)
+
+
+@pytest.mark.parametrize("field,value", [("parsed", "CORRECT"), ("seconds", -1)])
+def test_cluster_loader_refuses_invalid_verdict_records(tmp_path, field, value):
+    rows, path = write_loader_fixture(tmp_path)
+    rows[0][field] = value
+    path.write_text("\n".join(json.dumps(row) for row in rows), encoding="utf-8")
+    with pytest.raises(ValueError, match="Invalid"):
+        E.load_main(tmp_path)
+
+
+def test_cluster_command_refuses_tampering_before_computation_or_artifact_writes(tmp_path, monkeypatch):
+    write_loader_fixture(tmp_path)
+    prereg = tmp_path / "docs/PREREGISTRATION.md"
+    prereg.write_bytes(prereg.read_bytes().replace(b"before judging", b"after judging"))
+    artifacts = [tmp_path / "results/e1/cluster_sensitivity.json", tmp_path / "results/e1/cluster_sensitivity.md",
+                 tmp_path / "README.md"]
+    for path in artifacts:
+        path.write_bytes(b"existing artifact\n")
+    generate = E.generate
+
+    def forbidden_computation(*args, **kwargs):
+        raise AssertionError("invalid provenance reached pipeline computation")
+
+    monkeypatch.setattr(E, "generate", lambda: generate(tmp_path))
+    monkeypatch.setattr(E, "pipelines", forbidden_computation)
+    monkeypatch.setattr(E, "ROOT", tmp_path)
+    monkeypatch.setattr(E, "REPORT_JSON", artifacts[0])
+    monkeypatch.setattr(E, "REPORT_MD", artifacts[1])
+    monkeypatch.setattr(sys, "argv", ["e1_cluster_sensitivity.py"])
+    with pytest.raises(ValueError, match="pre-registration original bytes"):
+        E.main()
+    assert all(path.read_bytes() == b"existing artifact\n" for path in artifacts)
 
 
 @pytest.mark.parametrize("defect", ["missing_item", "missing_axis", "duplicate", "unknown_axis", "pairwise"])
@@ -201,7 +280,9 @@ def test_report_loader_rejects_incomplete_or_ambiguous_matrix(tmp_path, defect):
     else:
         rows[0]["order"] = "AB"
     path.write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
-    with pytest.raises(ValueError, match="complete, unique"):
+    message = {"missing_item": "Missing", "missing_axis": "Missing", "duplicate": "Duplicate",
+               "unknown_axis": "Unexpected", "pairwise": "Unexpected"}[defect]
+    with pytest.raises(ValueError, match=message):
         E.load_main(tmp_path)
 
 
