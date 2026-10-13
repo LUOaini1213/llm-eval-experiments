@@ -1,0 +1,275 @@
+{
+ "assessor_note": "Single assessor, using data/accreditation/rubric.json. Both documents are public case studies of the Global AI Assurance Pilot (seven pages each), written to describe approach and lessons for a general audience. They are summaries, not the full reports the testers gave the deployers. A low score therefore means the public summary does not show the evidence, not that the tester did not do the work. Quotations are kept short; pages are the PDF page numbers. The source PDFs are not redistributed; their SHA-256 digests are recorded so the quotations can be checked against the same files.",
+ "reports": [
+  {
+   "id": "R1",
+   "title": "FinMate - Anti-Money Laundering Assistant (Tookitaki x Resaro), Global AI Assurance Pilot case study",
+   "url": "https://aiverifyfoundation.sg/wp-content/uploads/2026/08/Tookitaki-X-Resaro.pdf",
+   "sha256": "71eb9bf3e3045b47798e4c51641a8495e6b36c34ca569cd25a729ae25297a5b1",
+   "retrieved": "2026-10-13",
+   "scores": {
+    "C1.1": {
+     "score": 2,
+     "page": 3,
+     "quote": "this tool was meant to be deployed within a company's environment and used by trusted employees",
+     "why": "Risks (accuracy and faithfulness; compliance and misuse) are chosen from the deployment context, and each is tied to a consequence (incorrect AML decisions, regulatory non-compliance)."
+    },
+    "C1.2": {
+     "score": 1,
+     "page": 3,
+     "quote": "combined batch job executions, API queries, database extracts, and log file trace analysis",
+     "why": "Output tests are described for both risks. Log and database analysis suggests component-level checks, but no component test (for example of the tool-calling or retrieval step) is described with its result."
+    },
+    "C1.3": {
+     "score": 2,
+     "page": 5,
+     "quote": "200 English samples ... 100 Mandarin samples ... 100 perturbed samples",
+     "why": "Inputs are stratified by case size, language and five perturbation types, and the 300 copilot queries cover all tool calls and misuse cases with stated generation instructions."
+    },
+    "C1.4": {
+     "score": 1,
+     "page": 3,
+     "quote": "Testing focused explicitly on evaluating:",
+     "why": "The scope is stated, but exclusions are not. Data leakage between customers appears only as a misuse example, and adversarial prompting beyond policy-violating queries is not mentioned as in or out of scope."
+    },
+    "C2.1": {
+     "score": 2,
+     "page": 4,
+     "quote": "Metrics included Precision and Recall of both facts and values.",
+     "why": "Fact-level precision and recall against synthetic ground truth fit a summarisation-accuracy objective (the Starter Kit's claim-decomposition approach); rejection of policy-violating queries fits the misuse objective."
+    },
+    "C2.2": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "Looked for a check of the LLM-based fact extraction or the automatic misuse assessment against human labels. None is reported, although the document names extraction as the key difficulty (p. 6)."
+    },
+    "C2.3": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "Looked for pass marks for precision, recall or misuse rejection. None is stated."
+    },
+    "C2.4": {
+     "score": 1,
+     "page": 4,
+     "quote": "create common queries and perturbations that were sent to the Application API",
+     "why": "Accuracy on legitimate copilot queries is tested, which covers usefulness, but over-refusal of legitimate requests by the misuse controls is not measured."
+    },
+    "C3.1": {
+     "score": 1,
+     "page": 2,
+     "quote": "During the pilot, the application was deployed in Tookitaki's internal QA environment.",
+     "why": "Environment and modules are described. No application version, test dates or underlying model of the application under test are given; the model named on p. 6 is in a cost note and its role is not explicit."
+    },
+    "C3.2": {
+     "score": 1,
+     "page": 5,
+     "quote": "Generation instructions were:",
+     "why": "The copilot query generation prompt and the perturbation types are published, which is unusually concrete. The synthetic alert data and the queries themselves are not released, and the seed examples are not shown."
+    },
+    "C3.3": {
+     "score": 1,
+     "page": 1,
+     "quote": "Surface form metrics (term frequency-inverse document frequency + Cosine similarity between extracted facts)",
+     "why": "Evaluator types are listed, but not the extraction model, its prompt, or the similarity cut-off that counts a fact as matched."
+    },
+    "C3.4": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "Looked for repeated runs or a consistency check. None is reported."
+    },
+    "C4.1": {
+     "score": 2,
+     "page": 5,
+     "quote": "400 narration samples consisting of",
+     "why": "Sample sizes are given for both test sets and for each stratum of the narration set."
+    },
+    "C4.2": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "No results are published, so no uncertainty is reported."
+    },
+    "C4.3": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "No comparison between languages, sizes or perturbation types is reported, although the design would support one."
+    },
+    "C4.4": {
+     "score": 1,
+     "page": 5,
+     "quote": "100 perturbed samples based on the following types:",
+     "why": "The strata needed for a breakdown are designed in, but no results by stratum are published."
+    },
+    "C5.1": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "Looked for precision, recall or misuse-rejection results. The case study reports none."
+    },
+    "C5.2": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "No failure cases or examples of incorrect narratives are shown."
+    },
+    "C5.3": {
+     "score": 1,
+     "page": 6,
+     "quote": "there was no actual client production data available",
+     "why": "Limitations of the test process are stated (synthetic data, difficult extraction). Residual risk to the application is not."
+    },
+    "C5.4": {
+     "score": 1,
+     "page": 7,
+     "quote": "Testing needs must be integral to the initial system design, particularly traceability and comprehensive logging.",
+     "why": "Lessons are useful for testers and deployers in general, but there is no application-specific recommendation or re-test plan."
+    }
+   },
+   "evidence_requests": [
+    "Precision and recall of facts and values for each narration stratum (size, language, perturbation type), with sample sizes and intervals.",
+    "Misuse-rejection rate on the policy-violating copilot queries, and the false-refusal rate on legitimate ones.",
+    "How the LLM-based fact extraction was validated against human labels, and its error rate.",
+    "Application version, underlying model and test dates; whether any test was repeated."
+   ]
+  },
+  {
+   "id": "R2",
+   "title": "Multilingual Internal Knowledge Bot (High Tech Manufacturing Firm x Vulcan), Global AI Assurance Pilot case study",
+   "url": "https://aiverifyfoundation.sg/wp-content/uploads/2026/08/Vulcan-x-High-Tech-Manufacturing-Firm.pdf",
+   "sha256": "5eb185f3ace08d8090ce2ae9b9194df3c92486319cf4a569745ecad6ef645de3",
+   "retrieved": "2026-10-13",
+   "scores": {
+    "C1.1": {
+     "score": 2,
+     "page": 3,
+     "quote": "Given these objectives, the following risks were considered important and included in the scope of testing.",
+     "why": "Three deployer objectives (internal confidentiality policy, OWASP alignment, readiness for employee use) lead to the selected risks: meta-prompt leakage, data leakage, multilingual robustness and harmful content."
+    },
+    "C1.2": {
+     "score": 1,
+     "page": 7,
+     "quote": "RAG improved relevance and accuracy but also widened the leakage surface",
+     "why": "Output testing covers every selected risk. The RAG finding implies a component-level comparison, but no component test or ablation is described."
+    },
+    "C1.3": {
+     "score": 2,
+     "page": 6,
+     "quote": "Each threat had about 40 test cases for each language.",
+     "why": "Test cases are generated from the application's own system prompt and a threat library agreed with the deployer, in both supported languages (more than 800 each)."
+    },
+    "C1.4": {
+     "score": 1,
+     "page": 3,
+     "quote": "designed to test black-box GenAI models",
+     "why": "The black-box assumption is a scope statement, but nothing is said about risks or components left out."
+    },
+    "C2.1": {
+     "score": 2,
+     "page": 6,
+     "quote": "Each chatbot response was clearly classified as either \"pass\" or \"fail\"",
+     "why": "A binary outcome per attack, defined against the attack's goal, is the attack-success measure the Starter Kit recommends."
+    },
+    "C2.2": {
+     "score": 1,
+     "page": 6,
+     "quote": "evaluation was performed manually by the Vulcan team and the Assured Firm's product specialists",
+     "why": "Human evaluation is used for the accuracy tests, but the LLM judge used for the red-teaming results is not reported as checked against human labels."
+    },
+    "C2.3": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "Looked for an acceptable failure rate per threat or overall. None is stated."
+    },
+    "C2.4": {
+     "score": 1,
+     "page": 6,
+     "quote": "Customised test cases were specifically designed to evaluate the accuracy and consistency of chatbot responses",
+     "why": "Accuracy on legitimate product questions is tested, but over-refusal is not measured."
+    },
+    "C3.1": {
+     "score": 1,
+     "page": 2,
+     "quote": "Proprietary chatbot built upon the Mistral-7B model",
+     "why": "Base model, RAG and system prompt are described; the version tested and the test dates are not (the engagement took two weeks, p. 7)."
+    },
+    "C3.2": {
+     "score": 1,
+     "page": 6,
+     "quote": "Utilising Vulcan's AI agent, scenario-based test cases were generated automatically.",
+     "why": "Construction is described at a high level. The threat library and the test cases are proprietary and not released."
+    },
+    "C3.3": {
+     "score": 1,
+     "page": 6,
+     "quote": "evaluated automatically using Vulcan's LLM as a judge",
+     "why": "The pass and fail rule is defined, but the judge model and its prompt are not given."
+    },
+    "C3.4": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "Looked for repeated runs. None is reported."
+    },
+    "C4.1": {
+     "score": 2,
+     "page": 6,
+     "quote": "more than 1,600 test cases were generated for this assessment with >800 test cases each allocated for English and Chinese",
+     "why": "Total and per-language sample sizes are given, with about 40 cases per threat per language."
+    },
+    "C4.2": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "No rates or intervals are published."
+    },
+    "C4.3": {
+     "score": 0,
+     "page": 7,
+     "quote": "Success in Chinese was nearly double that in English",
+     "why": "The key comparison is stated without the two rates or a test. With about 800 cases per language it may well be clear, but a reader cannot check it."
+    },
+    "C4.4": {
+     "score": 1,
+     "page": 7,
+     "quote": "The most effective tactic was Role-Play jailbreaks",
+     "why": "Results are discussed by language and attack strategy, but only qualitatively."
+    },
+    "C5.1": {
+     "score": 0,
+     "page": null,
+     "quote": null,
+     "why": "Looked for attack success rates per risk. None is published; the only quantitative result is the 'nearly double' ratio."
+    },
+    "C5.2": {
+     "score": 2,
+     "page": 4,
+     "quote": "this time, the attack prompt was repeated in Chinese and was successful in eliciting confidential business information",
+     "why": "Two full examples, a cross-language leak and a harmful five-step answer (p. 5), show what failure looks like."
+    },
+    "C5.3": {
+     "score": 1,
+     "page": 6,
+     "quote": "Insufficient Training Data for Customised Test Case Generation",
+     "why": "Practical challenges are stated (thin data for custom cases, the rate limit that halted the API). Residual risk to the application is not."
+    },
+    "C5.4": {
+     "score": 2,
+     "page": 7,
+     "quote": "Consider redacting or masking highly confidential information before indexing and enforce document-level access control list checks.",
+     "why": "Recommendations are specific to the failures found (indexing, access control, multilingual alignment, pacing test traffic)."
+    }
+   },
+   "evidence_requests": [
+    "Attack success rate per threat and per language, with the number of cases behind each, and the English and Chinese rates behind 'nearly double'.",
+    "Agreement between the LLM judge and human review on a sample of red-teaming verdicts.",
+    "Whether the leakage findings were re-tested after any mitigation, and the application version tested.",
+    "Over-refusal on legitimate employee questions."
+   ]
+  }
+ ]
+}

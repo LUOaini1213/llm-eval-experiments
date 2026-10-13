@@ -1,0 +1,77 @@
+{
+ "totals": {
+  "R1": {
+   "C1": {
+    "name": "Coverage",
+    "score": 6,
+    "max": 8
+   },
+   "C2": {
+    "name": "Method soundness",
+    "score": 3,
+    "max": 8
+   },
+   "C3": {
+    "name": "Reproducibility",
+    "score": 3,
+    "max": 8
+   },
+   "C4": {
+    "name": "Statistical rigour",
+    "score": 3,
+    "max": 8
+   },
+   "C5": {
+    "name": "Reporting quality",
+    "score": 2,
+    "max": 8
+   },
+   "total": {
+    "name": "Total",
+    "score": 17,
+    "max": 40
+   }
+  },
+  "R2": {
+   "C1": {
+    "name": "Coverage",
+    "score": 6,
+    "max": 8
+   },
+   "C2": {
+    "name": "Method soundness",
+    "score": 4,
+    "max": 8
+   },
+   "C3": {
+    "name": "Reproducibility",
+    "score": 3,
+    "max": 8
+   },
+   "C4": {
+    "name": "Statistical rigour",
+    "score": 3,
+    "max": 8
+   },
+   "C5": {
+    "name": "Reporting quality",
+    "score": 5,
+    "max": 8
+   },
+   "total": {
+    "name": "Total",
+    "score": 21,
+    "max": 40
+   }
+  }
+ },
+ "critical_gaps": {
+  "R1": [
+   "C2.2",
+   "C5.1"
+  ],
+  "R2": [
+   "C5.1"
+  ]
+ }
+}

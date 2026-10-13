@@ -1,0 +1,187 @@
+{
+ "title": "Rubric for reviewing a third-party AI test report (LLM applications)",
+ "version": "1.0 (2026-10-13)",
+ "scale": {
+  "0": "No evidence in the document.",
+  "1": "Mentioned or partly done, but not specific enough for a reviewer to check it.",
+  "2": "Done and stated specifically enough that a reviewer could check or repeat it."
+ },
+ "rules": [
+  "Score only what the document under review states. An indicator the report does not address scores 0 and becomes an evidence request, not a finding that the work was not done.",
+  "Every score above 0 cites the page and a short quotation (at most 25 words). Every score of 0 says what was looked for.",
+  "Indicators marked critical are the ones without which a reported result cannot be relied on. A report with a critical indicator at 0 is referred back for evidence, whatever its total.",
+  "Criterion totals are reported separately. The overall total is a summary only, because a high score in one criterion does not offset a missing critical indicator in another."
+ ],
+ "criteria": [
+  {
+   "id": "C1",
+   "name": "Coverage",
+   "indicators": [
+    {
+     "id": "C1.1",
+     "short": "Risk selection justified",
+     "text": "Risks are selected for the use case and the selection is justified (deployment context, users, severity).",
+     "kit": "3.1.2, pp. 31-33",
+     "critical": true
+    },
+    {
+     "id": "C1.2",
+     "short": "Output and component tests",
+     "text": "Each material risk has output tests, and component tests (retrieval, filters, system prompt) where they are needed to explain or confirm results.",
+     "kit": "1.3.2-1.3.3, pp. 13-14",
+     "critical": false
+    },
+    {
+     "id": "C1.3",
+     "short": "Representative test data",
+     "text": "Test data represent the application: realistic inputs, breadth and depth, edge cases, the languages and user types the application serves.",
+     "kit": "2.1.2, pp. 19-20",
+     "critical": true
+    },
+    {
+     "id": "C1.4",
+     "short": "Exclusions stated",
+     "text": "What was not tested, and why, is stated.",
+     "kit": "3.1.3, p. 34",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "name": "Method soundness",
+   "indicators": [
+    {
+     "id": "C2.1",
+     "short": "Metrics fit the objective",
+     "text": "Metrics measure the stated objective and fit the data format (e.g. precision and recall of facts, attack success rate).",
+     "kit": "2.1.3, p. 21",
+     "critical": false
+    },
+    {
+     "id": "C2.2",
+     "short": "Evaluators validated",
+     "text": "Automated evaluators (rules, classifiers, LLM judges) are checked against human or gold labels on a sample, and the agreement is reported.",
+     "kit": "2.1.4, p. 22; 3.7.2, p. 95",
+     "critical": true
+    },
+    {
+     "id": "C2.3",
+     "short": "Thresholds set in advance",
+     "text": "Pass thresholds are set before testing, with a stated basis.",
+     "kit": "3.1.4, pp. 34-36",
+     "critical": false
+    },
+    {
+     "id": "C2.4",
+     "short": "Over-refusal measured",
+     "text": "Helpfulness or over-refusal on legitimate requests is measured alongside safety.",
+     "kit": "3.4.2, p. 68; 3.5.2, p. 77",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "id": "C3",
+   "name": "Reproducibility",
+   "indicators": [
+    {
+     "id": "C3.1",
+     "short": "System under test identified",
+     "text": "The system under test is identified: version or build, underlying model, configuration, test dates and environment.",
+     "kit": "3.7.3, p. 96",
+     "critical": true
+    },
+    {
+     "id": "C3.2",
+     "short": "Test set released or rebuildable",
+     "text": "The test set is released, or its construction is described well enough to rebuild an equivalent one.",
+     "kit": "2.1.2, p. 20",
+     "critical": false
+    },
+    {
+     "id": "C3.3",
+     "short": "Evaluator configuration stated",
+     "text": "Evaluator configuration is stated: judge model, rubric or prompt, decision rule.",
+     "kit": "2.1.4, p. 22",
+     "critical": false
+    },
+    {
+     "id": "C3.4",
+     "short": "Repeated runs",
+     "text": "Tests are repeated, at least on a subset, and run-to-run variation is reported.",
+     "kit": "1.3.4, p. 15; 3.1.3, p. 34",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "id": "C4",
+   "name": "Statistical rigour",
+   "indicators": [
+    {
+     "id": "C4.1",
+     "short": "Sample sizes given",
+     "text": "The number of test cases behind each reported result is given.",
+     "kit": "2.1.2, p. 20",
+     "critical": true
+    },
+    {
+     "id": "C4.2",
+     "short": "Uncertainty reported",
+     "text": "Uncertainty is reported: confidence intervals, variance across runs, or an equivalent.",
+     "kit": "3.7.2, p. 95",
+     "critical": false
+    },
+    {
+     "id": "C4.3",
+     "short": "Comparisons supported",
+     "text": "Comparisons (between languages, versions, techniques) give both rates and their sample sizes, or a test, and claims stay within what the sample supports.",
+     "kit": "3.7.2, pp. 94-95",
+     "critical": false
+    },
+    {
+     "id": "C4.4",
+     "short": "Breakdown by sub-category",
+     "text": "Results are broken down by sub-category (topic, harm type, data type, attack technique).",
+     "kit": "3.7.2, p. 94",
+     "critical": false
+    }
+   ]
+  },
+  {
+   "id": "C5",
+   "name": "Reporting quality",
+   "indicators": [
+    {
+     "id": "C5.1",
+     "short": "Quantitative results",
+     "text": "Quantitative results are reported for each tested risk, against the thresholds where there are thresholds.",
+     "kit": "3.7.1, p. 94",
+     "critical": true
+    },
+    {
+     "id": "C5.2",
+     "short": "Failure cases analysed",
+     "text": "Failure cases are analysed qualitatively, with examples.",
+     "kit": "3.7.2, p. 95",
+     "critical": false
+    },
+    {
+     "id": "C5.3",
+     "short": "Limitations and residual risk",
+     "text": "Limitations of the test and the residual risk to the application are stated.",
+     "kit": "3.7.1, p. 94",
+     "critical": false
+    },
+    {
+     "id": "C5.4",
+     "short": "Specific recommendations",
+     "text": "Recommendations are specific and say what should be re-tested.",
+     "kit": "3.7.3, p. 96",
+     "critical": false
+    }
+   ]
+  }
+ ]
+}

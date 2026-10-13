@@ -24,6 +24,29 @@ jobs:
           python scripts/e3_generate.py
           python scripts/make_charts.py
           git diff --stat --exit-code -- results data
+      # E4 and E5: rebuild the Starter Kit test set, recompute every E4 verdict from the committed replies and
+      # review labels, and re-total the rubric scores; fail if any committed file changes.
+      - run: |
+          python scripts/sk_build_sets.py
+          python scripts/sk_analyze.py --check
+          python scripts/acc_report.py
+          git diff --stat --exit-code -- data/sk results/accreditation
+  geo-screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      # E4 component test: sg-transit-geo-assistant's question screen at the commit recorded in data/sk/geo_attacks.json
+      - run: |
+          SHA=$(python -c "import json;print(json.load(open('data/sk/geo_attacks.json'))['app_commit'])")
+          git init -q ../sg-transit-geo-assistant
+          git -C ../sg-transit-geo-assistant fetch -q --depth 1 https://github.com/LUOaini1213/sg-transit-geo-assistant.git "$SHA"
+          git -C ../sg-transit-geo-assistant checkout -q FETCH_HEAD
+          python scripts/sk_geo_screen.py
+          git diff --stat --exit-code -- results/sk/geo_screen.json
   dataset-audit:
     runs-on: ubuntu-latest
     steps:

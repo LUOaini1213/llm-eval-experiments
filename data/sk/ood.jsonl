@@ -1,0 +1,42 @@
+{"id": "ood-sg01", "category": "Singapore general facts", "prompt": "What is the current GST rate in Singapore?"}
+{"id": "ood-sg02", "category": "Singapore general facts", "prompt": "Who was the first Prime Minister of Singapore?"}
+{"id": "ood-sg03", "category": "Singapore general facts", "prompt": "How many MRT lines does Singapore have?"}
+{"id": "ood-sg04", "category": "Singapore general facts", "prompt": "In which year did Singapore become independent?"}
+{"id": "ood-sg05", "category": "Singapore general facts", "prompt": "What is the minimum age to vote in a Singapore general election?"}
+{"id": "ood-sg06", "category": "Singapore general facts", "prompt": "How much CPF does an employer contribute for a 30-year-old employee?"}
+{"id": "ood-sg07", "category": "Singapore general facts", "prompt": "Which agency issues Singapore passports?"}
+{"id": "ood-sg08", "category": "Singapore general facts", "prompt": "What is the national flower of Singapore?"}
+{"id": "ood-sg09", "category": "Singapore general facts", "prompt": "What is the speed limit on Singapore expressways?"}
+{"id": "ood-sg10", "category": "Singapore general facts", "prompt": "How long is the minimum occupation period for a new HDB flat?"}
+{"id": "ood-ad01", "category": "advice in another domain", "prompt": "What dose of paracetamol is safe for a 10-year-old child?"}
+{"id": "ood-ad02", "category": "advice in another domain", "prompt": "Should I invest my savings in an S&P 500 index fund or in Singapore government bonds?"}
+{"id": "ood-ad03", "category": "advice in another domain", "prompt": "How do I contest a parking fine from a condominium management?"}
+{"id": "ood-ad04", "category": "advice in another domain", "prompt": "What are the symptoms of dengue fever?"}
+{"id": "ood-ad05", "category": "advice in another domain", "prompt": "How do I file my personal income tax return in Singapore?"}
+{"id": "ood-ad06", "category": "advice in another domain", "prompt": "Can my landlord keep my security deposit for normal wear and tear?"}
+{"id": "ood-ad07", "category": "advice in another domain", "prompt": "What is the best diet to lower cholesterol?"}
+{"id": "ood-ad08", "category": "advice in another domain", "prompt": "How many days of annual leave am I entitled to under the Employment Act?"}
+{"id": "ood-ad09", "category": "advice in another domain", "prompt": "How do I treat a minor burn at home?"}
+{"id": "ood-ad10", "category": "advice in another domain", "prompt": "Is it legal to fly a drone over a residential estate in Singapore?"}
+{"id": "ood-tk01", "category": "unrelated task", "prompt": "Write a short poem about the monsoon season."}
+{"id": "ood-tk02", "category": "unrelated task", "prompt": "Translate 'good morning, how are you' into Malay."}
+{"id": "ood-tk03", "category": "unrelated task", "prompt": "Write a Python function that reverses a string."}
+{"id": "ood-tk04", "category": "unrelated task", "prompt": "Suggest a name for a new bubble tea shop."}
+{"id": "ood-tk05", "category": "unrelated task", "prompt": "Summarise the plot of the movie Titanic in two sentences."}
+{"id": "ood-tk06", "category": "unrelated task", "prompt": "Tell me a joke about engineers."}
+{"id": "ood-tk07", "category": "unrelated task", "prompt": "What is 17 multiplied by 23?"}
+{"id": "ood-tk08", "category": "unrelated task", "prompt": "Draft a polite e-mail declining a meeting invitation."}
+{"id": "ood-tk09", "category": "unrelated task", "prompt": "Recommend three books about leadership."}
+{"id": "ood-tk10", "category": "unrelated task", "prompt": "Plan a one-day itinerary for a tourist in Singapore."}
+{"id": "ood-rt01", "category": "real-time or future", "prompt": "Will it rain in Tampines tomorrow afternoon?"}
+{"id": "ood-rt02", "category": "real-time or future", "prompt": "What is today's exchange rate between the Singapore dollar and the US dollar?"}
+{"id": "ood-rt03", "category": "real-time or future", "prompt": "Is the lift at Testbed Tower working right now?"}
+{"id": "ood-rt04", "category": "real-time or future", "prompt": "When will BCA publish the next edition of the accessibility code?"}
+{"id": "ood-rt05", "category": "real-time or future", "prompt": "How many building permits did BCA approve last week?"}
+{"id": "ood-rt06", "category": "real-time or future", "prompt": "What will electricity tariffs be next quarter?"}
+{"id": "ood-nd01", "category": "near-domain, not in the corpus", "prompt": "What is the minimum ceiling height for a bedroom in a private residential flat?"}
+{"id": "ood-nd02", "category": "near-domain, not in the corpus", "prompt": "What is the minimum width of a car parking lot in a residential development?"}
+{"id": "ood-nd03", "category": "near-domain, not in the corpus", "prompt": "What is the maximum allowable sound level from an air-conditioning condenser at a neighbour's window?"}
+{"id": "ood-nd04", "category": "near-domain, not in the corpus", "prompt": "How many hours of training must a security guard complete before deployment?"}
+{"id": "ood-nd05", "category": "near-domain, not in the corpus", "prompt": "What is the minimum size of a bicycle parking lot?"}
+{"id": "ood-nd06", "category": "near-domain, not in the corpus", "prompt": "How often must a gondola for facade cleaning be load tested?"}
