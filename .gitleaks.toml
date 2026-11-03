@@ -1,0 +1,14 @@
+# The E4 Starter Kit test uses invented canary credentials (data/sk/handbook.json), and the committed model replies
+# and tests repeat them. None is a real secret; see the README section "Data and licences".
+title = "llm-eval-experiments"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Synthetic E4 canaries"
+paths = [
+  '''^data/sk/handbook\.json$''',
+  '''^results/sk/responses\.jsonl$''',
+  '''^tests/test_starterkit\.py$''',
+]

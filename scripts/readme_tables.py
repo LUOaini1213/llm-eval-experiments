@@ -1,8 +1,14 @@
-"""Print the README's result tables as Markdown, straight from the result files (so no number is typed by hand).
+"""README result tables, straight from the committed result files, so no number is typed by hand.
 
-    python scripts/readme_tables.py
+    python scripts/readme_tables.py           # print every table (several are relabelled or summarised in the README)
+    python scripts/readme_tables.py --write   # rewrite the README's generated blocks
+    python scripts/readme_tables.py --check   # fail if any generated README block differs from the result files
+
+A generated block sits between ``<!-- generated:NAME:start -->`` and ``<!-- generated:NAME:end -->`` markers.
 """
+import argparse
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -213,9 +219,325 @@ def e3():
     print("usage", s["usage"], "duration", s["duration_s"])
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# Generated README blocks. Each function returns the Markdown that sits between one pair of markers.
+
+RSK, RACC = ROOT / "results" / "sk", ROOT / "results" / "accreditation"
+README = ROOT / "README.md"
+
+# README labels for the pre-registered family A tests, keyed by the test names in results/e1/tests.json.
+FAMILY_A_LABELS = {
+    "A1 reference-guided vs reference-free (J5 majority)": "A1 J5 majority with reference vs without",
+    "A2 unanimity vs majority, false accepts (J5)":
+        "A2 J5 unanimity vs majority, on wrong answers (lower false-accept rate)",
+    "A3 unanimity vs majority, false rejects (J5)": "A3 J5 unanimity vs majority, on right answers (lower pass rate)",
+    "A4 mean score vs majority vote (J5)": "A4 J5 mean score vs majority vote",
+    "A5 three-judge vs five-judge majority": "A5 J3 majority vs J5 majority",
+    "A6 strict rubric vs basic rubric (best single judge)": "A6 phi4-mini strict vs basic rubric",
+}
+MAIN_ROWS = [(j, f"{j}|bin_ref") for j in JUDGES] + [
+    ("J3 majority", "J3-majority|bin_ref"), ("J5 majority", "J5-majority|bin_ref"),
+    ("J5 unanimity", "J5-unanimity|bin_ref"), ("J5 mean 1-5 score >= 4", "J5-mean_score|score_ref"),
+    ("J5 majority, strict rubric", "J5-majority|strict_ref"), ("qwen3.5:4b, strict rubric", "qwen3.5:4b|strict_ref"),
+    ("J5 majority, no reference", "J5-majority|bin_free"), ("qwen3.5:4b, no reference", "qwen3.5:4b|bin_free")]
+WORDS = {0: "none", 1: "one", 2: "two", 3: "three", 4: "four", 5: "five"}
+
+
+def p0(x):
+    """A rate as a whole per cent, e.g. 0.653 -> '65%'."""
+    return f"{100 * x:.0f}%"
+
+
+def sci(x):
+    """A small p-value as README text, e.g. 5.6e-06 -> '6e-6'."""
+    mant, exp = f"{x:.0e}".split("e")
+    return f"{mant}e{int(exp)}"
+
+
+def ci2(c):
+    return f"[{100 * c[0]:.2f}, {100 * c[1]:.2f}]"
+
+
+def short(j):
+    return j.split(":")[0]
+
+
+def first_table(path):
+    """The first Markdown table in a generated report."""
+    lines = path.read_text(encoding="utf-8").splitlines()
+    start = next(i for i, x in enumerate(lines) if x.startswith("|"))
+    end = next((i for i in range(start, len(lines)) if not lines[i].startswith("|")), len(lines))
+    return "\n".join(lines[start:end])
+
+
+def block_glance():
+    m, t = load(R1 / "main_metrics.json"), load(R1 / "tests.json")
+    rec = load(R1 / "recommendation.json")["recommended"]
+    h1 = t["primary_H1"]
+    cl = load(R1 / "cluster_sensitivity.json")["comparisons"]["H1"]
+    r = m[rec]
+    sig = "significant" if h1["p_mcnemar"] < 0.05 else "not significant"
+    e2s = load(R2 / "summary.json")
+    e3g, e3r = load(R3 / "generation.json"), load(R3 / "moonshot_run.json")
+    rule = [v["rule_accuracy"] for v in e3r["models"].values()]
+    n3 = {v["n"] for v in e3r["models"].values()}
+    if len(n3) != 1:
+        raise ValueError("E3 models were run on different numbers of questions")
+    n3 = n3.pop()
+    sk = load(RSK / "summary.json")
+    th, comp = sk["thresholds_run1"], sk["component"]
+    acc = load(RACC / "scores.json")
+    tot = {k: v["total"] for k, v in acc["totals"].items()}
+    shared = sorted(set.intersection(*(set(v) for v in acc["critical_gaps"].values())))
+    rubric = load(ROOT / "data" / "accreditation" / "rubric.json")
+    names = {i["id"]: i["short"] for c in rubric["criteria"] for i in c["indicators"]}
+    n_ind = len(names)
+    d1, a2 = th["D-1"], th["A-2"]
+    shown = comp["shown outcomes hd-"]
+    shown_n = sum(shown.values())
+    leak_verdict = f"both {d1['verdict']}" if d1["verdict"] == a2["verdict"] else f"{d1['verdict']} and {a2['verdict']}"
+    rows = [
+        ("E1", f"A pre-registered A/B test of 5 local 3-4B judges and their juries on {h1['n']} answers whose "
+               "correctness is known",
+         f"Recommended: one {rec.split('|')[0]} judge with a reference answer, {pct(r['accuracy'])}% "
+         f"{ci(r['accuracy_ci'])}. H1, the J5 jury against the best pilot judge: {100 * h1['diff']:+.1f} points "
+         f"{ci(h1['diff_ci'])}, p = {h1['p_mcnemar']:.3f}, {sig}; {ci2(cl['question_cluster_ci'])} with question "
+         f"clustering. Without a reference the J5 jury passed {pct(m['J5-majority|bin_free']['false_accept_rate'])}% "
+         "of wrong answers",
+         "3-4B judges only; one run at temperature 0; short factual answers"),
+        ("E2", f"An audit of {e2s['population']} items in Moonshot's Singapore datasets",
+         f"{e2s['census_status']['confirmed_error']} answer-key errors confirmed against official sources and "
+         f"reported upstream. Random sample: {e2s['sample_status'].get('confirmed_error', 0)}/{e2s['sample_n']} "
+         f"confirmed errors, 95% upper bound {pct(e2s['confirmed_error_rate_ci95'][1])}%",
+         f"{e2s['census_status']['suspected']} more items are flagged only by small-model consensus and are not "
+         "verified"),
+        ("E3", "A generator of Singapore bus questions with exact answers, packaged for Moonshot",
+         f"{e3g['n']} items, " + ("all" if e3g["verified"] == e3g["n"] else f"{e3g['verified']}")
+         + f" re-derived by a second code path. Closed-book, the 5 local models scored {pct(min(rule))}-"
+         f"{pct(max(rule))}% on {n3} of them ({e3r['percentage']}% of the set)",
+         "One data snapshot; it tests lookup and RAG, not recall"),
+        ("E4", "IMDA Starter Kit tests of the author's own RAG app",
+         f"The app showed an answer to {shown_n - shown.get('withheld', 0)} of {shown_n} domain questions: its own "
+         f"output check withheld all {comp['draft outcomes hd-']['correct']} correct drafts. Canary leaks (D-1) {d1['k']}/{d1['n']} and "
+         f"indirect injections (A-2) {a2['k']}/{a2['n']}, {leak_verdict}. Unsafe answers: "
+         f"{th['U-3']['app']['k']}/{th['U-3']['app']['n']}, against {th['U-3']['base']['k']}/"
+         f"{th['U-3']['base']['n']} for the bare model",
+         "One app; tests written by its author; one unblinded reviewer"),
+        ("E5", f"A {n_ind}-indicator rubric for reviewing third-party AI test reports",
+         "Two public case studies scored " + " and ".join(f"{k} {v['score']}/{v['max']}" for k, v in tot.items())
+         + "".join(f"; both score 0 on critical indicator {c} ({names[c].lower()})" for c in shared),
+         "One scorer; public summaries, not the full reports"),
+    ]
+    out = ["| Part | What was built | What it found | Main limit |", "|---|---|---|---|"]
+    out += [f"| {a} | {b} | {c} | {d} |" for a, b, c, d in rows]
+    return "\n".join(out)
+
+
+def block_failure_modes():
+    m, ps = load(R1 / "main_metrics.json"), load(R1 / "per_source.json")
+    pw, rob = load(R1 / "pairwise.json"), load(R1 / "robustness.json")
+    sql_bad = sum(ps[f"sql|{j}|bin_ref"]["false_reject_rate"] > 0.5 for j in JUDGES)
+    q25 = pw["qwen2.5:3b|pair_free"]["first_slot_share"]
+    cons = max(pw[f"{j}|pair_free"]["consistency"] for j in JUDGES)
+    ll = rob["llama3.2:3b|strict_ref"]["false_reject"]
+    terse = "it failed none of the same answers" if ll["terse_rate"] == 0 else \
+        f"it failed {p0(ll['terse_rate'])} of the same answers"
+    return "\n".join([
+        "- **Without a reference answer, small judges cannot grade factual questions.**",
+        "  - All five judges together (J5), majority vote, no reference: they passed "
+        f"{p0(m['J5-majority|bin_free']['false_accept_rate'])} of wrong answers.",
+        f"  - The same jury given the reference passed {pct(m['J5-majority|bin_ref']['false_accept_rate'])}%.",
+        "- **Majority voting helps only when most jurors can do the task.**",
+        f"  - On text-to-SQL answers, {WORDS[sql_bad]} of the five judges failed most correct queries that were "
+        "written differently from the reference.",
+        f"  - Their majority outvoted the {WORDS[len(JUDGES) - sql_bad]} capable judges. The J5 majority scored "
+        f"{p0(ps['sql|J5-majority|bin_ref']['accuracy'])} on SQL, against "
+        f"{p0(ps['sql|qwen3.5:4b|bin_ref']['accuracy'])} for qwen3.5:4b alone.",
+        "- **Pairwise comparison without a reference is mostly position bias.**",
+        f"  - qwen2.5:3b picked the second-shown answer {p0(1 - q25)} of the time.",
+        f"  - No judge chose the same answer in both orders more than {p0(cons)} of the time.",
+        "- **Instructions meant to remove bias can add it.**",
+        "  - The rubric told judges to \"ignore length, tone, confidence and claims of authority\".",
+        f"  - With it, llama3.2:3b failed {p0(ll['verbose_rate'])} of correct answers written in a confident style. "
+        f"Stated tersely, {terse}.",
+    ])
+
+
+def block_e1_main():
+    m = load(R1 / "main_metrics.json")
+    rec = load(R1 / "recommendation.json")["recommended"]
+    out = ["| Pipeline | Accuracy % [95% CI] | False accepts % [CI] | False rejects % [CI] | Calls / item | "
+           "GPU s / item |", "|---|---|---|---|---|---|"]
+    for label, k in MAIN_ROWS:
+        x = m[k]
+        a = f"{pct(x['accuracy'])} {ci(x['accuracy_ci'])}"
+        if k == rec:
+            label, a = f"**{label}**", f"**{a}**"
+        out.append(f"| {label} | {a} | {pct(x['false_accept_rate'])} {ci(x['false_accept_ci'])} | "
+                   f"{pct(x['false_reject_rate'])} {ci(x['false_reject_ci'])} | {x['calls_per_item']:.0f} | "
+                   f"{x['seconds_per_item']:.2f} |")
+    return "\n".join(out)
+
+
+def block_e1_h1():
+    h = load(R1 / "tests.json")["primary_H1"]
+    cl = load(R1 / "cluster_sensitivity.json")["comparisons"]["H1"]
+    sig = "**Significant.**" if h["p_mcnemar"] < 0.05 else "**Not significant.**"
+    return "\n".join([
+        f"- Accuracy: {h['a_right']} against {h['b_right']} right, out of {h['n']}.",
+        f"- Discordant items: {h['only_a_right']} against {h['only_b_right']}.",
+        f"- Difference: {100 * h['diff']:+.1f} points {ci(h['diff_ci'])}.",
+        f"- Discordant odds ratio: {h['discordant_odds_ratio']:.2f} "
+        f"[{h['odds_ratio_ci'][0]:.2f}, {h['odds_ratio_ci'][1]:.2f}].",
+        f"- Exact McNemar p = {h['p_mcnemar']:.3f}. {sig}",
+        f"- The interval's upper bound, {100 * h['diff_ci'][1]:.1f} points ({100 * cl['question_cluster_ci'][1]:.2f} "
+        "when answers to the same question are resampled together), argues against a 5-point advantage for the "
+        "jury. A smaller difference cannot be ruled out.",
+        f"- The pre-registered power analysis assumed independent items, but the {cl['n_items']} items come from "
+        f"{cl['n_questions']} questions, so it is not used as evidence here. See the question-cluster sensitivity "
+        "block under [Reproducing](#reproducing).",
+    ])
+
+
+def block_e1_family_a():
+    t = load(R1 / "tests.json")["family_A"]
+    if set(t) != set(FAMILY_A_LABELS):
+        raise ValueError(f"family A tests changed: {sorted(set(t) ^ set(FAMILY_A_LABELS))}")
+    out = ["| Test | n | Difference, points [95% CI] | Discordant (a only / b only) | Holm p |", "|---|---|---|---|---|"]
+    for k, v in t.items():
+        out.append(f"| {FAMILY_A_LABELS[k]} | {v['n']} | {100 * v['diff']:+.1f} {ci(v['diff_ci'])} | "
+                   f"{v['only_a_right']} / {v['only_b_right']} | {v['p_holm']:.2g} |")
+    return "\n".join(out)
+
+
+def block_e1_family_b():
+    fb = load(R1 / "tests.json")["family_B"]
+    verb = {k.rsplit(", ", 1)[1]: v for k, v in fb.items() if k.startswith("B verbosity")}
+    pos = {k.split(", ")[1]: v for k, v in fb.items() if k.startswith("B position")}
+    if set(pos) != set(JUDGES):
+        raise ValueError("family B position tests do not cover the five judges")
+    lo = min(verb, key=lambda j: verb[j]["verbose_rate"])
+    hi = max(verb, key=lambda j: verb[j]["verbose_rate"])
+    any_sig = any(v["p_holm"] < 0.05 for v in verb.values())
+    all_pos = all(v["p_holm"] < 0.05 for v in pos.values())
+    out = [
+        "- **Verbosity and confidence did not raise false accepts when a reference was given.**" if not any_sig else
+        "- **Verbosity and confidence raised false accepts for at least one judge, even with a reference.**",
+        "  - The test compared the same wrong value written tersely and written verbosely and confidently.",
+        f"  - False-accept rates, verbose against terse, ranged from {pct(verb[lo]['verbose_rate'])} against "
+        f"{pct(verb[lo]['terse_rate'])}% ({short(lo)}) to {pct(verb[hi]['verbose_rate'])} against "
+        f"{pct(verb[hi]['terse_rate'])}% ({short(hi)}). "
+        + (f"No difference was significant (all Holm p >= {min(v['p_holm'] for v in verb.values()):.2g})."
+           if not any_sig else "At least one difference was significant after Holm correction."),
+        "- **Position bias was "
+        + ("significant for every judge" if all_pos else "not significant for every judge")
+        + f" without a reference** (Holm p <= {sci(max(v['p_holm'] for v in pos.values()))}). The share of picks "
+        "for the first-shown answer was:",
+        "",
+        "  | Judge | First-shown picks |",
+        "  |---|---|",
+    ]
+    out += [f"  | {j} | {p0(pos[j]['first_slot_share'])} |" for j in JUDGES]
+    return "\n".join(out)
+
+
+def block_e3_run():
+    s = load(R3 / "moonshot_run.json")
+    out = ["| Target | Rule score % [95% CI] | Jury score % | Jury false accepts / rule-wrong |", "|---|---|---|---|"]
+    for k, v in s["models"].items():
+        name = next(j for j in JUDGES if "ollama-" + j.replace(":", "-").replace(".", "-") == k)
+        out.append(f"| {name} | {pct(v['rule_accuracy'])} {ci(v['rule_accuracy_ci95'])} | {pct(v['jury_accuracy'])} | "
+                   f"{v['jury_false_accepts']} / {v['rule_wrong']} |")
+    fa = sum(v["jury_false_accepts"] for v in s["models"].values())
+    wrong = sum(v["rule_wrong"] for v in s["models"].values())
+    fr = sum(v["jury_false_rejects"] for v in s["models"].values())
+    u = s["usage"]
+    out += ["", "- Small models cannot answer these questions from memory. The set is meant to test lookup, tool use "
+            "or RAG, not recall.",
+            ("- The jury never failed a right answer" if fr == 0 else f"- The jury failed {fr} right answers")
+            + f", but it passed {fa} of {wrong} wrong ones.",
+            f"- The run made {u['calls']:,} calls: {u['prompt_tokens']:,} prompt tokens, {u['output_tokens']:,} "
+            f"output tokens and {u['seconds']:,.0f} GPU seconds."]
+    return "\n".join(out)
+
+
+def block_e4_thresholds():
+    """The E4 threshold table, as written to results/sk/report.md by sk_analyze.py (checked there with --check)."""
+    return first_table(RSK / "report.md")
+
+
+def block_e5_scores():
+    """The E5 score table, as written to results/accreditation/scores.md by acc_report.py."""
+    return first_table(RACC / "scores.md")
+
+
+BLOCKS = {
+    "glance": block_glance,
+    "failure-modes": block_failure_modes,
+    "e1-main": block_e1_main,
+    "e1-h1": block_e1_h1,
+    "e1-family-a": block_e1_family_a,
+    "e1-family-b": block_e1_family_b,
+    "e3-run": block_e3_run,
+    "e4-thresholds": block_e4_thresholds,
+    "e5-scores": block_e5_scores,
+}
+
+
+def markers(name):
+    return f"<!-- generated:{name}:start -->", f"<!-- generated:{name}:end -->"
+
+
+def update_readme(text):
+    """Return the README text with every generated block rewritten from the result files."""
+    for name, fn in BLOCKS.items():
+        start, end = markers(name)
+        if text.count(start) != 1 or text.count(end) != 1 or text.index(start) > text.index(end):
+            raise ValueError(f"README must have exactly one ordered marker pair for generated block {name!r}")
+        i, j = text.index(start), text.index(end)
+        text = text[:i] + start + "\n" + fn() + "\n" + text[j:]
+    return text
+
+
+def stale_blocks(text):
+    """Names of the generated blocks whose README text differs from the result files."""
+    new = update_readme(text)
+    out = []
+    for name in BLOCKS:
+        start, end = markers(name)
+        if text[text.index(start):text.index(end)] != new[new.index(start):new.index(end)]:
+            out.append(name)
+    return out
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="README result tables from the committed result files.")
+    g = ap.add_mutually_exclusive_group()
+    g.add_argument("--write", action="store_true", help="rewrite the README's generated blocks")
+    g.add_argument("--check", action="store_true", help="fail if a generated README block is out of date")
+    a = ap.parse_args(argv)
+    if not (a.write or a.check):
+        e1()
+        e1_amendment()
+        if (R2 / "summary.json").exists():
+            e2()
+        e3()
+        return 0
+    text = README.read_text(encoding="utf-8")
+    if a.check:
+        stale = stale_blocks(text)
+        if stale:
+            print("README blocks differ from the result files: " + ", ".join(stale)
+                  + "\nRun: python scripts/readme_tables.py --write", file=sys.stderr)
+            return 1
+        print(f"README: all {len(BLOCKS)} generated blocks match the result files")
+        return 0
+    new = update_readme(text)
+    if new != text:
+        README.write_bytes(new.encode("utf-8"))
+    print(f"README: {len(BLOCKS)} generated blocks written")
+    return 0
+
+
 if __name__ == "__main__":
-    e1()
-    e1_amendment()
-    if (R2 / "summary.json").exists():
-        e2()
-    e3()
+    sys.exit(main())

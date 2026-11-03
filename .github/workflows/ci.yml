@@ -31,6 +31,21 @@ jobs:
           python scripts/sk_analyze.py --check
           python scripts/acc_report.py
           git diff --stat --exit-code -- data/sk results/accreditation
+      # every generated README block (results at a glance, E1-E5 tables) must match the committed result files
+      - run: python scripts/readme_tables.py --check
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      # the README's quick verify block, on Windows
+      - run: python -m pytest tests
+      - run: python scripts/readme_tables.py --check
+      - run: python scripts/e1_cluster_sensitivity.py --check
+      - run: python scripts/sk_analyze.py --check
   geo-screen:
     runs-on: ubuntu-latest
     steps:
